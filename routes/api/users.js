@@ -21,7 +21,6 @@ router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
-    console.log(req.body)
     return res.status(400).json(errors);
   }
 
@@ -74,8 +73,6 @@ router.post('/login', (req, res) => {
       if (!user) {
         return res.status(404).json({ email: 'This user does not exist' });
       }
-      console.log(req.body)
-
       bcrypt.compare(password, user.password)
         .then((isMatch) => {
           if (isMatch) {

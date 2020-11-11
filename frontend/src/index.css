@@ -8,7 +8,7 @@ body {
 }
 
 
-main, header, h1, h2, ul, li {
+main, header, h1, h2, ul, li, select, input {
   margin: 0;
   padding: 0;
 }
