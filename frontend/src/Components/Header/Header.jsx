@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import styles from './Header.module.css'
 import { logout } from '../../util/session_api_util'
+import logo from '../../assets/images/logo.png'
+const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
 
-const Header = ({ toggleModal }) => {
-
-  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwtToken'))
   
+  const signOut = () => {
+    logout()
+    setLoggedIn(JSON.parse(localStorage.getItem('currentUser')).isAuthenticated)
+  }
   return (
     <header>
       <div className={styles.left}>
-        Grant Finder
+        <img src={logo} alt="" />
+        <h1>
+          Grant Finder
+        </h1>
       </div>
       {
         loggedIn ? ( 
-            <button onClick={logout}>
+          <div className={styles.right}>
+            <button onClick={signOut}>
               Logout
             </button>
+          </div>
         ) : (
             <div className={styles.right}>
               <button onClick={() => toggleModal([true, 'login'])}>

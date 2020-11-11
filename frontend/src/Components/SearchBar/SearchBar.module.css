@@ -1,0 +1,13 @@
+.searchBarWrapper {
+  height: 40vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.searchBar {
+  margin-top: 200px;
+  height: 2vw;
+  width: 30vw;
+  padding-left: 10px;
+}

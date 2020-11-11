@@ -13,7 +13,7 @@ export const logout = () => {
   localStorage.removeItem('jwtToken')
   // Remove the token from the common axios header
   setAuthToken(false)
-  window.session = null
+  localStorage.setItem('currentUser', JSON.stringify({ isAuthenticated: false, user: null }))
 }
 
 

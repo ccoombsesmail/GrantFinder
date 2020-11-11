@@ -4,14 +4,14 @@ import RegisterForm from '../SessionForms/RegisterForm';
 
 import styles from './Modal.module.css'
 
-const Modal = ({ type, toggleModal }) => {
+const Modal = ({ type, toggleModal, setLoggedIn }) => {
   let component
   switch (type) {
     case 'login':
-      component = <LoginForm />
+      component = <LoginForm toggleModal={toggleModal} setLoggedIn={setLoggedIn} />
       break;
     case 'register':
-      component = <RegisterForm />
+      component = <RegisterForm toggleModal={toggleModal} setLoggedIn={setLoggedIn} />
       break;
     default:
       break;

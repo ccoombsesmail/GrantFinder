@@ -4,6 +4,7 @@ import App from "./App"
 import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './util/session_api_util'
+import './index.css'
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -14,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Decode the token to obtain the user's information
     const decodedUser = jwt_decode(localStorage.jwtToken);
-
-    window.session = { session: { isAuthenticated: true, user: decodedUser } };
+    localStorage.setItem('currentUser', JSON.stringify({ isAuthenticated: true, user: decodedUser }))
+    // window.session = { session: { isAuthenticated: true, user: decodedUser } };
 
     const currentTime = Date.now() / 1000;
 
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = '/login';
     }
   } else {
-    window.session = null
+    localStorage.setItem('currentUser', JSON.stringify({ isAuthenticated: false, user: null }))
   }
 
   // Render our root component and pass in the store as a prop

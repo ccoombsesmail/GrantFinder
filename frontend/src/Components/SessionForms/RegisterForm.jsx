@@ -3,12 +3,18 @@ import styles from './SessionForm.module.css'
 import { register, setAuthToken } from '../../util/session_api_util'
 import jwt_decode from 'jwt-decode';
 
-const RegisterForm = () => {
+const RegisterForm = ({ toggleModal, setLoggedIn }) => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPass, setconfirmPass] = useState('')
   const [email, setEmail] = useState('')
+
+  const toggle = () => {
+    toggleModal([false, null])
+    setLoggedIn(JSON.parse(localStorage.getItem('currentUser')).isAuthenticated)
+  }
+
 
   const update = (type) => {
     switch (type) {
@@ -42,11 +48,9 @@ const RegisterForm = () => {
         localStorage.setItem('jwtToken', token);
         setAuthToken(token);
         const decoded = jwt_decode(token);
-        localStorage.setItem('session', decoded )
+        localStorage.setItem('currentUser', JSON.stringify({ isAuthenticated: true, user: decoded }) )
       })
-      // .fail((res) => {
-      //   console.log(res)
-      // })
+      .then(() => toggle())
   }
 
   return (

@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import styles from './SessionForm.module.css'
-import { login } from '../../util/session_api_util'
+import { login, setAuthToken } from '../../util/session_api_util'
+import jwt_decode from 'jwt-decode';
 
-const LoginForm = () => {
+const LoginForm = ({ toggleModal, setLoggedIn }) => {
   
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const toggle = () => {
+    toggleModal([false, null])
+    setLoggedIn(JSON.parse(localStorage.getItem('currentUser')).isAuthenticated)
+  }
   
   const update = (type) => {
     switch (type) {
-      case 'username':
+      case 'email':
         return (e) => {
-          setUsername(e.currentTarget.value)
+          setEmail(e.currentTarget.value)
         }
       case 'password':
         return (e) => {
@@ -24,11 +30,17 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    login({ username, password })
-      .then((res) => console.log(res))
-      .fail((res) => {
+    login({ email, password })
+      .then((res) => {
         console.log(res)
+        const { token } = res.data;
+        localStorage.setItem('jwtToken', token);
+        setAuthToken(token);
+        const decoded = jwt_decode(token);
+        localStorage.setItem('currentUser', JSON.stringify({ isAuthenticated: true, user: decoded }))
       })
+      .then(() => toggle())
+      .catch((res) => console.log(res))
   }
 
     return (
@@ -37,13 +49,13 @@ const LoginForm = () => {
               Login
             </h1>
             <label className={styles.formLabel}>
-              <h4>Username</h4>
+              <h4>Email</h4>
               <input 
-                maxLength={16} 
+                maxLength={52} 
                 id="username" 
                 className={styles.formInput} 
-                type="text" value={username} 
-                onChange={update('username')} 
+                type="text" value={email} 
+                onChange={update('email')} 
                 autoComplete="off" />
             </label>
             {/* {
