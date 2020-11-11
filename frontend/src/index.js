@@ -1,17 +1,36 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from "./App"
+import jwt_decode from 'jwt-decode'
+import { setAuthToken } from './util/session_api_util'
+import { logout } from './util/session_api_util'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+document.addEventListener('DOMContentLoaded', () => {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  // If a returning user has a session token stored in localStorage
+  if (localStorage.jwtToken) {
+    // Set the token as a common header for all axios requests
+    setAuthToken(localStorage.jwtToken);
+    
+    // Decode the token to obtain the user's information
+    const decodedUser = jwt_decode(localStorage.jwtToken);
+
+    window.session = { session: { isAuthenticated: true, user: decodedUser } };
+
+    const currentTime = Date.now() / 1000;
+
+    // If the user's token has expired
+    if (decodedUser.exp < currentTime) {
+      // Logout the user and redirect to the login page
+      logout()
+      window.location.href = '/login';
+    }
+  } else {
+    window.session = null
+  }
+
+  // Render our root component and pass in the store as a prop
+  const root = document.getElementById('root');
+
+  ReactDOM.render(<App />, root);
+});

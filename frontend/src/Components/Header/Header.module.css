@@ -1,0 +1,16 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: brown;
+}
+
+.left {
+  margin-left: 50px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}

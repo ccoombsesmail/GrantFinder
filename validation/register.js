@@ -4,10 +4,10 @@ const validText = require('./valid-text');
 module.exports = function validateRegisterInput(data) {
   let errors = {};
 
-  data.username = validText(data.username) ? data.handle : '';
+  data.username = validText(data.username) ? data.username : '';
   data.email = validText(data.email) ? data.email : '';
   data.password = validText(data.password) ? data.password : '';
-  data.password2 = validText(data.password2) ? data.password2 : '';
+  data.confirmPass = validText(data.confirmPass) ? data.confirmPass : '';
 
   if (!Validator.isLength(data.username, { min: 2, max: 30 })) {
     errors.handle = 'Username must be between 2 and 30 characters';
@@ -33,12 +33,12 @@ module.exports = function validateRegisterInput(data) {
     errors.password = 'Password must be at least 6 characters';
   }
 
-  if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'Confirm Password field is required';
+  if (Validator.isEmpty(data.confirmPass)) {
+    errors.confirmPass = 'Confirm Password field is required';
   }
 
-  if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = 'Passwords must match';
+  if (!Validator.equals(data.password, data.confirmPass)) {
+    errors.confirmPass = 'Passwords must match';
   }
 
   return {

@@ -21,12 +21,13 @@ router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
+    console.log(req.body)
     return res.status(400).json(errors);
   }
 
   User.findOne({ username: req.body.username }).then((user) => {
     if (user) {
-      errors.handle = "User already exists";
+      errors.username = "User already exists";
       return res.status(400).json(errors);
     } else {
       const newUser = new User({
@@ -90,7 +91,6 @@ router.post('/login', (req, res) => {
                   token: 'Bearer ' + token
                 });
               });
-            res.json({ msg: 'Success' });
           } else {
             return res.status(400).json({ password: 'Incorrect password' });
           }
