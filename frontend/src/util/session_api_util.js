@@ -24,3 +24,8 @@ export const register = (userData) => {
 export const login = (userData) => {
   return axios.post('/api/users/login', userData);
 }
+
+
+export const current = () => {
+  return axios.get('/api/users/current').then((res) => console.log(res))
+}

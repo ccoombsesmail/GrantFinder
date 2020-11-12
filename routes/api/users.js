@@ -8,6 +8,8 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
+require('../../config/passport')(passport)
+
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.json({
     id: req.user.id,
@@ -42,7 +44,7 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => {
-              const payload = { id: user.id, username: user.username };
+              const payload = { id: user.id, username: user.username, isAdmin: user.isAdmin };
               jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                 res.json({
                   success: true,
@@ -60,11 +62,10 @@ router.post("/register", (req, res) => {
 
 router.post('/login', (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
-
   if (!isValid) {
     return res.status(400).json(errors);
   }
-
+  
   const email = req.body.email;
   const password = req.body.password;
 
@@ -74,9 +75,9 @@ router.post('/login', (req, res) => {
         return res.status(404).json({ email: 'This user does not exist' });
       }
       bcrypt.compare(password, user.password)
-        .then((isMatch) => {
+      .then((isMatch) => {
           if (isMatch) {
-            const payload = { id: user.id, username: user.username };
+            const payload = { id: user.id, username: user.username, isAdmin: user.isAdmin };
             
             jwt.sign(
               payload,
@@ -97,4 +98,23 @@ router.post('/login', (req, res) => {
 })
 
 
+router.get("/createAdmin", (req, res) => {
+  const newUser = new User({
+    username: "GrantFinderAdmin",
+    email: 'grantfinder@gmail.com',
+    password: 'Lp6#?#&qr+tbJ7&$',
+    isAdmin: true
+  });
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      newUser.save()
+    })
+  })
+})
+
 module.exports = router
+
+

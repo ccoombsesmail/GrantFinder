@@ -1,17 +1,13 @@
-.form > h1 {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  color: black;
-  letter-spacing: .2rem;
-  font-size: 40px;
-
-
-}
-
-.form > h3 {
-  margin: 5px;
-  font-size: 18px;
-  color: red;
+.grantFormWrapper {
+  margin-top: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 90vw;
+  height: 60vh;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  margin-bottom: 500px;
 }
 
 .form {
@@ -25,9 +21,12 @@
   background-color:white;
   color: black;
 
-
-
 }
+
+.form > h1 {
+  margin-top: 50px;
+}
+
 
 .form > button {
   background: #2c3e50;  /* fallback for old browsers */
@@ -54,12 +53,6 @@
   outline: none;
   border: none;
 } 
-
-.formLabel > h4 {
-  margin-bottom: 5px;
-  color: black;
-  font-size: 15px;
-}
 
 .formLabel > input {
   width: 100%;

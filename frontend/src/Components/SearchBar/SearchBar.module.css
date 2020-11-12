@@ -24,8 +24,8 @@
 .tagWrapper {
   display: flex;
   width: 40vw;
-  margin-left: -10px;
   margin-top: 10px;
+  box-sizing: border-box;
 }
 
 .departmentSelect {

@@ -5,10 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 
-main, header, h1, h2, ul, li, select, input {
+main, header, h1, h2, h3, h4, h5, ul, li, p, select, input {
   margin: 0;
   padding: 0;
 }

@@ -1,6 +1,8 @@
 const express = require("express")
 const router = express.Router()
 const Grant = require('../../models/Grant');
+const passport = require('passport');
+require('../../config/passport')(passport)
 
 
 
@@ -1021,6 +1023,17 @@ router.get('/seed', (req, res) => {
 router.post('/', (req, res) => { 
   Grant.find({ tags: { $all: req.body.filters[1] }, grant_title: { $regex: req.body.filters[0], $options: "$i" }}).limit(40)
     .then((grants) => res.json(grants))
+})
+
+
+router.post('/admin/grants', passport.authenticate('jwt', { session: false }), (req, res) => {
+  let grant = new Grant({
+    grant_title: req.body.grant_title,
+    tags: req.body.tags,
+    amount: Number(req.body.amount)
+  })
+  grant.save()
+  res.json(grant)
 })
 
 

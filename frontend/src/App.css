@@ -2,9 +2,32 @@ main {
   width: 100vw;
   overflow-x: hidden;
   overflow-y: scroll;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 
 main > img {
   width: 100vw;
+}
+
+main::-webkit-scrollbar {
+  width: 15px;
+}
+
+main::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+main::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+
+
+html {
+  --scrollbarBG: black;
+  --thumbBG: rgb(51,141,203);
 }

@@ -7,7 +7,6 @@ import { logout } from './util/session_api_util'
 import './index.css'
 
 document.addEventListener('DOMContentLoaded', () => {
-
   // If a returning user has a session token stored in localStorage
   if (localStorage.jwtToken) {
     // Set the token as a common header for all axios requests
