@@ -9,7 +9,8 @@ const SearchBar = () => {
 
   const [department, setDepartment] = useState('')
   const [title, setTitle] = useState('')
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState(null)
+  const [sort, setSort] = useState('{"val": ["createdAt", -1]}')
 
   const update = (type) => {
     switch (type) {
@@ -21,6 +22,10 @@ const SearchBar = () => {
         return (e) => {
           setTitle(e.currentTarget.value)
         }   
+      case 'sort':
+        return (e) => {
+          setSort(e.currentTarget.value)
+        }   
       default:
         break;
     }
@@ -28,7 +33,8 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const filters = [title, [department]]
+    console.log(JSON.parse(sort))
+    const filters = [title, [department], JSON.parse(sort).val]
     getGrants({filters})
       .then((res) => {
         console.log(res)
@@ -54,17 +60,18 @@ const SearchBar = () => {
             </select>
           </Animated>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true} animationInDelay={300}>
-            <select className={styles.departmentSelect} >
+            <select className={styles.departmentSelect} value={sort} onChange={update('sort')}>
               <option value="" selected disabled>Sort By</option>
-              <option value="newest">Newest</option>
-              <option value="oldest">Oldest</option>
-              <option value="high">Highest Amount</option>
+              <option value='{"val": ["createdAt", -1]}'>Newest</option>
+              <option value='{"val": ["createdAt", 1]}'>Oldest</option>
+              <option value='{"val": ["amount", -1]}'>Highest Amount</option>
+              <option value='{"val": ["amount", 1]}'>Lowest Amount</option>
             </select>
           </Animated>
         </div>
       </form>
       {
-       results.length !== 0 ? <Results results={results} /> : null
+       results !== null ? <Results results={results} /> : null
       }
     </section>
   )
