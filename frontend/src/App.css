@@ -5,6 +5,8 @@ main {
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;
   align-items: center;
   flex-direction: column;
+  margin:0;
+  padding-bottom: 100px;
 }
 
 
