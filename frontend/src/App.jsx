@@ -5,7 +5,7 @@ import Header from './Components/Header/Header';
 import Modal from './Components/Modal/Modal';
 import SearchBar from './Components/SearchBar/SearchBar';
 import { AuthRoute } from './util/route_util'
-import wavyImg from './assets/images/wavy.jpg'
+import banner from './assets/images/banner3.jpg'
 import GrantForm from './Components/GrantForm/GrantForm';
 
 
@@ -24,7 +24,7 @@ function App() {
           <AuthRoute exact component={GrantForm} path="/admin/addgrant" /> 
           <Route path="/">
             <SearchBar />
-            <img src={wavyImg} alt="" />
+            <img src={banner} alt="" />
           </Route>
         </Switch>
       </HashRouter>

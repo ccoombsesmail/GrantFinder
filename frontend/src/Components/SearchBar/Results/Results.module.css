@@ -1,14 +1,17 @@
 .resultsWrapper {
-  width: 70vw;
+  width: 75vw;
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
   z-index: 9999;
-  border: 1px solid black;
+  border: 2.8px solid black;
+  box-sizing: border-box;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  margin-bottom: 100px;
+  padding-top: 20px;
   /* background-color: rgb(34,34,34); */
 
 }
@@ -44,7 +47,7 @@
 
 .resultsWrapper > ul li {
   list-style: none;
-  width: 95%;
+  width: 100%;
   /* background-color: rgb(34,34,34); */
   color: black;
   margin-bottom: 10px;
@@ -55,6 +58,7 @@
   transition: all .5s;
   border: 1px solid black;
   box-sizing: border-box;
+  background-color: #0FA3B1;
   
 }
 
