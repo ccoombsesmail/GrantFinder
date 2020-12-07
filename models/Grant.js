@@ -2,18 +2,46 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const GrantSchema = new Schema({
-  grant_title: {
+  title: {
     type: String,
     required: true
   },
-  tags: {
-    type: [String],
+  description: {
+    type: String,
     required: true
+  },
+  links: {
+    type: String,
+    required: false
   },
   amount: {
-    type: Number,
-    required: true
+    type: String,
+    required: false
   },
+  deadline: {
+    type: String,
+    required: false
+  },
+  disbursement: {
+    type: String,
+    required: false
+  },
+  status: {
+    type: String,
+    required: false
+  },
+  location_elig: {
+    type: String,
+    required: false
+  },
+  applicant_elig: {
+    type: String,
+    required: false
+  },
+  tags: {
+    type: [String],
+    required: false
+  }
 }, {
   timestamps: true
 })

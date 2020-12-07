@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Results from './Results/Results'
 import styles from './SearchBar.module.css'
 import { getGrants } from '../../util/grants_api_util'
+import { getTags } from '../../util/tags_api_util'
 import { Animated } from "react-animated-css";
 
 
@@ -11,6 +12,14 @@ const SearchBar = () => {
   const [title, setTitle] = useState('')
   const [results, setResults] = useState(null)
   const [sort, setSort] = useState('{"val": ["createdAt", -1]}')
+  const [tags, setTags] = useState([])
+
+  useEffect(() => {
+    getTags().then((tags) => {
+      setTags(Object.values(tags.data))
+    })
+  }, [])
+  
 
   const update = (type) => {
     switch (type) {
@@ -51,12 +60,13 @@ const SearchBar = () => {
         <div className={styles.tagWrapper}>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
             <select className={styles.departmentSelect} value={department} onChange={update('department')} >
-              <option value="" selected disabled>Select Department</option>
-              <option value="Business Development">Business Development</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Legal">Legal</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Film">Film</option>
+              <option value="" selected disabled>Select Tag</option>
+              {
+                tags.map((tag) => {
+                  return <option key={tag._id} value={tag.tag}>{tag.tag}</option>
+                })
+              }
+    
             </select>
           </Animated>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true} animationInDelay={300}>

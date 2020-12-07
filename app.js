@@ -9,6 +9,7 @@ const path = require('path');
 //Importing Routes
 const users = require('./routes/api/users')
 const grants = require('./routes/api/grants')
+const tags = require('./routes/api/tags')
 
 
 //Connect to Mongo
@@ -26,6 +27,7 @@ app.all('/api/grants/admin/*', requiresAdmin());
 // Routes
 app.use("/api/users", users)
 app.use("/api/grants", grants)
+app.use("/api/tags", tags)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('frontend/build'));
@@ -38,6 +40,11 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server is running on port ${port}`))
 
 
+//
 
 
-
+// fetch('http://localhost:3000/grantNames.txt')
+//   .then(response => response.text())
+//   .then((data) => {
+//     textToJsonHelper(data)
+//   }))

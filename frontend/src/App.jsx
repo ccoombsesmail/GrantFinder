@@ -22,6 +22,7 @@ function App() {
       <HashRouter>
         <Switch>
           <AuthRoute exact component={GrantForm} path="/admin/addgrant" /> 
+          <AuthRoute exact component={SearchBar} path="/admin/editgrant" /> 
           <Route path="/">
             <SearchBar />
             <img src={banner} alt="" />

@@ -27,16 +27,22 @@ const Result = ({ results }) => {
                 <li>
                   <div className={styles.resultsDetailsLeft}>
                     <h1>
-                    {`${result.grant_title}`}  
+                    {`${result.title}`}  
                     </h1>
-                    <h3>
+                    {/* <h3>
                       {`Organization: ...`}
-                    </h3>
+                    </h3> */}
                     <h5>
-                    {`Amount: $${result.amount}`}
+                    {`Amount: ${result.amount}`}
+                    </h5>
+                    <h5>
+                      {`Deadline: ${result.deadline}`}
                     </h5>
                     <h5>
                       {`Tags: ${result.tags}`}
+                    </h5>
+                    <h5>
+                      {`Link: ${result.links}`}
                     </h5>
                     <h5>
                       {`Created At: ${result.createdAt.split('T')[0]}`}
@@ -44,8 +50,7 @@ const Result = ({ results }) => {
                   </div>
                   <div className={styles.resultsDetailsRight}>
                   <p>
-                    <b>Summary:</b> <br></br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <b>Summary:</b> <br></br>{result.description}
                   </p>
                   </div>
                 </li>
