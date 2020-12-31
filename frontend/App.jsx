@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import './App.css';
 import { HashRouter, Switch, Route } from 'react-router-dom'
-import Header from './Components/Header/Header';
-import Modal from './Components/Modal/Modal';
-import SearchBar from './Components/SearchBar/SearchBar';
+import Header from './components/Header/Header';
+import Modal from './components/Modal/Modal';
+import SearchBar from './components/SearchBar/SearchBar';
 import { AuthRoute } from './util/route_util'
 import banner from './assets/images/banner3.jpg'
-import GrantForm from './Components/GrantForm/GrantForm';
+import GrantForm from './components/GrantForm/GrantForm';
 
 
 function App() {
