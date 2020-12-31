@@ -6,9 +6,17 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
+    "@types/jest": "^26.0.16",
+    "@types/node": "^14.14.10",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router": "^5.1.8",
     "react": "^17.0.1",
+    "react-animated-css": "^1.2.1",
     "react-dom": "^17.0.1",
-    "react-scripts": "^2.1.8",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^4.0.0",
+    "typescript": "^3.2.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -35,5 +43,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.6"
+  }
 }

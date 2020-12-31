@@ -41,6 +41,7 @@ router.get('/seed', (req, res) => {
 router.post('/', (req, res) => { 
   const sortCat = req.body.filters[2][0]
   const sortOrder = Number(req.body.filters[2][1])
+  console.log(req.body.filters[1])
   Grant.find({ tags: { $all: req.body.filters[1] }, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
     .then((grants) => res.json(grants))
 })

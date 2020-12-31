@@ -11,7 +11,7 @@ import GrantForm from './Components/GrantForm/GrantForm';
 
 function App() {
   const [showModal, toggleModal] = useState([false, null])
-  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser')).isAuthenticated)
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
   return (
     <main >

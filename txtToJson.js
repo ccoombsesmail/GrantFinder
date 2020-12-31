@@ -13,6 +13,7 @@ const textToJsonHelper = (data) => {
   const project = data[8].split('\r\n')
 
   for (let i = 0; i < grantNames.length; i++) {
+    let tags = project[i].split(',').map((tag) => tag.trim())
     const entry = {
       title: grantNames[i],
       description: description[i],
@@ -23,7 +24,7 @@ const textToJsonHelper = (data) => {
       status: '',
       location_elig: location[i],
       applicant_elig: applicant[i],
-      tags: project[i].split(',')
+      tags
     }
     json.push(new Grant(entry))
   }

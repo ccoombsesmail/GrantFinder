@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Results from './Results/Results'
+import TagItem from './TagItem'
 import styles from './SearchBar.module.css'
 import { getGrants } from '../../util/grants_api_util'
 import { getTags } from '../../util/tags_api_util'
@@ -8,7 +9,7 @@ import { Animated } from "react-animated-css";
 
 const SearchBar = () => {
 
-  const [department, setDepartment] = useState('')
+  const [selectedTags, setSelectedTags] = useState([])
   const [title, setTitle] = useState('')
   const [results, setResults] = useState(null)
   const [sort, setSort] = useState('{"val": ["createdAt", -1]}')
@@ -23,9 +24,10 @@ const SearchBar = () => {
 
   const update = (type) => {
     switch (type) {
-      case 'department':
+      case 'selectedTags':
         return (e) => {
-          setDepartment(e.currentTarget.value)
+          setSelectedTags([[e.currentTarget.value, e.currentTarget.selectedIndex], ...selectedTags])
+          e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true
         }  
       case 'title':
         return (e) => {
@@ -42,14 +44,23 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(JSON.parse(sort))
-    const filters = [title, [department], JSON.parse(sort).val]
+    const filters = [title, selectedTags, JSON.parse(sort).val]
     getGrants({filters})
       .then((res) => {
-        console.log(res)
         setResults(res.data)
       })
   }
+
+  const removeTag = (e) => {
+    const idxToRemove = e.currentTarget.parentElement.dataset.idx
+    const optionIdx = e.currentTarget.parentElement.dataset.optionidx
+    let newSelectedTags = [...selectedTags]
+    newSelectedTags.splice(idxToRemove, 1)
+    setSelectedTags(newSelectedTags)
+    document.getElementById('tagSelect').options[optionIdx].disabled = false
+    
+  }
+  console.log(selectedTags)
 
   return (
     <section className={styles.searchBarWrapper}>
@@ -57,9 +68,9 @@ const SearchBar = () => {
         <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
           <input placeholder="Search For Grants" className={styles.searchBar} value={title} onChange={update('title')} />
         </Animated>
-        <div className={styles.tagWrapper}>
+        <div className={styles.filtersWrapper}>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-            <select className={styles.departmentSelect} value={department} onChange={update('department')} >
+            <select id='tagSelect' className={styles.tagSelect} value={selectedTags} onChange={update('selectedTags')} >
               <option value="" selected disabled>Select Tag</option>
               {
                 tags.map((tag) => {
@@ -70,7 +81,7 @@ const SearchBar = () => {
             </select>
           </Animated>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true} animationInDelay={300}>
-            <select className={styles.departmentSelect} value={sort} onChange={update('sort')}>
+            <select className={styles.tagSelect} value={sort} onChange={update('sort')}>
               <option value="" selected disabled>Sort By</option>
               <option value='{"val": ["createdAt", -1]}'>Newest</option>
               <option value='{"val": ["createdAt", 1]}'>Oldest</option>
@@ -78,7 +89,15 @@ const SearchBar = () => {
               <option value='{"val": ["amount", 1]}'>Lowest Amount</option>
             </select>
           </Animated>
+        
         </div>
+        <ul className={styles.selectedTagsWrap}>
+          {
+            selectedTags.map((tag, idx) => {
+              return <TagItem removeTag={removeTag} optionIdx={tag[1]} index={idx} key={tag[0]} tag={tag[0]} />
+            })
+          }
+        </ul>
       </form>
       {
        results !== null ? <Results results={results} /> : null
