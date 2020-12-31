@@ -5,14 +5,17 @@ const passport = require('passport');
 require('../../config/passport')(passport)
 
 
+const fetch = require("node-fetch");
 
+const fetcher = (txtFile) => {
+  return fetch(`http://localhost:5000/${txtFile}`).then(response => response.text())
+}
 
 
 
 
 router.get('/', (req, res) => {
   Tag.find({}).then((tags) => res.json(tags))
-
 })
 
 

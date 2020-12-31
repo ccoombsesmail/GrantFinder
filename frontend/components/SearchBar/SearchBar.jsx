@@ -9,10 +9,11 @@ import { Animated } from "react-animated-css";
 
 const SearchBar = () => {
 
+  const [defaultSelected, setDefaultSelected] = useState(true)
   const [selectedTags, setSelectedTags] = useState([])
   const [title, setTitle] = useState('')
   const [results, setResults] = useState(null)
-  const [sort, setSort] = useState('{"val": ["createdAt", -1]}')
+  const [sort, setSort] = useState('')
   const [tags, setTags] = useState([])
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const SearchBar = () => {
         return (e) => {
           setSelectedTags([[e.currentTarget.value, e.currentTarget.selectedIndex], ...selectedTags])
           e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true
+          setDefaultSelected(true)
         }  
       case 'title':
         return (e) => {
@@ -44,7 +46,12 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const filters = [title, selectedTags, JSON.parse(sort).val]
+    const tags = selectedTags.map((tag) => tag[0])
+    let sortOrder = ["createdAt", -1]
+    if (sort) {
+      sortOrder = JSON.parse(sort).val
+    }
+    const filters = [title, tags, sortOrder]
     getGrants({filters})
       .then((res) => {
         setResults(res.data)
@@ -71,7 +78,7 @@ const SearchBar = () => {
         <div className={styles.filtersWrapper}>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
             <select id='tagSelect' className={styles.tagSelect} value={selectedTags} onChange={update('selectedTags')} >
-              <option value="" selected disabled>Select Tag</option>
+              <option value="">Select Tag</option>
               {
                 tags.map((tag) => {
                   return <option key={tag._id} value={tag.tag}>{tag.tag}</option>
@@ -82,11 +89,11 @@ const SearchBar = () => {
           </Animated>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true} animationInDelay={300}>
             <select className={styles.tagSelect} value={sort} onChange={update('sort')}>
-              <option value="" selected disabled>Sort By</option>
+              <option value=''>Sort By</option>
               <option value='{"val": ["createdAt", -1]}'>Newest</option>
               <option value='{"val": ["createdAt", 1]}'>Oldest</option>
-              <option value='{"val": ["amount", -1]}'>Highest Amount</option>
-              <option value='{"val": ["amount", 1]}'>Lowest Amount</option>
+              <option value='{"val": ["numAmount", -1]}'>Highest Amount</option>
+              <option value='{"val": ["numAmount", 1]}'>Lowest Amount</option>
             </select>
           </Animated>
         

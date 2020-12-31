@@ -12,6 +12,7 @@ const Result = ({ results }) => {
   }, [results])
 
   return (
+    <>
     <div className={styles.resultsWrapper}>
       {
         results.length === 0 ? (
@@ -22,8 +23,14 @@ const Result = ({ results }) => {
           <ul>
           {
             results.map((result, idx) => {
+              let tags = result.tags.map((tag) => {
+                if (tag){
+                  return tag.tag
+                }
+              })
+              console.log(tags)
               return (
-              <Animated animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*idx}>
+              <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*idx}>
                 <li>
                   <div className={styles.resultsDetailsLeft}>
                     <h1>
@@ -39,10 +46,13 @@ const Result = ({ results }) => {
                       {`Deadline: ${result.deadline}`}
                     </h5>
                     <h5>
-                      {`Tags: ${result.tags}`}
+                      {`Tags: ${tags.join(", ")}`}
                     </h5>
                     <h5>
-                      {`Link: ${result.links}`}
+                        Link 
+                      <a href={result.links} target='_blank'>
+                        {` ${result.links}`}
+                      </a>
                     </h5>
                     <h5>
                       {`Created At: ${result.createdAt.split('T')[0]}`}
@@ -62,6 +72,9 @@ const Result = ({ results }) => {
         )
       }
     </div>
+    <div className={styles.fillerDiv}>.</div>
+    </>
+
   )
 }
 

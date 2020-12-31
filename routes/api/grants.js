@@ -1,7 +1,6 @@
 const express = require("express")
 const router = express.Router()
 const Grant = require('../../models/Grant');
-const Tag = require('../../models/Tag');
 const passport = require('passport');
 require('../../config/passport')(passport)
 
@@ -10,7 +9,7 @@ const fetch = require("node-fetch");
 const textToJson = require('../../txtToJson')
 
 const fetcher = (txtFile) => {
-  return fetch(`http://localhost:3000/${txtFile}`).then(response => response.text())
+  return fetch(`http://localhost:5000/${txtFile}`).then(response => response.text())
 }
 
 
@@ -41,11 +40,19 @@ router.get('/seed', (req, res) => {
 router.post('/', (req, res) => { 
   const sortCat = req.body.filters[2][0]
   const sortOrder = Number(req.body.filters[2][1])
-  console.log(req.body.filters[1])
-  Grant.find({ tags: { $all: req.body.filters[1] }, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
-    .then((grants) => res.json(grants))
-})
-
+  const tagsConditions = req.body.filters[1].map((tag) => {
+    return { 
+      'tags.tag': tag
+    }
+  })
+  // Grant.find({ tags: { $all: req.body.filters[1] }, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
+  //   .then((grants) => res.json(grants))
+  Grant.find({ $or: tagsConditions, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
+    .then((grants) => {
+      console.log(grants[0].tags)
+      res.json(grants)
+    })
+  })
 
 router.post('/admin/grants', passport.authenticate('jwt', { session: false }), (req, res) => {
   let grant = new Grant({

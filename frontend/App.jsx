@@ -29,8 +29,9 @@ function App() {
           </Route>
         </Switch>
       </HashRouter>
+      {/* <footer></footer> */}
     </main>
   );
 }
 
-export default App;
+export default App

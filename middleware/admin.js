@@ -1,6 +1,4 @@
-const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const validateLoginInput = require('../validation/login');
 
 const requiresAdmin = () => {
 
@@ -11,14 +9,11 @@ const requiresAdmin = () => {
           if (!user) {
             return res.status(404).json({ email: 'This user does not exist' });
           }
-          // bcrypt.compare(password, user.password)
-          //   .then((isMatch) => {
-              if (user.isAdmin === true) { 
-                next();
-              } else {
-                res.status(401).send('Unauthorized');
-              }
-        // })
+            if (user.isAdmin === true) { 
+              next();
+            } else {
+              res.status(401).send('Unauthorized');
+            }
       })
     }
   ]

@@ -4,7 +4,6 @@ import App from "./App"
 import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './util/session_api_util'
-import './index.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   // If a returning user has a session token stored in localStorage

@@ -40,5 +40,5 @@ const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
   )
 }
 
-export default Header
+export default Header;
 

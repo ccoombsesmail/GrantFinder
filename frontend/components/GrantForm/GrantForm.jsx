@@ -76,4 +76,4 @@ const GrantForm = () => {
   )
 }
 
-export default GrantForm
+export default GrantForm;

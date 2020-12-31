@@ -10,19 +10,22 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  margin-bottom: 100px;
+  margin-bottom: 300px;
+
 
 }
 
 .resultsWrapper > ul {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   width: 100%;
   align-items: center;
   overflow-y: scroll;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
 
+}
+.resultsWrapper > ul:last-child {
+  padding-bottom: 100px;
 }
 
 .resultsWrapper > ul::-webkit-scrollbar {
@@ -104,3 +107,7 @@
 }
 
 
+.fillerDiv {
+  height: 300px;
+  width: 100vw;
+}

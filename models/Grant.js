@@ -1,6 +1,15 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+const TagSchema = new Schema({
+  tag: {
+    type: String,
+    required: true
+  }
+})
+
+
+
 const GrantSchema = new Schema({
   title: {
     type: String,
@@ -16,6 +25,10 @@ const GrantSchema = new Schema({
   },
   amount: {
     type: String,
+    required: false
+  },
+  numAmount: {
+    type: Number,
     required: false
   },
   deadline: {
@@ -38,10 +51,7 @@ const GrantSchema = new Schema({
     type: String,
     required: false
   },
-  tags: {
-    type: [String],
-    required: false
-  }
+  tags: [TagSchema]
 }, {
   timestamps: true
 })

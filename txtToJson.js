@@ -1,4 +1,7 @@
 const Grant = require('./models/Grant');
+const Tag = require('./models/Tag');
+
+const numPat = /\d+/g;
 
 const textToJsonHelper = (data) => {
   const json = []
@@ -13,12 +16,28 @@ const textToJsonHelper = (data) => {
   const project = data[8].split('\r\n')
 
   for (let i = 0; i < grantNames.length; i++) {
-    let tags = project[i].split(',').map((tag) => tag.trim())
+    let tags = project[i].split(',').map((tagName) => {
+      if (tagName.trim() !== '') {
+        return new Tag({
+          tag: tagName.trim()
+        })
+      }
+    })
+    let numAmount = 0
+    if (amount[i]) {
+      let stringAmounts = amount[i].replace(/,/g, '').match(numPat)
+      let numAmounts = [] 
+      if (stringAmounts) {
+        numAmounts = stringAmounts.map((amount) => Number(amount))
+      }
+      numAmount = Math.max(...numAmounts)
+    }
     const entry = {
       title: grantNames[i],
       description: description[i],
       links: links[i],
       amount: amount[i],
+      numAmount: numAmount,
       deadline: deadline[i],
       disbursement: disbursement[i],
       status: '',
