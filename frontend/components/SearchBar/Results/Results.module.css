@@ -20,7 +20,7 @@
   flex-direction: column;
   width: 100%;
   align-items: center;
-  overflow-y: scroll;
+  overflow-y: hidden;
   scrollbar-color: var(--thumbBG) var(--scrollbarBG);
 
 }
@@ -72,10 +72,6 @@
   background-color: #EFEFEF;
 }
 
-/* .resultsWrapper > ul li > h1 {
-  border-bottom: 1px solid white;
-  padding-bottom: 10px;
-} */
 
 .resultsDetailsLeft {
   display: flex;

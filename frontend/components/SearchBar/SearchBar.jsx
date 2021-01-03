@@ -67,7 +67,6 @@ const SearchBar = () => {
     document.getElementById('tagSelect').options[optionIdx].disabled = false
     
   }
-  console.log(selectedTags)
 
   return (
     <section className={styles.searchBarWrapper}>
@@ -84,7 +83,6 @@ const SearchBar = () => {
                   return <option key={tag._id} value={tag.tag}>{tag.tag}</option>
                 })
               }
-    
             </select>
           </Animated>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true} animationInDelay={300}>

@@ -9,11 +9,11 @@ const requiresAdmin = () => {
           if (!user) {
             return res.status(404).json({ email: 'This user does not exist' });
           }
-            if (user.isAdmin === true) { 
-              next();
-            } else {
-              res.status(401).send('Unauthorized');
-            }
+          if (user.isAdmin === true) { 
+            next();
+          } else {
+            res.status(401).send('Unauthorized');
+          }
       })
     }
   ]

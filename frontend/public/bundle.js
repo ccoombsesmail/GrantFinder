@@ -168,7 +168,18 @@ function App() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrantForm.module.css */ "./components/GrantForm/GrantForm.module.css");
-/* harmony import */ var _util_grants_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/grants_api_util */ "./util/grants_api_util.js");
+/* harmony import */ var _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SearchBar/SearchBar.module.css */ "./components/SearchBar/SearchBar.module.css");
+/* harmony import */ var _util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/grants_api_util */ "./util/grants_api_util.js");
+/* harmony import */ var _SearchBar_TagItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../SearchBar/TagItem */ "./components/SearchBar/TagItem.jsx");
+/* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/tags_api_util */ "./util/tags_api_util.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -185,6 +196,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
+
 var GrantForm = function GrantForm() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -193,21 +207,62 @@ var GrantForm = function GrantForm() {
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
-      department = _useState4[0],
-      setDepartment = _useState4[1];
+      amount = _useState4[0],
+      setAmount = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      amount = _useState6[0],
-      setAmount = _useState6[1];
+      link = _useState6[0],
+      setLink = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      deadline = _useState8[0],
+      setDeadline = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState10 = _slicedToArray(_useState9, 2),
+      disbursement = _useState10[0],
+      setDisbursement = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState12 = _slicedToArray(_useState11, 2),
+      status = _useState12[0],
+      setStatus = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState14 = _slicedToArray(_useState13, 2),
+      location = _useState14[0],
+      setLocation = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState16 = _slicedToArray(_useState15, 2),
+      applicantelig = _useState16[0],
+      setApplicantelig = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState18 = _slicedToArray(_useState17, 2),
+      description = _useState18[0],
+      setDescription = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState20 = _slicedToArray(_useState19, 2),
+      tags = _useState20[0],
+      setTags = _useState20[1];
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      tagOptions = _useState22[0],
+      setTagOptions = _useState22[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__.getTags)().then(function (allTags) {
+      setTagOptions(Object.values(allTags.data));
+    });
+  }, []);
 
   var update = function update(type) {
     switch (type) {
-      case 'department':
-        return function (e) {
-          setDepartment(e.currentTarget.value);
-        };
-
       case 'title':
         return function (e) {
           setTitle(e.currentTarget.value);
@@ -218,6 +273,47 @@ var GrantForm = function GrantForm() {
           setAmount(e.currentTarget.value);
         };
 
+      case 'link':
+        return function (e) {
+          setLink(e.currentTarget.value);
+        };
+
+      case 'deadline':
+        return function (e) {
+          setDeadline(e.currentTarget.value);
+        };
+
+      case 'disbursement':
+        return function (e) {
+          setDisbursement(e.currentTarget.value);
+        };
+
+      case 'status':
+        return function (e) {
+          setStatus(e.currentTarget.value);
+        };
+
+      case 'location':
+        return function (e) {
+          setLocation(e.currentTarget.value);
+        };
+
+      case 'applicantelig':
+        return function (e) {
+          setApplicantelig(e.currentTarget.value);
+        };
+
+      case 'tags':
+        return function (e) {
+          setTags([[e.currentTarget.value, e.currentTarget.selectedIndex]].concat(_toConsumableArray(tags)));
+          e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true;
+        };
+
+      case 'description':
+        return function (e) {
+          setDescription(e.currentTarget.value);
+        };
+
       default:
         break;
     }
@@ -226,14 +322,32 @@ var GrantForm = function GrantForm() {
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
     var grant = {
-      grant_title: title,
-      tags: [department],
+      title: title,
+      tags: tags,
       amount: amount,
+      link: link,
+      deadline: deadline,
+      disbursement: disbursement,
+      status: status,
+      location: location,
+      applicantelig: applicantelig,
+      description: description,
       username: JSON.parse(localStorage.getItem('currentUser')).user.username
     };
-    (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_2__.createGrant)(grant).then(function (res) {
+    (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.createGrant)(grant).then(function (res) {
       return console.log(res);
     });
+  };
+
+  var removeTag = function removeTag(e) {
+    var idxToRemove = e.currentTarget.parentElement.dataset.idx;
+    var optionIdx = e.currentTarget.parentElement.dataset.optionidx;
+
+    var newSelectedTags = _toConsumableArray(tags);
+
+    newSelectedTags.splice(idxToRemove, 1);
+    setTags(newSelectedTags);
+    document.getElementById('tagSelect').options[optionIdx].disabled = false;
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -254,11 +368,11 @@ var GrantForm = function GrantForm() {
     autoComplete: "off"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Department"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Link"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: department,
-    onChange: update('department')
+    value: link,
+    onChange: update('link')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -266,6 +380,70 @@ var GrantForm = function GrantForm() {
     type: "text",
     value: amount,
     onChange: update('amount')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Deadline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: deadline,
+    onChange: update('deadline')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Disbursement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: disbursement,
+    onChange: update('disbursement')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: status,
+    onChange: update('status')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Location Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: location,
+    onChange: update('location')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Applicant Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: applicantelig,
+    onChange: update('applicantelig')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: description,
+    onChange: update('description')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    id: "tagSelect",
+    className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagSelect,
+    value: tags,
+    onChange: update('tags')
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+    value: ""
+  }, "Select Tag"), tagOptions.map(function (tag) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      key: tag._id,
+      value: tag.tag
+    }, tag.tag);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.selectedTagsWrap
+  }, tags.map(function (tag, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SearchBar_TagItem__WEBPACK_IMPORTED_MODULE_4__.default, {
+      removeTag: removeTag,
+      optionIdx: tag[1],
+      index: idx,
+      key: tag[0],
+      tag: tag[0]
+    });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "submit"
   }, "Submit")));
@@ -436,14 +614,13 @@ var Result = function Result(_ref) {
         return tag.tag;
       }
     });
-    console.log(tags);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_animated_css__WEBPACK_IMPORTED_MODULE_2__.Animated, {
       key: result._id,
       animationIn: "fadeInUp",
       animationOut: "fadeOut",
       isVisible: isVis,
       animationInDelay: 200 * idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsLeft
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Amount: ".concat(result.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Deadline: ".concat(result.deadline)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Tags: ".concat(tags.join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Link", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
       href: result.links,
@@ -594,7 +771,6 @@ var SearchBar = function SearchBar() {
     document.getElementById('tagSelect').options[optionIdx].disabled = false;
   };
 
-  console.log(selectedTags);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("section", {
     className: _SearchBar_module_css__WEBPACK_IMPORTED_MODULE_3__.default.searchBarWrapper
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -1223,7 +1399,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AuthRoute": function() { return /* binding */ AuthRoute; }
 /* harmony export */ });
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+
 
 
 var Auth = function Auth(_ref) {
@@ -1235,21 +1413,21 @@ var Auth = function Auth(_ref) {
       isAuthenticated = _JSON$parse.isAuthenticated,
       user = _JSON$parse.user;
 
-  return /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Route, {
     path: path,
     exact: exact,
     render: function render(props) {
-      return isAuthenticated && user.isAdmin ? /*#__PURE__*/React.createElement(Component, props) :
+      return isAuthenticated && user.isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Component, props) :
       /*#__PURE__*/
       // Redirect to the tweets page if the user is authenticated
-      React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_0__.Redirect, {
+      react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Redirect, {
         to: "/"
       });
     }
   });
 };
 
-var AuthRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_0__.withRouter)(Auth);
+var AuthRoute = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.withRouter)(Auth);
 
 /***/ }),
 
@@ -2475,7 +2653,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._2mCNVUFTt-0_fKJ0_vKYqz {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  height: 60vh;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n._3JY87cBHvV3yaz-vy47XPD {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > h1 {\n  margin-top: 50px;\n}\n\n\n._3JY87cBHvV3yaz-vy47XPD > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:focus {\n  outline: none;\n  border: none;\n} \n\n._317ZTfEE3CgrPn3KmFukRZ > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > input:focus {\n  border: 2px solid #3389C5;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}", "",{"version":3,"sources":["webpack://./components/GrantForm/GrantForm.module.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,kBAAkB;EAClB,WAAW;EACX,YAAY;EACZ,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,oBAAoB;AACtB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,+BAA+B;EAC/B,kBAAkB;EAClB,sBAAsB;EACtB,YAAY;;AAEd;;AAEA;EACE,gBAAgB;AAClB;;;AAGA;EACE,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,wDAAwD,EAAE,qEAAqE;EAC/H,YAAY;EACZ,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,eAAe;EACf,mBAAmB;;AAErB;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;;AAEpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;AACd","sourcesContent":[".grantFormWrapper {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  height: 60vh;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n.form {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n.form > h1 {\n  margin-top: 50px;\n}\n\n\n.form > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n.form > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n.form > button:focus {\n  outline: none;\n  border: none;\n} \n\n.formLabel > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n.formLabel > input:focus {\n  border: 2px solid #3389C5;\n}\n\n.formLabel {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._2mCNVUFTt-0_fKJ0_vKYqz {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n._3JY87cBHvV3yaz-vy47XPD {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > h1 {\n  margin-top: 50px;\n}\n\n\n._3JY87cBHvV3yaz-vy47XPD > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:focus {\n  outline: none;\n  border: none;\n} \n\n._317ZTfEE3CgrPn3KmFukRZ > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > input:focus {\n  border: 2px solid #3389C5;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}", "",{"version":3,"sources":["webpack://./components/GrantForm/GrantForm.module.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;EACtB,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,oBAAoB;AACtB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,+BAA+B;EAC/B,kBAAkB;EAClB,sBAAsB;EACtB,YAAY;;AAEd;;AAEA;EACE,gBAAgB;AAClB;;;AAGA;EACE,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,wDAAwD,EAAE,qEAAqE;EAC/H,YAAY;EACZ,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,eAAe;EACf,mBAAmB;;AAErB;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;;AAEpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;AACd","sourcesContent":[".grantFormWrapper {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n.form {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n.form > h1 {\n  margin-top: 50px;\n}\n\n\n.form > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n.form > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n.form > button:focus {\n  outline: none;\n  border: none;\n} \n\n.formLabel > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n.formLabel > input:focus {\n  border: 2px solid #3389C5;\n}\n\n.formLabel {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"grantFormWrapper": "_2mCNVUFTt-0_fKJ0_vKYqz",
@@ -2560,7 +2738,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: scroll;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n/* .resultsWrapper > ul li > h1 {\n  border-bottom: 1px solid white;\n  padding-bottom: 10px;\n} */\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;EACE,4BAA4B;EAC5B,yBAAyB;AAC3B;;AAEA;;;GAGG;;AAEH;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;;AAGA;EACE,aAAa;EACb,YAAY;AACd","sourcesContent":[".resultsWrapper {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: scroll;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n.resultsWrapper > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n/* .resultsWrapper > ul li > h1 {\n  border-bottom: 1px solid white;\n  padding-bottom: 10px;\n} */\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;EACE,4BAA4B;EAC5B,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;;AAGA;EACE,aAAa;EACb,YAAY;AACd","sourcesContent":[".resultsWrapper {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n.resultsWrapper > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"resultsWrapper": "_1dvHL2TeuxYpw0kN4hgH1d",

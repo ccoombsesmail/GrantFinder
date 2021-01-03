@@ -45,8 +45,6 @@ router.post('/', (req, res) => {
       'tags.tag': tag
     }
   })
-  // Grant.find({ tags: { $all: req.body.filters[1] }, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
-  //   .then((grants) => res.json(grants))
   Grant.find({ $or: tagsConditions, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
     .then((grants) => {
       console.log(grants[0].tags)
@@ -56,7 +54,7 @@ router.post('/', (req, res) => {
 
 router.post('/admin/grants', passport.authenticate('jwt', { session: false }), (req, res) => {
   let grant = new Grant({
-    grant_title: req.body.grant_title,
+    title: req.body.title,
     tags: req.body.tags,
     amount: Number(req.body.amount)
   })

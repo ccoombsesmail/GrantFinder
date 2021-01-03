@@ -24,23 +24,20 @@ const Result = ({ results }) => {
           {
             results.map((result, idx) => {
               let tags = result.tags.map((tag) => {
-                if (tag){
+                if (tag) {
                   return tag.tag
                 }
               })
-              console.log(tags)
               return (
               <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*idx}>
                 <li>
+                  <button>Edit</button>
                   <div className={styles.resultsDetailsLeft}>
                     <h1>
-                    {`${result.title}`}  
+                      {`${result.title}`}  
                     </h1>
-                    {/* <h3>
-                      {`Organization: ...`}
-                    </h3> */}
                     <h5>
-                    {`Amount: ${result.amount}`}
+                      {`Amount: ${result.amount}`}
                     </h5>
                     <h5>
                       {`Deadline: ${result.deadline}`}
