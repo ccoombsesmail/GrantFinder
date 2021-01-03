@@ -29,7 +29,7 @@
   },
   "scripts": {
     "webpack": "webpack --mode development --watch",
-    "webpack-prod": "webpack --mode production" 
+    "webpack-prod": "webpack --mode production"
   },
   "eslintConfig": {
     "extends": [

@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Results.module.css'
 import { Animated } from "react-animated-css";
+import { withRouter, Link } from "react-router-dom";
 
-const Result = ({ results }) => {
+const Result = ({ results, location }) => {
 
   const [isVis, setIsVis] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
   useEffect(() => {
     setIsVis(false)
     setTimeout(() => setIsVis(true), 100)
   }, [results])
+
 
   return (
     <>
@@ -31,7 +34,11 @@ const Result = ({ results }) => {
               return (
               <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*idx}>
                 <li>
-                  <button>Edit</button>
+                  {
+                    (loggedIn && location.pathname === '/admin/editgrant') ? (
+                      <Link to={`/admin/tag/${result}`}>Edit</Link>
+                    ) : null
+                  }
                   <div className={styles.resultsDetailsLeft}>
                     <h1>
                       {`${result.title}`}  
@@ -75,4 +82,4 @@ const Result = ({ results }) => {
   )
 }
 
-export default Result
+export default withRouter(Result)

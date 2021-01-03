@@ -4,8 +4,9 @@ import tagInputStyles from '../SearchBar/SearchBar.module.css'
 import { createGrant } from '../../util/grants_api_util'
 import TagItem from '../SearchBar/TagItem'
 import { getTags } from '../../util/tags_api_util'
+import { withRouter } from "react-router-dom";
 
-const GrantForm = () => {
+const GrantForm = ({ location }) => {
 
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
@@ -23,6 +24,9 @@ const GrantForm = () => {
     getTags().then((allTags) => {
       setTagOptions(Object.values(allTags.data))
     })
+    if (location.pathname === '/admin/editgrant/' ) {
+
+    }
   }, [])
 
 
@@ -202,4 +206,4 @@ const GrantForm = () => {
   )
 }
 
-export default GrantForm;
+export default withRouter(GrantForm)

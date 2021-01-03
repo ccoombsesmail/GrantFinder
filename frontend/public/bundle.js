@@ -118,6 +118,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var UserContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext('user');
 
 function App() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([false, null]),
@@ -146,6 +147,10 @@ function App() {
     exact: true,
     component: _components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_4__.default,
     path: "/admin/editgrant"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
+    exact: true,
+    component: EditGrant,
+    path: "/admin/editgrant/:grant"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
     path: "/"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
@@ -162,294 +167,9 @@ function App() {
 /*!********************************************!*\
   !*** ./components/GrantForm/GrantForm.jsx ***!
   \********************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ (function() {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GrantForm.module.css */ "./components/GrantForm/GrantForm.module.css");
-/* harmony import */ var _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SearchBar/SearchBar.module.css */ "./components/SearchBar/SearchBar.module.css");
-/* harmony import */ var _util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/grants_api_util */ "./util/grants_api_util.js");
-/* harmony import */ var _SearchBar_TagItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../SearchBar/TagItem */ "./components/SearchBar/TagItem.jsx");
-/* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/tags_api_util */ "./util/tags_api_util.js");
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-var GrantForm = function GrantForm() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      title = _useState2[0],
-      setTitle = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState4 = _slicedToArray(_useState3, 2),
-      amount = _useState4[0],
-      setAmount = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState6 = _slicedToArray(_useState5, 2),
-      link = _useState6[0],
-      setLink = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState8 = _slicedToArray(_useState7, 2),
-      deadline = _useState8[0],
-      setDeadline = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      disbursement = _useState10[0],
-      setDisbursement = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState12 = _slicedToArray(_useState11, 2),
-      status = _useState12[0],
-      setStatus = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState14 = _slicedToArray(_useState13, 2),
-      location = _useState14[0],
-      setLocation = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState16 = _slicedToArray(_useState15, 2),
-      applicantelig = _useState16[0],
-      setApplicantelig = _useState16[1];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState18 = _slicedToArray(_useState17, 2),
-      description = _useState18[0],
-      setDescription = _useState18[1];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState20 = _slicedToArray(_useState19, 2),
-      tags = _useState20[0],
-      setTags = _useState20[1];
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState22 = _slicedToArray(_useState21, 2),
-      tagOptions = _useState22[0],
-      setTagOptions = _useState22[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__.getTags)().then(function (allTags) {
-      setTagOptions(Object.values(allTags.data));
-    });
-  }, []);
-
-  var update = function update(type) {
-    switch (type) {
-      case 'title':
-        return function (e) {
-          setTitle(e.currentTarget.value);
-        };
-
-      case 'amount':
-        return function (e) {
-          setAmount(e.currentTarget.value);
-        };
-
-      case 'link':
-        return function (e) {
-          setLink(e.currentTarget.value);
-        };
-
-      case 'deadline':
-        return function (e) {
-          setDeadline(e.currentTarget.value);
-        };
-
-      case 'disbursement':
-        return function (e) {
-          setDisbursement(e.currentTarget.value);
-        };
-
-      case 'status':
-        return function (e) {
-          setStatus(e.currentTarget.value);
-        };
-
-      case 'location':
-        return function (e) {
-          setLocation(e.currentTarget.value);
-        };
-
-      case 'applicantelig':
-        return function (e) {
-          setApplicantelig(e.currentTarget.value);
-        };
-
-      case 'tags':
-        return function (e) {
-          setTags([[e.currentTarget.value, e.currentTarget.selectedIndex]].concat(_toConsumableArray(tags)));
-          e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true;
-        };
-
-      case 'description':
-        return function (e) {
-          setDescription(e.currentTarget.value);
-        };
-
-      default:
-        break;
-    }
-  };
-
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    var grant = {
-      title: title,
-      tags: tags,
-      amount: amount,
-      link: link,
-      deadline: deadline,
-      disbursement: disbursement,
-      status: status,
-      location: location,
-      applicantelig: applicantelig,
-      description: description,
-      username: JSON.parse(localStorage.getItem('currentUser')).user.username
-    };
-    (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.createGrant)(grant).then(function (res) {
-      return console.log(res);
-    });
-  };
-
-  var removeTag = function removeTag(e) {
-    var idxToRemove = e.currentTarget.parentElement.dataset.idx;
-    var optionIdx = e.currentTarget.parentElement.dataset.optionidx;
-
-    var newSelectedTags = _toConsumableArray(tags);
-
-    newSelectedTags.splice(idxToRemove, 1);
-    setTags(newSelectedTags);
-    document.getElementById('tagSelect').options[optionIdx].disabled = false;
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.grantFormWrapper
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.form,
-    onSubmit: function onSubmit(e) {
-      return handleSubmit(e);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Enter New Grant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    maxLength: 100,
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: title,
-    onChange: update('title'),
-    autoComplete: "off"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Link"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: link,
-    onChange: update('link')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: amount,
-    onChange: update('amount')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Deadline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: deadline,
-    onChange: update('deadline')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Disbursement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: disbursement,
-    onChange: update('disbursement')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: status,
-    onChange: update('status')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Location Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: location,
-    onChange: update('location')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Applicant Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: applicantelig,
-    onChange: update('applicantelig')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
-    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: description,
-    onChange: update('description')
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-    id: "tagSelect",
-    className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagSelect,
-    value: tags,
-    onChange: update('tags')
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: ""
-  }, "Select Tag"), tagOptions.map(function (tag) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      key: tag._id,
-      value: tag.tag
-    }, tag.tag);
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.selectedTagsWrap
-  }, tags.map(function (tag, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_SearchBar_TagItem__WEBPACK_IMPORTED_MODULE_4__.default, {
-      removeTag: removeTag,
-      optionIdx: tag[1],
-      index: idx,
-      key: tag[0],
-      tag: tag[0]
-    });
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-    type: "submit"
-  }, "Submit")));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (GrantForm);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/components/GrantForm/GrantForm.jsx: Unexpected token (26:8)\n\n\u001b[0m \u001b[90m 24 | \u001b[39m      setTagOptions(\u001b[33mObject\u001b[39m\u001b[33m.\u001b[39mvalues(allTags\u001b[33m.\u001b[39mdata))\u001b[0m\n\u001b[0m \u001b[90m 25 | \u001b[39m    })\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 | \u001b[39m    \u001b[36mif\u001b[39m ()\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 27 | \u001b[39m  }\u001b[33m,\u001b[39m [])\u001b[0m\n\u001b[0m \u001b[90m 28 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 29 | \u001b[39m\u001b[0m\n    at Object._raise (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:748:17)\n    at Object.raiseWithData (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:741:17)\n    at Object.raise (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:735:17)\n    at Object.unexpected (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:9101:16)\n    at Object.parseExprAtom (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:10575:20)\n    at Object.parseExprAtom (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:4763:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:10150:23)\n    at Object.parseUpdate (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:10130:21)\n    at Object.parseMaybeUnary (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:10119:17)\n    at Object.parseExprOps (/mnt/c/Users/Charles/Desktop/GrantFiner/GrantFinder/frontend/node_modules/@babel/parser/lib/index.js:9989:23)");
 
 /***/ }),
 
@@ -576,6 +296,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Results_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Results.module.css */ "./components/SearchBar/Results/Results.module.css");
 /* harmony import */ var react_animated_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-animated-css */ "./node_modules/react-animated-css/lib/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -592,13 +314,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var Result = function Result(_ref) {
-  var results = _ref.results;
+  var results = _ref.results,
+      location = _ref.location;
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
       isVis = _useState2[0],
       setIsVis = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loggedIn = _useState4[0],
+      setLoggedIn = _useState4[1];
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     setIsVis(false);
@@ -620,7 +349,9 @@ var Result = function Result(_ref) {
       animationOut: "fadeOut",
       isVisible: isVis,
       animationInDelay: 200 * idx
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Edit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, loggedIn && location.pathname === '/admin/editgrant' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/admin/tag/".concat(result)
+    }, "Edit") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsLeft
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Amount: ".concat(result.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Deadline: ".concat(result.deadline)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Tags: ".concat(tags.join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Link", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
       href: result.links,
@@ -633,7 +364,7 @@ var Result = function Result(_ref) {
   }, "."));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Result);
+/* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)(Result));
 
 /***/ }),
 
@@ -1235,27 +966,6 @@ options.insert = "head";
 options.singleton = false;
 var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_App_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
 /* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_App_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./components/GrantForm/GrantForm.module.css":
-/*!***************************************************!*\
-  !*** ./components/GrantForm/GrantForm.module.css ***!
-  \***************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./GrantForm.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/GrantForm/GrantForm.module.css");
-
-
-var options = {};
-options.insert = "head";
-options.singleton = false;
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
-/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -2631,35 +2341,6 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Poppins', sans-serif;\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./App.css"],"names":[],"mappings":"AAAA;EACE,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,aAAa;EACb,kDAAkD,GAAG,aAAa;EAClE,mBAAmB;EACnB,sBAAsB;EACtB,QAAQ;EACR,aAAa;EACb,sBAAsB;EACtB,8BAA8B;AAChC;;;AAGA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;;;AAIA;EACE,oBAAoB;EACpB,0BAA0B;EAC1B,kCAAkC;AACpC;;;AAGA;EACE,SAAS;EACT,kCAAkC;EAClC,mCAAmC;EACnC,kCAAkC;EAClC,gBAAgB;AAClB;;;AAGA;EACE,SAAS;EACT,UAAU;AACZ;;AAEA;EACE,SAAS;EACT,SAAS;EACT,UAAU;EACV,WAAW;EACX,uBAAuB;EACvB,YAAY;AACd","sourcesContent":["main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Poppins', sans-serif;\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}"],"sourceRoot":""}]);
 // Exports
-/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/GrantForm/GrantForm.module.css":
-/*!*********************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/GrantForm/GrantForm.module.css ***!
-  \*********************************************************************************************************************/
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "._2mCNVUFTt-0_fKJ0_vKYqz {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n._3JY87cBHvV3yaz-vy47XPD {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > h1 {\n  margin-top: 50px;\n}\n\n\n._3JY87cBHvV3yaz-vy47XPD > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:focus {\n  outline: none;\n  border: none;\n} \n\n._317ZTfEE3CgrPn3KmFukRZ > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > input:focus {\n  border: 2px solid #3389C5;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}", "",{"version":3,"sources":["webpack://./components/GrantForm/GrantForm.module.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;EACtB,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,oBAAoB;AACtB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,+BAA+B;EAC/B,kBAAkB;EAClB,sBAAsB;EACtB,YAAY;;AAEd;;AAEA;EACE,gBAAgB;AAClB;;;AAGA;EACE,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,wDAAwD,EAAE,qEAAqE;EAC/H,YAAY;EACZ,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,eAAe;EACf,mBAAmB;;AAErB;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;;AAEpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;AACd","sourcesContent":[".grantFormWrapper {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n.form {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n.form > h1 {\n  margin-top: 50px;\n}\n\n\n.form > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n.form > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n.form > button:focus {\n  outline: none;\n  border: none;\n} \n\n.formLabel > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n\n}\n\n.formLabel > input:focus {\n  border: 2px solid #3389C5;\n}\n\n.formLabel {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}"],"sourceRoot":""}]);
-// Exports
-___CSS_LOADER_EXPORT___.locals = {
-	"grantFormWrapper": "_2mCNVUFTt-0_fKJ0_vKYqz",
-	"form": "_3JY87cBHvV3yaz-vy47XPD",
-	"formLabel": "_317ZTfEE3CgrPn3KmFukRZ"
-};
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
 
