@@ -36,7 +36,7 @@ const Result = ({ results, location }) => {
                 <li>
                   {
                     (loggedIn && location.pathname === '/admin/editgrant') ? (
-                      <Link to={`/admin/tag/${result}`}>Edit</Link>
+                      <Link to={`/admin/editgrant/${result._id}`}>Edit</Link>
                     ) : null
                   }
                   <div className={styles.resultsDetailsLeft}>

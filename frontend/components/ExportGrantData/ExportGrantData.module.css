@@ -1,0 +1,24 @@
+.button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background-color: rgb(43, 123, 189);
+  padding: 15px;
+  font-size: 25px;
+  font-weight: 900;
+  color: white;
+  outline: none;
+  border: none;
+  transition: all .6s;
+  background: #2c3e50;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  cursor: pointer;
+}
+
+.button:hover {
+  color: black;
+  opacity: .7;
+}

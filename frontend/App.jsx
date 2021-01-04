@@ -7,7 +7,7 @@ import SearchBar from './components/SearchBar/SearchBar';
 import { AuthRoute } from './util/route_util'
 import banner from './assets/images/banner3.jpg'
 import GrantForm from './components/GrantForm/GrantForm';
-
+import ExportGrantData from './components/ExportGrantData/ExportGrantData'
 const UserContext = React.createContext('user');
 
 
@@ -26,7 +26,8 @@ function App() {
         <Switch>
           <AuthRoute exact component={GrantForm} path="/admin/addgrant" /> 
           <AuthRoute exact component={SearchBar} path="/admin/editgrant" /> 
-          <AuthRoute exact component={EditGrant} path="/admin/editgrant/:grant" /> 
+          <AuthRoute exact component={GrantForm} path="/admin/editgrant/:grantId" /> 
+          <AuthRoute exact component={ExportGrantData} path="/admin/downloadgrants" /> 
           <Route path="/">
             <SearchBar />
             <img src={banner} alt="" />

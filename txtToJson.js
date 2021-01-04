@@ -16,21 +16,10 @@ const textToJsonHelper = (data) => {
   const project = data[8].split('\r\n')
 
   for (let i = 0; i < grantNames.length; i++) {
-    let tags = project[i].split(',').map((tagName) => {
-      if (tagName.trim() !== '') {
-        return new Tag({
-          tag: tagName.trim()
-        })
-      }
-    })
+    let tags = formatTags(project[i])
     let numAmount = 0
     if (amount[i]) {
-      let stringAmounts = amount[i].replace(/,/g, '').match(numPat)
-      let numAmounts = [] 
-      if (stringAmounts) {
-        numAmounts = stringAmounts.map((amount) => Number(amount))
-      }
-      numAmount = Math.max(...numAmounts)
+     numAmount = getNumericalAmount(amount[i])
     }
     const entry = {
       title: grantNames[i],
@@ -51,6 +40,39 @@ const textToJsonHelper = (data) => {
 }
 
 
+const formatTags = (tags) => {
+  if (typeof tags === 'string') {
+    return tags.split(',').map((tagName) => {
+      if (tagName.trim() !== '') {
+        return new Tag({
+          tag: tagName.trim()
+        })
+      }
+    })
+  }
+  return tags.map((tagName) => {
+    if (tagName.trim() !== '') {
+      return new Tag({
+        tag: tagName.trim()
+      })
+    }
+  })
+}
+
+const getNumericalAmount = (amount) => {
+  let numAmount = 0
+  let stringAmounts = amount.replace(/,/g, '').match(numPat)
+  let numAmounts = []
+  if (stringAmounts) {
+    numAmounts = stringAmounts.map((amount) => Number(amount))
+  }
+  numAmount = Math.max(...numAmounts)
+  return numAmount
+}
+
+
 module.exports = {
-  textToJsonHelper
+  textToJsonHelper,
+  formatTags,
+  getNumericalAmount
 }

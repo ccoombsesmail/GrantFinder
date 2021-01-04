@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import styles from './GrantForm.module.css'
 import tagInputStyles from '../SearchBar/SearchBar.module.css'
-import { createGrant } from '../../util/grants_api_util'
+import { createGrant, getGrant, editGrant } from '../../util/grants_api_util'
 import TagItem from '../SearchBar/TagItem'
 import { getTags } from '../../util/tags_api_util'
 import { withRouter } from "react-router-dom";
 
-const GrantForm = ({ location }) => {
+const GrantForm = ({ location, match }) => {
 
+  const [id, setId] = useState('')
   const [title, setTitle] = useState('')
   const [amount, setAmount] = useState('')
   const [link, setLink] = useState('')
   const [deadline, setDeadline] = useState('')
   const [disbursement, setDisbursement] = useState('')
   const [status, setStatus] = useState('')
-  const [location, setLocation] = useState('')
+  const [locationelig, setLocationElig] = useState('')
   const [applicantelig, setApplicantelig] = useState('')
   const [description, setDescription] = useState('')
   const [tags, setTags] = useState([])
@@ -23,10 +24,30 @@ const GrantForm = ({ location }) => {
   useEffect(() => {
     getTags().then((allTags) => {
       setTagOptions(Object.values(allTags.data))
+      if (match.params.grantId) {
+        getGrant(match.params.grantId).then((res) => {
+          const tagOptionNode = document.getElementById('tagSelect')
+          const grant = res.data[0]
+          const tagsArray = grant.tags.map((tag) => {
+            let idx = tagOptionNode.querySelectorAll(`[data-tag='${tag.tag}']`)[0].dataset.id
+            document.getElementById('tagSelect').options[idx].disabled = true
+            return [tag.tag, Number(idx)]
+          })
+          setTitle(grant.title)
+          setAmount(grant.amount)
+          setLink(grant.links)
+          setDeadline(grant.deadline)
+          setDisbursement(grant.disbursement)
+          setStatus(grant.status)
+          setLocationElig(grant.location_elig)
+          setApplicantelig(grant.applicant_elig)
+          setDescription(grant.description)
+          setTags(tagsArray)
+          setId(grant._id)
+        })
+      }
     })
-    if (location.pathname === '/admin/editgrant/' ) {
-
-    }
+    
   }, [])
 
 
@@ -56,9 +77,9 @@ const GrantForm = ({ location }) => {
         return (e) => {
           setStatus(e.currentTarget.value)
         }
-      case 'location':
+      case 'locationelig':
         return (e) => {
-          setLocation(e.currentTarget.value)
+          setLocationElig(e.currentTarget.value)
         }
       case 'applicantelig':
         return (e) => {
@@ -82,18 +103,20 @@ const GrantForm = ({ location }) => {
     e.preventDefault()
     const grant = {
       title,
-      tags,
+      tags: tags.map((tag) => tag[0]),
       amount,
       link,
       deadline,
       disbursement,
       status,
-      location,
-      applicantelig,
+      location_elig: locationelig,
+      applicant_elig: applicantelig,
       description,
       username: JSON.parse(localStorage.getItem('currentUser')).user.username 
     }
-    createGrant(grant).then((res) => console.log(res))
+    match.params.grantId ? 
+      editGrant(grant, id).then(() => window.location.reload()) : 
+      createGrant(grant).then((res) => console.log(res))
   }
 
   const removeTag = (e) => {
@@ -166,8 +189,8 @@ const GrantForm = ({ location }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={location}
-            onChange={update('location')} />
+            value={locationelig}
+            onChange={update('locationelig')} />
         </label>
         <label className={styles.formLabel}>
           <h4>Applicant Eligibility</h4>
@@ -188,15 +211,15 @@ const GrantForm = ({ location }) => {
         <select id='tagSelect' className={tagInputStyles.tagSelect} value={tags} onChange={update('tags')} >
           <option value="">Select Tag</option>
           {
-            tagOptions.map((tag) => {
-              return <option key={tag._id} value={tag.tag}>{tag.tag}</option>
+            tagOptions.map((tag, idx) => {
+              return <option data-tag={tag.tag} data-id={idx+1} key={tag._id} value={tag.tag}>{tag.tag}</option>
             })
           }
         </select>
         <ul className={tagInputStyles.selectedTagsWrap}>
           {
             tags.map((tag, idx) => {
-              return <TagItem removeTag={removeTag} optionIdx={tag[1]} index={idx} key={tag[0]} tag={tag[0]} />
+              return <TagItem removeTag={removeTag} optionIdx={tag[1]} index={idx} key={`${tag[0]}${idx}`} tag={tag[0]} />
             })
           }
         </ul>

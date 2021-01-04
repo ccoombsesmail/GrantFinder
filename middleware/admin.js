@@ -4,7 +4,7 @@ const requiresAdmin = () => {
 
   return [
     (req, res, next) => {
-        const { username } = req.body
+        const { username } = req.body.grant
         User.findOne({ username: username }).then((user) => {
           if (!user) {
             return res.status(404).json({ email: 'This user does not exist' });
