@@ -87,9 +87,7 @@ router.post('/admin/grants/edit', passport.authenticate('jwt', { session: false 
   delete grant.username
   grant.tags = textToJson.formatTags(grant.tags)
   grant.numAmount = textToJson.getNumericalAmount(grant.amount)
-  console.log(id)
   Grant.updateOne({ _id: mongoose.Types.ObjectId(id) }, { ...grant }).then((err, grnt) => {
-    if (err) console.log(err)
     res.send({success: true})
   }).catch(err => console.log(err))
 })

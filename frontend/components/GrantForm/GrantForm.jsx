@@ -28,10 +28,11 @@ const GrantForm = ({ location, match }) => {
         getGrant(match.params.grantId).then((res) => {
           const tagOptionNode = document.getElementById('tagSelect')
           const grant = res.data[0]
-          const tagsArray = grant.tags.map((tag) => {
-            let idx = tagOptionNode.querySelectorAll(`[data-tag='${tag.tag}']`)[0].dataset.id
-            document.getElementById('tagSelect').options[idx].disabled = true
-            return [tag.tag, Number(idx)]
+          console.log(grant)
+          const tagsArray = grant.tags.filter(tag => tag !== null ).map((tag) => {
+              let idx = tagOptionNode.querySelectorAll(`[data-tag='${tag.tag}']`)[0].dataset.id
+              document.getElementById('tagSelect').options[idx].disabled = true
+              return [tag.tag, Number(idx)]
           })
           setTitle(grant.title)
           setAmount(grant.amount)
