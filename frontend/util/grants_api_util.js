@@ -11,7 +11,7 @@ export const getAllGrants = () => {
 
 
 export const getGrant = (grantId) => {
-  return axios.get('/api/grants', { params: { grantId } })
+  return axios.get(`/api/grants/${grantId}`, { params: { grantId } })
 }
 
 

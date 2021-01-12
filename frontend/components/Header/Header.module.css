@@ -27,7 +27,7 @@ header {
 }
 
 .left > h1 {
-  font-size: 30px;
+  font-size: 2vw;
 }
 
 .right {
@@ -38,10 +38,9 @@ header {
 
 .right > button {
   background-color: rgb(43, 123, 189);
-  width: 6vw;
-  height: 2vw;
-  padding: 5px;
-  font-size: 15px;
+  padding: 10px;
+  max-height: 55px;
+  font-size: 1.2vw;
   font-weight: 900;
   color: white;
   outline: none;
@@ -60,4 +59,26 @@ header {
 .right > button:hover {
   color: black;
   opacity: .7;
+}
+
+@media only screen and (max-width: 600px) {
+   .right > button {
+    font-size: 3.2vw;
+  }
+  .left > h1 {
+  font-size: 4.6vw;
+  }
+}
+
+
+@media only screen and (max-width: 1400px) {
+  .left > h1 {
+  font-size: 3vw;
+  }
+}
+
+@media only screen and (max-width: 780px) {
+  .left > h1 {
+  font-size: 4vw;
+  }
 }

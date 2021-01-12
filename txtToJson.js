@@ -1,7 +1,17 @@
 const Grant = require('./models/Grant');
 const Tag = require('./models/Tag');
+const moment = require('moment')
 
 const numPat = /\d+/g;
+const currencies = ["Lek", "؋", "$", "ƒ", "₼", "p.",
+  "BZ$", "$", "$b", "KM", "лв", "R$", "$", "៛", "$", "$", "$", "¥",
+  "$", "₡", "kn", "₱", "Kč", "RD$", "$", "kr", "€", "£", "$", "₾",
+  "¢", "£", "$", "Ft", "kr", "₹", "Rp", "﷼",
+  "£", "₪", "J$", "¥", "£", "лв", "₩", "₩", "лв", "₭", "Ls", "£",
+  "$", "Lt", "ден", "RM", "₨", "$", "₮", "MT", "$", "₨", "ƒ", "$", "C$",
+  "₦", "kr", "﷼", "₨", "B/.", "Gs", "₱", "zł", "﷼", "lei", "₽", "£", "﷼", "Дин.", "₨", "$", "$",
+  "₨", "kr", "CHF", "$", "£", "NT$", "฿", "TT$", "₺", "$", "₴", "£",
+  "$U", "лв", "Bs", "₫", "﷼", "Z$"]
 
 const textToJsonHelper = (data) => {
   const json = []
@@ -17,17 +27,24 @@ const textToJsonHelper = (data) => {
 
   for (let i = 0; i < grantNames.length; i++) {
     let tags = formatTags(project[i])
-    let numAmount = 0
+    const currencySymbol = getSymbol(amount[i])
+    let maxAward = 0
+    let deadlineDate = moment('01/01/2050', "MM-DD-YYYY").format()
     if (amount[i]) {
-     numAmount = getNumericalAmount(amount[i])
+      maxAward = getNumericalAmount(amount[i])
+    }
+    if (deadline[i] && hasNumber(deadline[i]) && deadline[i] !== '\n' && deadline[i] !== ' ') {
+      date = moment(deadline[i], "MM-DD-YYYY");
+      deadlineDate = date.format()
     }
     const entry = {
       title: grantNames[i],
       description: description[i],
       links: links[i],
       amount: amount[i],
-      numAmount: numAmount,
-      deadline: deadline[i],
+      maxAward,
+      currencySymbol,
+      deadline: deadlineDate,
       disbursement: disbursement[i],
       status: '',
       location_elig: location[i],
@@ -36,6 +53,7 @@ const textToJsonHelper = (data) => {
     }
     json.push(new Grant(entry))
   }
+
  return json
 }
 
@@ -59,20 +77,39 @@ const formatTags = (tags) => {
   })
 }
 
+
+const getSymbol = (amountDetails) => {
+  for (const curr of currencies) {
+    if (amountDetails.includes(curr)) {
+      return curr
+    }
+  }
+  return '?'
+}
+
 const getNumericalAmount = (amount) => {
   let numAmount = 0
-  let stringAmounts = amount.replace(/,/g, '').match(numPat)
+  let stringAmounts = amount.replace(/,/g, '').replace(/\./g, '').match(numPat)
   let numAmounts = []
   if (stringAmounts) {
     numAmounts = stringAmounts.map((amount) => Number(amount))
   }
-  numAmount = Math.max(...numAmounts)
+  if (numAmounts.length > 0) numAmount = Math.max(...numAmounts)
   return numAmount
 }
 
+function hasNumber(myString) {
+  return /\d/.test(myString);
+}
 
 module.exports = {
   textToJsonHelper,
   formatTags,
   getNumericalAmount
 }
+
+
+
+
+
+

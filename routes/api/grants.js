@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Grant = require('../../models/Grant');
+const Tag = require('../../models/Tag');
 const passport = require('passport');
 require('../../config/passport')(passport)
 const mongoose = require('mongoose')
@@ -52,14 +53,20 @@ router.post('/', (req, res) => {
       'tags.tag': tag
     }
   })
-  Grant.find({ $or: tagsConditions, title: { $regex: req.body.filters[0], $options: "$i" } }).limit(40).sort({ [sortCat]: sortOrder })
+  let query
+  if (req.body.filters[1].length === 0) {
+    query = generateQuery(true, tagsConditions, req)
+  } else {
+    query = generateQuery(false, tagsConditions, req)
+  }
+  query.sort({ [sortCat]: sortOrder })
     .then((grants) => {
       res.json(grants)
     })
   })
 
 
-router.get('/', (req, res) => {
+router.get('/:grantId', (req, res) => {
   const { grantId } = req.query
   const idObj = mongoose.Types.ObjectId(grantId)
   Grant.find({ _id: idObj})
@@ -84,7 +91,12 @@ router.post('/admin/grants', passport.authenticate('jwt', { session: false }), (
 router.post('/admin/grants/edit', passport.authenticate('jwt', { session: false }), (req, res) => {
   const { grant } = req.body
   const { id } = req.query
+  const newTags = textToJson.formatTags(grant.newTags)
+  for (const tag of newTags) {
+    tag.save()
+  }
   delete grant.username
+  delete grant.newTags
   grant.tags = textToJson.formatTags(grant.tags)
   grant.numAmount = textToJson.getNumericalAmount(grant.amount)
   Grant.updateOne({ _id: mongoose.Types.ObjectId(id) }, { ...grant }).then((err, grnt) => {
@@ -92,6 +104,31 @@ router.post('/admin/grants/edit', passport.authenticate('jwt', { session: false 
   }).catch(err => console.log(err))
 })
 
+
+
+
+const generateQuery = (noTags, tagsConditions, req) => {
+  if (noTags) {
+    return Grant.find({
+          $or: [
+            { title: { $regex: req.body.filters[0], $options: "$i" } },
+            { description: { $regex: req.body.filters[0], $options: "$i" } }]
+          })
+  } else {
+    return Grant.find({
+      $and: [
+        {
+          $or: tagsConditions
+        },
+        {
+          $or: [
+            { title: { $regex: req.body.filters[0], $options: "$i" } },
+            { description: { $regex: req.body.filters[0], $options: "$i" } }]
+        }
+      ]
+    })
+  }
+}
 
 
 

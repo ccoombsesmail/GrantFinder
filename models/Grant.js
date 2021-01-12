@@ -27,12 +27,17 @@ const GrantSchema = new Schema({
     type: String,
     required: false
   },
-  numAmount: {
+  maxAward: {
     type: Number,
     required: false
   },
-  deadline: {
+  currencySymbol: {
     type: String,
+    required: false
+  },
+  deadline: {
+    type: Date,
+    default: Date.now(),
     required: false
   },
   disbursement: {

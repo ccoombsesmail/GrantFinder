@@ -31,8 +31,13 @@ const Result = ({ results, location }) => {
                   return tag.tag
                 }
               })
+              const date = new Date(result.deadline)
+              let deadline = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
+              if (date.getFullYear() === 2050) {
+                deadline = 'No Deadline Specified'
+              }
               return (
-              <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*idx}>
+              <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*Math.sqrt(idx)}>
                 <li>
                   {
                     (loggedIn && location.pathname === '/admin/editgrant') ? (
@@ -44,10 +49,13 @@ const Result = ({ results, location }) => {
                       {`${result.title}`}  
                     </h1>
                     <h5>
-                      {`Amount: ${result.amount}`}
+                      {`Max Award: ${result.currencySymbol}${result.maxAward === 0 ? '' : result.maxAward}`}
                     </h5>
                     <h5>
-                      {`Deadline: ${result.deadline}`}
+                      {`Payment Details: ${result.amount}`}
+                    </h5>
+                    <h5>
+                      {`Deadline: ${deadline}`}
                     </h5>
                     <h5>
                       {`Tags: ${tags.join(", ")}`}
@@ -57,9 +65,6 @@ const Result = ({ results, location }) => {
                       <a href={result.links} target='_blank'>
                         {` ${result.links}`}
                       </a>
-                    </h5>
-                    <h5>
-                      {`Created At: ${result.createdAt.split('T')[0]}`}
                     </h5>
                   </div>
                   <div className={styles.resultsDetailsRight}>

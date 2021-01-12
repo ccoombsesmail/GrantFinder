@@ -95,9 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Modal_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Modal/Modal */ "./components/Modal/Modal.jsx");
 /* harmony import */ var _components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/SearchBar/SearchBar */ "./components/SearchBar/SearchBar.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/route_util */ "./util/route_util.js");
-/* harmony import */ var _assets_images_banner3_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./assets/images/banner3.jpg */ "./assets/images/banner3.jpg");
-/* harmony import */ var _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/GrantForm/GrantForm */ "./components/GrantForm/GrantForm.jsx");
-/* harmony import */ var _components_ExportGrantData_ExportGrantData__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/ExportGrantData/ExportGrantData */ "./components/ExportGrantData/ExportGrantData.jsx");
+/* harmony import */ var _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/GrantForm/GrantForm */ "./components/GrantForm/GrantForm.jsx");
+/* harmony import */ var _components_ExportGrantData_ExportGrantData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/ExportGrantData/ExportGrantData */ "./components/ExportGrantData/ExportGrantData.jsx");
+/* harmony import */ var _components_DeleteTags_DeleteTags__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/DeleteTags/DeleteTags */ "./components/DeleteTags/DeleteTags.jsx");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -143,7 +143,7 @@ function App() {
     setLoggedIn: setLoggedIn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     exact: true,
-    component: _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_7__.default,
+    component: _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_6__.default,
     path: "/admin/addgrant"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     exact: true,
@@ -151,21 +151,71 @@ function App() {
     path: "/admin/editgrant"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     exact: true,
-    component: _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_7__.default,
+    component: _components_GrantForm_GrantForm__WEBPACK_IMPORTED_MODULE_6__.default,
     path: "/admin/editgrant/:grantId"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
     exact: true,
-    component: _components_ExportGrantData_ExportGrantData__WEBPACK_IMPORTED_MODULE_8__.default,
+    component: _components_DeleteTags_DeleteTags__WEBPACK_IMPORTED_MODULE_8__.default,
+    path: "/admin/deletetag"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__.AuthRoute, {
+    exact: true,
+    component: _components_ExportGrantData_ExportGrantData__WEBPACK_IMPORTED_MODULE_7__.default,
     path: "/admin/downloadgrants"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
     path: "/"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_4__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: _assets_images_banner3_jpg__WEBPACK_IMPORTED_MODULE_6__.default,
-    alt: ""
-  })))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_4__.default, null)))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./components/DeleteTags/DeleteTags.jsx":
+/*!**********************************************!*\
+  !*** ./components/DeleteTags/DeleteTags.jsx ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/tags_api_util */ "./util/tags_api_util.js");
+/* harmony import */ var _DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteTags.module.css */ "./components/DeleteTags/DeleteTags.module.css");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var DeleteTags = function DeleteTags() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tags = _useState2[0],
+      setTags = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_1__.getTags)().then(function (allTags) {
+      setTags(Object.values(allTags.data));
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: _DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagsWrap
+  }, tags.map(function (tag, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, tag.tag, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete"));
+  }));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DeleteTags);
 
 /***/ }),
 
@@ -371,6 +421,16 @@ var GrantForm = function GrantForm(_ref) {
       tagOptions = _useState24[0],
       setTagOptions = _useState24[1];
 
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState26 = _slicedToArray(_useState25, 2),
+      addTag = _useState26[0],
+      setAddTag = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState28 = _slicedToArray(_useState27, 2),
+      newTags = _useState28[0],
+      setNewTags = _useState28[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__.getTags)().then(function (allTags) {
       setTagOptions(Object.values(allTags.data));
@@ -379,10 +439,10 @@ var GrantForm = function GrantForm(_ref) {
         (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.getGrant)(match.params.grantId).then(function (res) {
           var tagOptionNode = document.getElementById('tagSelect');
           var grant = res.data[0];
-          console.log(grant);
           var tagsArray = grant.tags.filter(function (tag) {
             return tag !== null;
           }).map(function (tag) {
+            console.log(tag);
             var idx = tagOptionNode.querySelectorAll("[data-tag='".concat(tag.tag, "']"))[0].dataset.id;
             document.getElementById('tagSelect').options[idx].disabled = true;
             return [tag.tag, Number(idx)];
@@ -456,6 +516,11 @@ var GrantForm = function GrantForm(_ref) {
           setDescription(e.currentTarget.value);
         };
 
+      case 'addTag':
+        return function (e) {
+          setAddTag(e.currentTarget.value);
+        };
+
       default:
         break;
     }
@@ -476,7 +541,8 @@ var GrantForm = function GrantForm(_ref) {
       location_elig: locationelig,
       applicant_elig: applicantelig,
       description: description,
-      username: JSON.parse(localStorage.getItem('currentUser')).user.username
+      username: JSON.parse(localStorage.getItem('currentUser')).user.username,
+      newTags: newTags
     };
     match.params.grantId ? (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.editGrant)(grant, id).then(function () {
       return window.location.reload();
@@ -493,7 +559,18 @@ var GrantForm = function GrantForm(_ref) {
 
     newSelectedTags.splice(idxToRemove, 1);
     setTags(newSelectedTags);
-    document.getElementById('tagSelect').options[optionIdx].disabled = false;
+
+    if (Number(optionIdx) !== -1) {
+      document.getElementById('tagSelect').options[optionIdx].disabled = false;
+    } else {
+      setNewTags(removeNewTag(e.currentTarget.parentElement.textContent.slice(1), newTags));
+    }
+  };
+
+  var addNewTag = function addNewTag() {
+    setTags([[addTag, -1]].concat(_toConsumableArray(tags)));
+    setNewTags([addTag].concat(_toConsumableArray(newTags)));
+    setAddTag('');
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -592,9 +669,32 @@ var GrantForm = function GrantForm(_ref) {
       key: "".concat(tag[0]).concat(idx),
       tag: tag[0]
     });
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Add Tag"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "text",
+    value: addTag,
+    onChange: update('addTag')
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    onClick: addNewTag,
+    type: "button"
+  }, "Add Tag")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "submit"
   }, "Submit")));
+};
+
+var removeNewTag = function removeNewTag(tag, newTags) {
+  var newTagsToAdd = _toConsumableArray(newTags);
+
+  for (var i = 0; i < newTagsToAdd.length; i++) {
+    if (tag === newTagsToAdd[i]) {
+      newTagsToAdd.splice(i, 1);
+      return newTagsToAdd;
+    }
+  }
+
+  return newTagsToAdd;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(GrantForm));
@@ -771,20 +871,27 @@ var Result = function Result(_ref) {
         return tag.tag;
       }
     });
+    var date = new Date(result.deadline);
+    var deadline = date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+
+    if (date.getFullYear() === 2050) {
+      deadline = 'No Deadline Specified';
+    }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_animated_css__WEBPACK_IMPORTED_MODULE_2__.Animated, {
       key: result._id,
       animationIn: "fadeInUp",
       animationOut: "fadeOut",
       isVisible: isVis,
-      animationInDelay: 200 * idx
+      animationInDelay: 200 * Math.sqrt(idx)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, loggedIn && location.pathname === '/admin/editgrant' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/admin/editgrant/".concat(result._id)
     }, "Edit") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsLeft
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Amount: ".concat(result.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Deadline: ".concat(result.deadline)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Tags: ".concat(tags.join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Link", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Max Award: ".concat(result.currencySymbol).concat(result.maxAward === 0 ? '' : result.maxAward)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Payment Details: ".concat(result.amount)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Deadline: ".concat(deadline)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Tags: ".concat(tags.join(", "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Link", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
       href: result.links,
       target: "_blank"
-    }, " ".concat(result.links))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Created At: ".concat(result.createdAt.split('T')[0]))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, " ".concat(result.links)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsRight
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Summary:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), result.description))));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -912,11 +1019,18 @@ var SearchBar = function SearchBar() {
     }
 
     var filters = [title, tags, sortOrder];
-    (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getGrants)({
-      filters: filters
-    }).then(function (res) {
-      setResults(res.data);
-    });
+
+    if (!title && tags.length === 0) {
+      (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getAllGrants)().then(function (res) {
+        setResults(res.data);
+      });
+    } else {
+      (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getGrants)({
+        filters: filters
+      }).then(function (res) {
+        setResults(res.data);
+      });
+    }
   };
 
   var removeTag = function removeTag(e) {
@@ -977,10 +1091,12 @@ var SearchBar = function SearchBar() {
   }, "Newest"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "{\"val\": [\"createdAt\", 1]}"
   }, "Oldest"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+    value: "{\"val\": [\"numAmount\", 1]}"
+  }, "Lowest Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "{\"val\": [\"numAmount\", -1]}"
   }, "Highest Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "{\"val\": [\"numAmount\", 1]}"
-  }, "Lowest Amount")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    value: "{\"val\": [\"deadline\", 1]}"
+  }, "Soonest Deadline")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: _SearchBar_module_css__WEBPACK_IMPORTED_MODULE_3__.default.selectedTagsWrap
   }, selectedTags.map(function (tag, idx) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TagItem__WEBPACK_IMPORTED_MODULE_2__.default, {
@@ -1352,18 +1468,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ "./assets/images/banner3.jpg":
-/*!***********************************!*\
-  !*** ./assets/images/banner3.jpg ***!
-  \***********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (__webpack_require__.p + "/images/38f3c63ec905d7654cf87123d27b53f4-banner3.jpg");
-
-/***/ }),
-
 /***/ "./assets/images/logo.png":
 /*!********************************!*\
   !*** ./assets/images/logo.png ***!
@@ -1394,6 +1498,27 @@ options.insert = "head";
 options.singleton = false;
 var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_App_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
 /* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_App_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./components/DeleteTags/DeleteTags.module.css":
+/*!*****************************************************!*\
+  !*** ./components/DeleteTags/DeleteTags.module.css ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./DeleteTags.module.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/DeleteTags/DeleteTags.module.css");
+
+
+var options = {};
+options.insert = "head";
+options.singleton = false;
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_1__.default, options);
+/* harmony default export */ __webpack_exports__["default"] = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_1_use_1_DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -1569,7 +1694,7 @@ var getAllGrants = function getAllGrants() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/grants');
 };
 var getGrant = function getGrant(grantId) {
-  return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/grants', {
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/grants/".concat(grantId), {
     params: {
       grantId: grantId
     }
@@ -2833,8 +2958,35 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Poppins', sans-serif;\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./App.css"],"names":[],"mappings":"AAAA;EACE,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,aAAa;EACb,kDAAkD,GAAG,aAAa;EAClE,mBAAmB;EACnB,sBAAsB;EACtB,QAAQ;EACR,aAAa;EACb,sBAAsB;EACtB,8BAA8B;AAChC;;;AAGA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;;;AAIA;EACE,oBAAoB;EACpB,0BAA0B;EAC1B,kCAAkC;AACpC;;;AAGA;EACE,SAAS;EACT,kCAAkC;EAClC,mCAAmC;EACnC,kCAAkC;EAClC,gBAAgB;AAClB;;;AAGA;EACE,SAAS;EACT,UAAU;AACZ;;AAEA;EACE,SAAS;EACT,SAAS;EACT,UAAU;EACV,WAAW;EACX,uBAAuB;EACvB,YAAY;AACd","sourcesContent":["main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Poppins', sans-serif;\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Poppins', sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Helvetica Neue'\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Helvetica Neue';\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}\n\nselect, button, option, h1, h2, h3, h4, h5, p, div, span, section, a {\n  font-family: 'Helvetica Neue';\n}", "",{"version":3,"sources":["webpack://./App.css"],"names":[],"mappings":"AAAA;EACE,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,aAAa;EACb,kDAAkD,GAAG,aAAa;EAClE,mBAAmB;EACnB,sBAAsB;EACtB,QAAQ;EACR,aAAa;EACb,sBAAsB;EACtB,8BAA8B;AAChC;;;AAGA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;;;AAIA;EACE,oBAAoB;EACpB,0BAA0B;EAC1B;AACF;;;AAGA;EACE,SAAS;EACT,6BAA6B;EAC7B,mCAAmC;EACnC,kCAAkC;EAClC,gBAAgB;AAClB;;;AAGA;EACE,SAAS;EACT,UAAU;AACZ;;AAEA;EACE,SAAS;EACT,SAAS;EACT,UAAU;EACV,WAAW;EACX,uBAAuB;EACvB,YAAY;AACd;;AAEA;EACE,6BAA6B;AAC/B","sourcesContent":["main {\n  width: 100vw;\n  overflow-x: hidden;\n  overflow-y: scroll;\n  height: 100vh;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin:0;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n\nmain > img {\n  width: 100vw;\n}\n\nmain::-webkit-scrollbar {\n  width: 15px;\n}\n\nmain::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\nmain::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n\n\nhtml {\n  --scrollbarBG: black;\n  --thumbBG: rgb(51,141,203);\n  font-family: 'Helvetica Neue'\n}\n  \n\nbody {\n  margin: 0;\n  font-family: 'Helvetica Neue';\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  overflow: hidden;\n}\n\n\nheader, h1, h2, h3, h4, h5, ul, li, p, select, input {\n  margin: 0;\n  padding: 0;\n}\n\nfooter {\n  bottom: 0;\n  margin: 0;\n  padding: 0;\n  height: 5vh;\n  background-color: black;\n  width: 100vw;\n}\n\nselect, button, option, h1, h2, h3, h4, h5, p, div, span, section, a {\n  font-family: 'Helvetica Neue';\n}"],"sourceRoot":""}]);
 // Exports
+/* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/DeleteTags/DeleteTags.module.css":
+/*!***********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./components/DeleteTags/DeleteTags.module.css ***!
+  \***********************************************************************************************************************/
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/cssWithMappingToString.js */ "./node_modules/css-loader/dist/runtime/cssWithMappingToString.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "._26HOC1RzjUdTiFRyVUiJ7f {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 80px;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   ._26HOC1RzjUdTiFRyVUiJ7f > li {\n    font-size: 3.2vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/DeleteTags/DeleteTags.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,aAAa;EACb,eAAe;EACf,gBAAgB;AAClB;;AAEA;EACE,gBAAgB;EAChB,kCAAkC;EAClC,YAAY;EACZ,YAAY;EACZ,gBAAgB;EAChB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;AACxB;;AAEA;EACE,eAAe;EACf,uBAAuB;EACvB,YAAY;EACZ,YAAY;EACZ,aAAa;AACf;;AAEA;GACG;IACC,gBAAgB;EAClB;AACF","sourcesContent":[".tagsWrap {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 80px;\n}\n\n.tagsWrap > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n.tagsWrap > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   .tagsWrap > li {\n    font-size: 3.2vw;\n  }\n}\n"],"sourceRoot":""}]);
+// Exports
+___CSS_LOADER_EXPORT___.locals = {
+	"tagsWrap": "_26HOC1RzjUdTiFRyVUiJ7f"
+};
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
 
@@ -2913,7 +3065,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  background-color: #000411;\n  height: 60px;\n  color: white;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  font-size: 30px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > img {\n  width: 40px;\n  margin-right: 15px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 30px;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button {\n  background-color: rgb(43, 123, 189);\n  width: 6vw;\n  height: 2vw;\n  padding: 5px;\n  font-size: 15px;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  cursor: pointer;\n  \n  \n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button:hover {\n  color: black;\n  opacity: .7;\n}", "",{"version":3,"sources":["webpack://./components/Header/Header.module.css"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,8BAA8B;EAC9B,mBAAmB;EACnB,qCAAqC;EACrC,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,oDAAoD;EACpD,iDAAiD;EACjD,4CAA4C;EAC5C,kBAAkB;EAClB,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,iBAAiB;EACjB,eAAe;AACjB;;AAEA;EACE,WAAW;EACX,kBAAkB;AACpB;;AAEA;EACE,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,kBAAkB;AACpB;;AAEA;EACE,mCAAmC;EACnC,UAAU;EACV,WAAW;EACX,YAAY;EACZ,eAAe;EACf,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;EACnB,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,uDAAuD,EAAE,qEAAqE;EAC9H,eAAe;;;AAGjB;;AAEA;EACE,YAAY;EACZ,WAAW;AACb","sourcesContent":["header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  background-color: #000411;\n  height: 60px;\n  color: white;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n.left {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  font-size: 30px;\n}\n\n.left > img {\n  width: 40px;\n  margin-right: 15px;\n}\n\n.left > h1 {\n  font-size: 30px;\n}\n\n.right {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n}\n\n.right > button {\n  background-color: rgb(43, 123, 189);\n  width: 6vw;\n  height: 2vw;\n  padding: 5px;\n  font-size: 15px;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  cursor: pointer;\n  \n  \n}\n\n.right > button:hover {\n  color: black;\n  opacity: .7;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  background-color: #000411;\n  height: 60px;\n  color: white;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  font-size: 30px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > img {\n  width: 40px;\n  margin-right: 15px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 2vw;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  max-height: 55px;\n  font-size: 1.2vw;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  cursor: pointer;\n  \n  \n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   ._2ObkiA2GT-SzXiUyRD6XWt > button {\n    font-size: 3.2vw;\n  }\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/Header/Header.module.css"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,8BAA8B;EAC9B,mBAAmB;EACnB,qCAAqC;EACrC,yBAAyB;EACzB,YAAY;EACZ,YAAY;EACZ,oDAAoD;EACpD,iDAAiD;EACjD,4CAA4C;EAC5C,kBAAkB;EAClB,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,iBAAiB;EACjB,eAAe;AACjB;;AAEA;EACE,WAAW;EACX,kBAAkB;AACpB;;AAEA;EACE,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,kBAAkB;AACpB;;AAEA;EACE,mCAAmC;EACnC,aAAa;EACb,gBAAgB;EAChB,gBAAgB;EAChB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;EACnB,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,uDAAuD,EAAE,qEAAqE;EAC9H,eAAe;;;AAGjB;;AAEA;EACE,YAAY;EACZ,WAAW;AACb;;AAEA;GACG;IACC,gBAAgB;EAClB;EACA;EACA,gBAAgB;EAChB;AACF;;;AAGA;EACE;EACA,cAAc;EACd;AACF;;AAEA;EACE;EACA,cAAc;EACd;AACF","sourcesContent":["header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  background-color: #000411;\n  height: 60px;\n  color: white;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n.left {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n  font-size: 30px;\n}\n\n.left > img {\n  width: 40px;\n  margin-right: 15px;\n}\n\n.left > h1 {\n  font-size: 2vw;\n}\n\n.right {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n}\n\n.right > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  max-height: 55px;\n  font-size: 1.2vw;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db, #2c3e50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  cursor: pointer;\n  \n  \n}\n\n.right > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   .right > button {\n    font-size: 3.2vw;\n  }\n  .left > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  .left > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  .left > h1 {\n  font-size: 4vw;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"left": "_27zK6TIFp4nqQwYVr-rMHi",
@@ -2969,7 +3121,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,yBAAyB;;AAE3B;;AAEA;EACE,4BAA4B;EAC5B,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;;AAGA;EACE,aAAa;EACb,YAAY;AACd","sourcesContent":[".resultsWrapper {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  \n}\n\n.resultsWrapper > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  padding: .8vw;\n\n  \n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,yBAAyB;EACzB,aAAa;;;AAGf;;AAEA;EACE,4BAA4B;EAC5B,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;AACxB;;AAEA;EACE,iBAAiB;EACjB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;;AAGA;EACE,aAAa;EACb,YAAY;AACd","sourcesContent":[".resultsWrapper {\n  width: 75vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: #0FA3B1;\n  padding: .8vw;\n\n  \n}\n\n.resultsWrapper > ul li:hover {\n  /* transform: scale(1.02); */\n  background-color: #EFEFEF;\n}\n\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  margin-top: auto;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"resultsWrapper": "_1dvHL2TeuxYpw0kN4hgH1d",

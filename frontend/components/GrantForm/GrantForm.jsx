@@ -20,6 +20,8 @@ const GrantForm = ({ location, match }) => {
   const [description, setDescription] = useState('')
   const [tags, setTags] = useState([])
   const [tagOptions, setTagOptions] = useState([])
+  const [addTag, setAddTag] = useState('')
+  const [newTags, setNewTags] = useState([])
 
   useEffect(() => {
     getTags().then((allTags) => {
@@ -28,8 +30,8 @@ const GrantForm = ({ location, match }) => {
         getGrant(match.params.grantId).then((res) => {
           const tagOptionNode = document.getElementById('tagSelect')
           const grant = res.data[0]
-          console.log(grant)
           const tagsArray = grant.tags.filter(tag => tag !== null ).map((tag) => {
+              console.log(tag)
               let idx = tagOptionNode.querySelectorAll(`[data-tag='${tag.tag}']`)[0].dataset.id
               document.getElementById('tagSelect').options[idx].disabled = true
               return [tag.tag, Number(idx)]
@@ -95,6 +97,10 @@ const GrantForm = ({ location, match }) => {
         return (e) => {
           setDescription(e.currentTarget.value)
       }
+      case 'addTag':
+        return (e) => {
+          setAddTag(e.currentTarget.value)
+      }
       default:
         break;
     }
@@ -113,7 +119,8 @@ const GrantForm = ({ location, match }) => {
       location_elig: locationelig,
       applicant_elig: applicantelig,
       description,
-      username: JSON.parse(localStorage.getItem('currentUser')).user.username 
+      username: JSON.parse(localStorage.getItem('currentUser')).user.username,
+      newTags 
     }
     match.params.grantId ? 
       editGrant(grant, id).then(() => window.location.reload()) : 
@@ -126,9 +133,18 @@ const GrantForm = ({ location, match }) => {
     let newSelectedTags = [...tags]
     newSelectedTags.splice(idxToRemove, 1)
     setTags(newSelectedTags)
-    document.getElementById('tagSelect').options[optionIdx].disabled = false
+    if (Number(optionIdx) !== -1) {
+      document.getElementById('tagSelect').options[optionIdx].disabled = false
+    } else {
+      setNewTags(removeNewTag(e.currentTarget.parentElement.textContent.slice(1), newTags))
+    }
   }
 
+  const addNewTag = () => {
+    setTags([[addTag, -1], ...tags])
+    setNewTags([addTag, ...newTags])
+    setAddTag('')
+  }
   return (
     
     <div className={styles.grantFormWrapper}>
@@ -224,10 +240,32 @@ const GrantForm = ({ location, match }) => {
             })
           }
         </ul>
+        <label className={styles.formLabel}>
+          <h4>Add Tag</h4>
+          <input
+            className={styles.formInput}
+            type="text"
+            value={addTag}
+            onChange={update('addTag')} />
+          <button onClick={addNewTag} type="button">Add Tag</button>
+        </label>
         <button type="submit">Submit</button>
       </form>
     </div>
   )
 }
 
+
+
+
+const removeNewTag = (tag, newTags) => {
+  let newTagsToAdd = [...newTags]
+  for (let i = 0; i < newTagsToAdd.length; i++) {
+    if (tag === newTagsToAdd[i]) {
+      newTagsToAdd.splice(i, 1)
+      return newTagsToAdd
+    }
+  }
+  return newTagsToAdd
+}
 export default withRouter(GrantForm)

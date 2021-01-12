@@ -35,13 +35,13 @@ main::-webkit-scrollbar-thumb {
 html {
   --scrollbarBG: black;
   --thumbBG: rgb(51,141,203);
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Helvetica Neue'
 }
   
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Helvetica Neue';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
@@ -60,4 +60,8 @@ footer {
   height: 5vh;
   background-color: black;
   width: 100vw;
+}
+
+select, button, option, h1, h2, h3, h4, h5, p, div, span, section, a {
+  font-family: 'Helvetica Neue';
 }

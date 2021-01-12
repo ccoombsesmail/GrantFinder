@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Results from './Results/Results'
 import TagItem from './TagItem'
 import styles from './SearchBar.module.css'
-import { getGrants } from '../../util/grants_api_util'
+import { getGrants, getAllGrants } from '../../util/grants_api_util'
 import { getTags } from '../../util/tags_api_util'
 import { Animated } from "react-animated-css";
 
@@ -52,10 +52,17 @@ const SearchBar = () => {
       sortOrder = JSON.parse(sort).val
     }
     const filters = [title, tags, sortOrder]
-    getGrants({filters})
-      .then((res) => {
-        setResults(res.data)
-      })
+    if (!title && tags.length === 0) {
+      getAllGrants()
+        .then((res) => {
+          setResults(res.data)
+        })
+    } else {
+      getGrants({filters})
+        .then((res) => {
+          setResults(res.data)
+        })
+    }
   }
 
   const removeTag = (e) => {
@@ -90,8 +97,9 @@ const SearchBar = () => {
               <option value=''>Sort By</option>
               <option value='{"val": ["createdAt", -1]}'>Newest</option>
               <option value='{"val": ["createdAt", 1]}'>Oldest</option>
-              <option value='{"val": ["numAmount", -1]}'>Highest Amount</option>
               <option value='{"val": ["numAmount", 1]}'>Lowest Amount</option>
+              <option value='{"val": ["numAmount", -1]}'>Highest Amount</option>
+              <option value='{"val": ["deadline", 1]}'>Soonest Deadline</option> 
             </select>
           </Animated>
         

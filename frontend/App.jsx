@@ -5,9 +5,10 @@ import Header from './components/Header/Header';
 import Modal from './components/Modal/Modal';
 import SearchBar from './components/SearchBar/SearchBar';
 import { AuthRoute } from './util/route_util'
-import banner from './assets/images/banner3.jpg'
 import GrantForm from './components/GrantForm/GrantForm';
 import ExportGrantData from './components/ExportGrantData/ExportGrantData'
+import DeleteTags from './components/DeleteTags/DeleteTags'
+
 const UserContext = React.createContext('user');
 
 
@@ -27,10 +28,11 @@ function App() {
           <AuthRoute exact component={GrantForm} path="/admin/addgrant" /> 
           <AuthRoute exact component={SearchBar} path="/admin/editgrant" /> 
           <AuthRoute exact component={GrantForm} path="/admin/editgrant/:grantId" /> 
+          <AuthRoute exact component={DeleteTags} path="/admin/deletetag" /> 
           <AuthRoute exact component={ExportGrantData} path="/admin/downloadgrants" /> 
           <Route path="/">
             <SearchBar />
-            <img src={banner} alt="" />
+            {/* <img src={banner} alt="" /> */}
           </Route>
         </Switch>
       </HashRouter>
