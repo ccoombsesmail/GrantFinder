@@ -49,19 +49,23 @@ const Result = ({ results, location }) => {
                       {`${result.title}`}  
                     </h1>
                     <h5>
-                      {`Max Award: ${result.currencySymbol}${result.maxAward === 0 ? '' : result.maxAward}`}
+                      <span>Max Award</span> 
+                      {`${result.currencySymbol}${result.maxAward === 0 ? '' : result.maxAward}`}
                     </h5>
                     <h5>
-                      {`Payment Details: ${result.amount}`}
+                      <span>Payment Details</span> 
+                      {result.amount}
                     </h5>
                     <h5>
-                      {`Deadline: ${deadline}`}
+                      <span>Deadline</span> 
+                      {deadline}
                     </h5>
                     <h5>
-                      {`Tags: ${tags.join(", ")}`}
+                      <span>Tags</span> 
+                      {tags.join(", ")}
                     </h5>
                     <h5>
-                        Link 
+                      <span>Link</span> 
                       <a href={result.links} target='_blank'>
                         {` ${result.links}`}
                       </a>

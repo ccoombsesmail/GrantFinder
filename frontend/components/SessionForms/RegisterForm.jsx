@@ -43,7 +43,6 @@ const RegisterForm = ({ toggleModal, setLoggedIn }) => {
     e.preventDefault()
     register({ username, password, confirmPass, email })
       .then((res) => {
-        console.log(res)
         const { token } = res.data;
         localStorage.setItem('jwtToken', token);
         setAuthToken(token);
@@ -104,7 +103,7 @@ const RegisterForm = ({ toggleModal, setLoggedIn }) => {
       {/* {
               errors && errors.passwordError ? <h3>{errors.passwordError}</h3> : null
             } */}
-      <button type="submit">Login</button>
+      <button type="submit">Register</button>
     </form>
   )
 }
