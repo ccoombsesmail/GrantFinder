@@ -19,9 +19,15 @@ mongoose
   .catch(err => console.log(err));
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  limit: '5mb',
+  parameterLimit: 100000,
+  extended: false
+}))
 
+app.use(bodyParser.json({
+  limit: '5mb'
+}))
 
 app.all('/api/grants/admin/*', requiresAdmin());
 // Routes

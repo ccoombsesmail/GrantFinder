@@ -18,25 +18,43 @@ const fetcher = (txtFile) => {
 
 
 router.get('/seed', (req, res) => {
-  Promise.all(
-    [
-      fetcher('grantNames.txt'),
-      fetcher('description.txt'),
-      fetcher('links.txt'),
-      fetcher('amount.txt'),
-      fetcher('deadline.txt'),
-      fetcher('disbursment.txt'),
-      fetcher('location.txt'),
-      fetcher('applicant.txt'),
-      fetcher('project.txt')]
-  ).then(data => {
-    const grantData = textToJson.textToJsonHelper(data)
-    for (let i = 0; i < grantData.length; i++) {
-      grantData[i].save()
+  Grant.collection.drop().then(() => {
+    Promise.all(
+      [
+        fetcher('grantNames.txt'),
+        fetcher('description.txt'),
+        fetcher('links.txt'),
+        fetcher('amount.txt'),
+        fetcher('deadline.txt'),
+        fetcher('disbursment.txt'),
+        fetcher('location.txt'),
+        fetcher('applicant.txt'),
+        fetcher('project.txt')]
+    ).then(data => {
+      const grantData = textToJson.textToJsonHelper(data)
+      for (let i = 0; i < grantData.length; i++) {
+        grantData[i].save()
+      }
+    })
+  })
+
+})
+
+router.post('/upload', (req, res) => {
+  const { grants } = req.body
+  mongoose.connection.collections['grants'].drop((err) => {
+    if (err) {
+      console.log(err)
+    }
+    for (const g of grants) {
+      g.tags = textToJson.formatTags(g.tags)
+      let grant = new Grant(g)
+      grant.save()
     }
   })
 
 })
+
 
 router.get('/', (req, res) => { 
   Grant.find()

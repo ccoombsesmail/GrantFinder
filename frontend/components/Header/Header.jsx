@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import styles from './Header.module.css'
 import { logout } from '../../util/session_api_util'
-import logo from '../../assets/images/logo.png'
+import logo from '../../assets/images/moth_mimesis.svg'
+import logo2 from '../../assets/images/cu.png'
 const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
 
   
@@ -13,9 +14,9 @@ const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
     <header>
       <div className={styles.left}>
         <img src={logo} alt="" />
-        <h1>
+        {/* <h1>
           Grant Finder
-        </h1>
+        </h1> */}
       </div>
       {
         loggedIn ? ( 
@@ -32,6 +33,9 @@ const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
               <button onClick={() => toggleModal([true, 'register'])}>
                 Register
               </button>
+              <a href='https://www.colorado.edu/center/cdem/'> 
+                <img src={logo2} alt="" />
+              </a>
             </div>
         )
       }

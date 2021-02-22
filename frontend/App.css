@@ -35,7 +35,7 @@ main::-webkit-scrollbar-thumb {
 html {
   --scrollbarBG: black;
   --thumbBG: rgb(51,141,203);
-  font-family: 'Helvetica Neue';
+  font-family: 'Helvetica Neue' !important;
   text-rendering: optimizeLegibility
 }
   
@@ -52,6 +52,8 @@ body {
 header, h1, h2, h3, h4, h5, ul, li, p, select, input {
   margin: 0;
   padding: 0;
+  font-family: 'Helvetica Neue';
+
 }
 
 footer {

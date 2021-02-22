@@ -17,7 +17,7 @@ const GrantSchema = new Schema({
   },
   description: {
     type: String,
-    required: true
+    required: false
   },
   links: {
     type: String,

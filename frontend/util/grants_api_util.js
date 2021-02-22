@@ -15,7 +15,9 @@ export const getGrant = (grantId) => {
 }
 
 
-
+export const uploadGrantData = (grants) => {
+  return axios.post('/api/grants/upload', {grants})
+}
 
 export const createGrant = (grant) => {
   return axios.post('/api/grants/admin/grants', {grant})
