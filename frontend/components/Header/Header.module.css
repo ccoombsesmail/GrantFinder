@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: rgb(34,34,34); */
+  background-color: white; 
   height: 90px;
   color: black;
   -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);
@@ -10,7 +10,7 @@ header {
   box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);
   position: absolute;
   width: calc(100vw + 14px);
-  z-index: 99999;
+  z-index: 999999999;
 }
 
 .left {
@@ -42,9 +42,10 @@ header {
 
 }
 
-.right > img {
+.right img {
   height: 59px;
-  margin-right: 15px;
+  margin-right: 1em;
+  margin-left: 1em;
   background-color: white;
   box-sizing: border-box;
 }

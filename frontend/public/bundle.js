@@ -187,6 +187,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/tags_api_util */ "./util/tags_api_util.js");
 /* harmony import */ var _DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteTags.module.css */ "./components/DeleteTags/DeleteTags.module.css");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -214,11 +216,61 @@ var DeleteTags = function DeleteTags() {
       setTags(Object.values(allTags.data));
     });
   }, []);
+
+  var deleteTagHandler = function deleteTagHandler(e) {
+    e.preventDefault();
+    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_1__.deleteTag)(e.currentTarget.dataset.id).then(function (res) {
+      var deletedTag = res.data;
+      var newTags = [];
+
+      var _iterator = _createForOfIteratorHelper(tags),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var tag = _step.value;
+
+          if (!isEqual(tag, deletedTag)) {
+            newTags.push(tag);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      setTags(newTags);
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
     className: _DeleteTags_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagsWrap
   }, tags.map(function (tag, idx) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, tag.tag, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", null, "Delete"));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, tag.tag, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      "data-id": tag._id,
+      onClick: deleteTagHandler
+    }, "Delete"));
   }));
+};
+
+var isEqual = function isEqual(object1, object2) {
+  var keys1 = Object.keys(object1);
+  var keys2 = Object.keys(object2);
+
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (var _i2 = 0, _keys = keys1; _i2 < _keys.length; _i2++) {
+    var key = _keys[_i2];
+
+    if (object1[key] !== object2[key]) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (DeleteTags);
@@ -756,7 +808,8 @@ var Header = function Header(_ref) {
       return toggleModal([true, 'register']);
     }
   }, "Register"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "https://www.colorado.edu/center/cdem/"
+    href: "https://www.colorado.edu/center/cdem/",
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     src: _assets_images_cu_png__WEBPACK_IMPORTED_MODULE_4__.default,
     alt: ""
@@ -1987,13 +2040,22 @@ var current = function current() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getTags": function() { return /* binding */ getTags; }
+/* harmony export */   "getTags": function() { return /* binding */ getTags; },
+/* harmony export */   "deleteTag": function() { return /* binding */ deleteTag; }
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "../node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var getTags = function getTags() {
   return axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/tags');
+};
+var deleteTag = function deleteTag(tagId) {
+  console.log(tagId);
+  return axios__WEBPACK_IMPORTED_MODULE_0___default().delete('/api/tags', {
+    data: {
+      tagId: tagId
+    }
+  });
 };
 
 /***/ }),
@@ -3152,7 +3214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._26HOC1RzjUdTiFRyVUiJ7f {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 80px;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   ._26HOC1RzjUdTiFRyVUiJ7f > li {\n    font-size: 3.2vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/DeleteTags/DeleteTags.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,aAAa;EACb,eAAe;EACf,gBAAgB;AAClB;;AAEA;EACE,gBAAgB;EAChB,kCAAkC;EAClC,YAAY;EACZ,YAAY;EACZ,gBAAgB;EAChB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;AACxB;;AAEA;EACE,eAAe;EACf,uBAAuB;EACvB,YAAY;EACZ,YAAY;EACZ,aAAa;AACf;;AAEA;GACG;IACC,gBAAgB;EAClB;AACF","sourcesContent":[".tagsWrap {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 80px;\n}\n\n.tagsWrap > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n.tagsWrap > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   .tagsWrap > li {\n    font-size: 3.2vw;\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._26HOC1RzjUdTiFRyVUiJ7f {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 15vh;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n._26HOC1RzjUdTiFRyVUiJ7f > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   ._26HOC1RzjUdTiFRyVUiJ7f > li {\n    font-size: 3.2vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/DeleteTags/DeleteTags.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,aAAa;EACb,eAAe;EACf,gBAAgB;AAClB;;AAEA;EACE,gBAAgB;EAChB,kCAAkC;EAClC,YAAY;EACZ,YAAY;EACZ,gBAAgB;EAChB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;AACxB;;AAEA;EACE,eAAe;EACf,uBAAuB;EACvB,YAAY;EACZ,YAAY;EACZ,aAAa;AACf;;AAEA;GACG;IACC,gBAAgB;EAClB;AACF","sourcesContent":[".tagsWrap {\n  width: 90vw;\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: 15vh;\n}\n\n.tagsWrap > li {\n  list-style: none;\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 5px;\n  font-size: 1.5vw;\n  border-radius: 5px;\n  margin: 5px;\n  display: flex;\n  flex-direction: column;\n}\n\n.tagsWrap > li > button {\n  cursor: pointer;\n  background-color: black;\n  color: white;\n  border: none;\n  outline: none;\n}\n\n@media only screen and (max-width: 600px) {\n   .tagsWrap > li {\n    font-size: 3.2vw;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"tagsWrap": "_26HOC1RzjUdTiFRyVUiJ7f"
@@ -3235,7 +3297,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  height: 90px;\n  color: black;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 2em;\n  width: 20em;\n  display: flex;\n  align-items: center;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n  height: 100%;\n\n\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n\n._2ObkiA2GT-SzXiUyRD6XWt > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  height: 80%;\n  font-size: 1.2em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  /* background: #2c3e50;  \n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  \n  background: linear-gradient(to right, #3498db, #2c3e50);  */\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n  \n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   ._2ObkiA2GT-SzXiUyRD6XWt > button {\n    font-size: 3.2vw;\n  }\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/Header/Header.module.css"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,8BAA8B;EAC9B,mBAAmB;EACnB,qCAAqC;EACrC,YAAY;EACZ,YAAY;EACZ,oDAAoD;EACpD,iDAAiD;EACjD,4CAA4C;EAC5C,kBAAkB;EAClB,yBAAyB;EACzB,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,cAAc;EACd,WAAW;EACX,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;;;AAGd;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,uBAAuB;EACvB,sBAAsB;AACxB;;;AAGA;EACE,mCAAmC;EACnC,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;EACnB;;6DAE2D;EAC3D,kCAAkC;EAClC,YAAY;EACZ,eAAe;;AAEjB;;AAEA;EACE,YAAY;EACZ,WAAW;AACb;;AAEA;GACG;IACC,gBAAgB;EAClB;EACA;EACA,gBAAgB;EAChB;AACF;;;AAGA;EACE;EACA,cAAc;EACd;AACF;;AAEA;EACE;EACA,cAAc;EACd;AACF","sourcesContent":["header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* background-color: rgb(34,34,34); */\n  height: 90px;\n  color: black;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 99999;\n}\n\n.left {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n\n.left > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n.left > h1 {\n  font-size: 2em;\n  width: 20em;\n  display: flex;\n  align-items: center;\n}\n\n.right {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n  height: 100%;\n\n\n}\n\n.right > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n\n.right > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  height: 80%;\n  font-size: 1.2em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  /* background: #2c3e50;  \n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  \n  background: linear-gradient(to right, #3498db, #2c3e50);  */\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n  \n}\n\n.right > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   .right > button {\n    font-size: 3.2vw;\n  }\n  .left > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  .left > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  .left > h1 {\n  font-size: 4vw;\n  }\n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: white; \n  height: 90px;\n  color: black;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 999999999;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 2em;\n  width: 20em;\n  display: flex;\n  align-items: center;\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n  height: 100%;\n\n\n}\n\n._2ObkiA2GT-SzXiUyRD6XWt img {\n  height: 59px;\n  margin-right: 1em;\n  margin-left: 1em;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n\n._2ObkiA2GT-SzXiUyRD6XWt > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  height: 80%;\n  font-size: 1.2em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  /* background: #2c3e50;  \n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  \n  background: linear-gradient(to right, #3498db, #2c3e50);  */\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n  \n}\n\n._2ObkiA2GT-SzXiUyRD6XWt > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   ._2ObkiA2GT-SzXiUyRD6XWt > button {\n    font-size: 3.2vw;\n  }\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  ._27zK6TIFp4nqQwYVr-rMHi > h1 {\n  font-size: 4vw;\n  }\n}\n", "",{"version":3,"sources":["webpack://./components/Header/Header.module.css"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,8BAA8B;EAC9B,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,YAAY;EACZ,oDAAoD;EACpD,iDAAiD;EACjD,4CAA4C;EAC5C,kBAAkB;EAClB,yBAAyB;EACzB,kBAAkB;AACpB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,iBAAiB;AACnB;;AAEA;EACE,YAAY;EACZ,kBAAkB;EAClB,uBAAuB;EACvB,sBAAsB;AACxB;;AAEA;EACE,cAAc;EACd,WAAW;EACX,aAAa;EACb,mBAAmB;AACrB;;AAEA;EACE,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;;;AAGd;;AAEA;EACE,YAAY;EACZ,iBAAiB;EACjB,gBAAgB;EAChB,uBAAuB;EACvB,sBAAsB;AACxB;;;AAGA;EACE,mCAAmC;EACnC,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;EACnB;;6DAE2D;EAC3D,kCAAkC;EAClC,YAAY;EACZ,eAAe;;AAEjB;;AAEA;EACE,YAAY;EACZ,WAAW;AACb;;AAEA;GACG;IACC,gBAAgB;EAClB;EACA;EACA,gBAAgB;EAChB;AACF;;;AAGA;EACE;EACA,cAAc;EACd;AACF;;AAEA;EACE;EACA,cAAc;EACd;AACF","sourcesContent":["header {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  background-color: white; \n  height: 90px;\n  color: black;\n  -webkit-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  box-shadow: 0px 5px 4px 0px rgba(0,0,0,0.75);\n  position: absolute;\n  width: calc(100vw + 14px);\n  z-index: 999999999;\n}\n\n.left {\n  display: flex;\n  align-items: center;\n  margin-left: 30px;\n}\n\n.left > img {\n  height: 59px;\n  margin-right: 15px;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n.left > h1 {\n  font-size: 2em;\n  width: 20em;\n  display: flex;\n  align-items: center;\n}\n\n.right {\n  display: flex;\n  align-items: center;\n  margin-right: 50px;\n  height: 100%;\n\n\n}\n\n.right img {\n  height: 59px;\n  margin-right: 1em;\n  margin-left: 1em;\n  background-color: white;\n  box-sizing: border-box;\n}\n\n\n.right > button {\n  background-color: rgb(43, 123, 189);\n  padding: 10px;\n  height: 80%;\n  font-size: 1.2em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-right: 10px;\n  transition: all .6s;\n  /* background: #2c3e50;  \n  background: -webkit-linear-gradient(to right, #3498db, #2c3e50);  \n  background: linear-gradient(to right, #3498db, #2c3e50);  */\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n  \n}\n\n.right > button:hover {\n  color: black;\n  opacity: .7;\n}\n\n@media only screen and (max-width: 600px) {\n   .right > button {\n    font-size: 3.2vw;\n  }\n  .left > h1 {\n  font-size: 4.6vw;\n  }\n}\n\n\n@media only screen and (max-width: 1400px) {\n  .left > h1 {\n  font-size: 3vw;\n  }\n}\n\n@media only screen and (max-width: 780px) {\n  .left > h1 {\n  font-size: 4vw;\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"left": "_27zK6TIFp4nqQwYVr-rMHi",

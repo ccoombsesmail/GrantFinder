@@ -19,6 +19,20 @@ router.get('/', (req, res) => {
 })
 
 
+router.delete('/', (req, res) => {
+  const { tagId } = req.body
+  console.log(tagId)
+  Tag.findOneAndDelete({ _id: tagId }, function (err, data) {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.send(data)
+    }
+  }); 
+})
+
+
 
 
 

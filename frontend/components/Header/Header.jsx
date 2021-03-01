@@ -33,7 +33,7 @@ const Header = ({ toggleModal, loggedIn, setLoggedIn }) => {
               <button onClick={() => toggleModal([true, 'register'])}>
                 Register
               </button>
-              <a href='https://www.colorado.edu/center/cdem/'> 
+              <a href='https://www.colorado.edu/center/cdem/' target="_blank"> 
                 <img src={logo2} alt="" />
               </a>
             </div>
