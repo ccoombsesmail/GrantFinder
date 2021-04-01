@@ -80,6 +80,7 @@ const SearchBar = () => {
       <form onSubmit={handleSubmit}>
         <Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
           <input placeholder="Search All Grants" className={styles.searchBar} value={title} onChange={update('title')} />
+          <button type="submit">Search</button> 
         </Animated>
         <div className={styles.filtersWrapper}>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>

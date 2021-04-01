@@ -50,7 +50,7 @@ const Result = ({ results, location }) => {
                     </h1>
                     <h5>
                       <span>Max Award</span> 
-                      {`${result.currencySymbol}${result.maxAward === 0 ? '' : result.maxAward}`}
+                        {`${result.currencySymbol === '?' ? '' : result.currencySymbol}${result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward}`}
                     </h5>
                     <h5>
                       <span>Payment Details</span> 

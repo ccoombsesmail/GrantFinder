@@ -12,19 +12,18 @@ import DeleteTags from './components/DeleteTags/DeleteTags'
 
 const UserContext = React.createContext('user');
 
-
 function App() {
   const [showModal, toggleModal] = useState([false, null])
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
   return (
     
-    <main >
+    <main>
       {
         showModal[0] ? <Modal type={showModal[1]} toggleModal={toggleModal} setLoggedIn={setLoggedIn} /> : null
       }
-      <Header toggleModal={toggleModal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <HashRouter>
+      <Header toggleModal={toggleModal} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
           <AuthRoute exact component={GrantForm} path="/admin/addgrant" /> 
           <AuthRoute exact component={SearchBar} path="/admin/editgrant" /> 

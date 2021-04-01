@@ -52,7 +52,7 @@ router.post('/upload', (req, res) => {
       grant.save()
     }
   })
-
+  res.send({success: 'true'}).status(200)
 })
 
 
