@@ -1,129 +1,52 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './GrantForm.module.css'
 import tagInputStyles from '../SearchBar/SearchBar.module.css'
-import { createGrant, getGrant, editGrant } from '../../util/grants_api_util'
+import { createGrant, editGrant } from '../../util/grants_api_util'
 import TagItem from '../SearchBar/TagItem'
-import { getTags } from '../../util/tags_api_util'
+
+import useGetGrantEffect from './hooks/useGetGrantEffect.js'
+import getCurrencyOptions from './utils/getCurrencyOptions'
+
 import { withRouter } from "react-router-dom";
 
-const GrantForm = ({ location, match }) => {
+const GrantForm = ({ match }) => {
 
-  const [id, setId] = useState('')
-  const [title, setTitle] = useState('')
-  const [amount, setAmount] = useState('')
-  const [link, setLink] = useState('')
-  const [deadline, setDeadline] = useState('')
-  const [disbursement, setDisbursement] = useState('')
-  const [status, setStatus] = useState('')
-  const [locationelig, setLocationElig] = useState('')
-  const [applicantelig, setApplicantelig] = useState('')
-  const [description, setDescription] = useState('')
   const [tags, setTags] = useState([])
   const [tagOptions, setTagOptions] = useState([])
   const [addTag, setAddTag] = useState('')
   const [newTags, setNewTags] = useState([])
+  const [grantData, setGrantData] = useState({})
 
-  useEffect(() => {
-    getTags().then((allTags) => {
-      setTagOptions(Object.values(allTags.data))
-      if (match.params.grantId) {
-        getGrant(match.params.grantId).then((res) => {
-          const tagOptionNode = document.getElementById('tagSelect')
-          const grant = res.data[0]
-          const tagsArray = grant.tags.filter(tag => tag !== null ).map((tag) => {
-              console.log(tag)
-              let idx = tagOptionNode.querySelectorAll(`[data-tag='${tag.tag}']`)[0].dataset.id
-              document.getElementById('tagSelect').options[idx].disabled = true
-              return [tag.tag, Number(idx)]
-          })
-          setTitle(grant.title)
-          setAmount(grant.amount)
-          setLink(grant.links)
-          setDeadline(grant.deadline)
-          setDisbursement(grant.disbursement)
-          setStatus(grant.status)
-          setLocationElig(grant.location_elig)
-          setApplicantelig(grant.applicant_elig)
-          setDescription(grant.description)
-          setTags(tagsArray)
-          setId(grant._id)
-        })
-      }
-    })
-    
-  }, [])
+  useGetGrantEffect(setGrantData, setTags, setTagOptions, match.params.grantId)
 
+  const currencyOptions = getCurrencyOptions()
 
   const update = (type) => {
-    switch (type) {
-      case 'title':
+    if (type === 'tags') {
         return (e) => {
-          setTitle(e.currentTarget.value)
-        }
-      case 'amount':
+        setTags([[e.currentTarget.value, e.currentTarget.selectedIndex], ...tags])
+        e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true
+      } 
+    } else if (type === 'addTag') {
         return (e) => {
-          setAmount(e.currentTarget.value)
-        }
-      case 'link':
-        return (e) => {
-          setLink(e.currentTarget.value)
-        }
-      case 'deadline':
-        return (e) => {
-          setDeadline(e.currentTarget.value)
-        }
-      case 'disbursement':
-        return (e) => {
-          setDisbursement(e.currentTarget.value)
-        }
-      case 'status':
-        return (e) => {
-          setStatus(e.currentTarget.value)
-        }
-      case 'locationelig':
-        return (e) => {
-          setLocationElig(e.currentTarget.value)
-        }
-      case 'applicantelig':
-        return (e) => {
-          setApplicantelig(e.currentTarget.value)
-        }
-      case 'tags':
-        return (e) => {
-          setTags([[e.currentTarget.value, e.currentTarget.selectedIndex], ...tags])
-          e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true
-        } 
-      case 'description':
-        return (e) => {
-          setDescription(e.currentTarget.value)
+        setAddTag(e.currentTarget.value)
       }
-      case 'addTag':
-        return (e) => {
-          setAddTag(e.currentTarget.value)
+    } else {
+      return (e) => {
+        setGrantData( { ...grantData, [type]: e.currentTarget.value})
       }
-      default:
-        break;
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const grant = {
-      title,
-      tags: tags.map((tag) => tag[0]),
-      amount,
-      link,
-      deadline,
-      disbursement,
-      status,
-      location_elig: locationelig,
-      applicant_elig: applicantelig,
-      description,
-      username: JSON.parse(localStorage.getItem('currentUser')).user.username,
-      newTags 
-    }
+    const grant = {...grantData}
+    grant.tags = tags.map((tag) => tag[0])
+    grant.username = JSON.parse(localStorage.getItem('currentUser')).user.username
+    grant.newTags = newTags
+ 
     match.params.grantId ? 
-      editGrant(grant, id).then(() => window.location.reload()) : 
+      editGrant(grant, grantData._id).then(() => window.location.reload()) : 
       createGrant(grant).then((res) => console.log(res))
   }
 
@@ -150,14 +73,15 @@ const GrantForm = ({ location, match }) => {
     <div className={styles.grantFormWrapper}>
       <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <h1>
-          Enter New Grant
+          { match.params.grantId ? 'Edit Grant' : 'Enter New Grant'}
         </h1>
         <label className={styles.formLabel}>
           <h4>Title</h4>
           <input
+            required 
             maxLength={100}
             className={styles.formInput}
-            type="text" value={title}
+            type="text" value={grantData.title}
             onChange={update('title')}
             autoComplete="off" />
         </label>
@@ -166,23 +90,45 @@ const GrantForm = ({ location, match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={link}
+            value={grantData.link}
             onChange={update('link')} />
         </label>
         <label className={styles.formLabel}>
-          <h4>Amount</h4>
+          <h4>Payment Details</h4>
           <input
             className={styles.formInput}
             type="text"
-            value={amount}
-            onChange={update('amount')} />
+            value={grantData.paymentDetails}
+            onChange={update('paymentDetails')} />
         </label>
+        <div className={styles.awardWrapper}>
+          <label className={styles.formLabel}>
+            <h4>Max Award</h4>
+            <input
+              className={styles.formInput}
+              type="number"
+              value={grantData.maxAward}
+              onChange={update('maxAward')} />
+          </label>
+          <label className={styles.formLabel}>
+            <h4>Currency</h4>
+            <select required value={grantData.currency} className={tagInputStyles.tagSelect} onChange={update('currency')} >
+              <option value="">Select Currency</option>
+              {
+                currencyOptions.map((currency, idx) => {
+                  return <option key={`currency${idx}`} value={currency}>{currency}</option>
+                })
+              }
+            </select>
+          </label>
+
+        </div>
         <label className={styles.formLabel}>
           <h4>Deadline</h4>
           <input
             className={styles.formInput}
-            type="text"
-            value={deadline}
+            type="date"
+            value={grantData.deadline?.split('T')[0]}
             onChange={update('deadline')} />
         </label>
         <label className={styles.formLabel}>
@@ -190,7 +136,7 @@ const GrantForm = ({ location, match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={disbursement}
+            value={grantData.disbursement}
             onChange={update('disbursement')} />
         </label>
         <label className={styles.formLabel}>
@@ -198,7 +144,7 @@ const GrantForm = ({ location, match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={status}
+            value={grantData.status}
             onChange={update('status')} />
         </label>
         <label className={styles.formLabel}>
@@ -206,26 +152,26 @@ const GrantForm = ({ location, match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={locationelig}
-            onChange={update('locationelig')} />
+            value={grantData.location_elig}
+            onChange={update('location_elig')} />
         </label>
         <label className={styles.formLabel}>
           <h4>Applicant Eligibility</h4>
           <input
             className={styles.formInput}
             type="text"
-            value={applicantelig}
-            onChange={update('applicantelig')} />
+            value={grantData.applicant_elig}
+            onChange={update('applicant_elig')} />
         </label>
         <label className={styles.formLabel}>
           <h4>Description</h4>
           <textarea
             className={styles.formInput}
             type="text"
-            value={description}
+            value={grantData.description}
             onChange={update('description')} />
         </label>
-        <select id='tagSelect' className={tagInputStyles.tagSelect} value={tags} onChange={update('tags')} >
+        <select id='tagSelect' className={tagInputStyles.tagSelect} onChange={update('tags')} >
           <option value="">Select Tag</option>
           {
             tagOptions.map((tag, idx) => {
@@ -236,7 +182,7 @@ const GrantForm = ({ location, match }) => {
         <ul className={tagInputStyles.selectedTagsWrap}>
           {
             tags.map((tag, idx) => {
-              return <TagItem removeTag={removeTag} optionIdx={tag[1]} index={idx} key={`${tag[0]}${idx}`} tag={tag[0]} />
+              return <TagItem removeTag={removeTag} optionIdx={tag[1]} index={idx} key={`tag[0].tag${idx}`} tag={tag[0]} />
             })
           }
         </ul>

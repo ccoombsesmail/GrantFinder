@@ -88,3 +88,12 @@
   box-sizing: border-box;
   background-color: rgb(232,240,254);
 }
+
+.awardWrapper {
+  display: flex;
+  width: 80%;
+}
+
+.awardWrapper > label:nth-child(2) {
+  margin-left: 2vw;
+}

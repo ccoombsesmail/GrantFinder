@@ -52,17 +52,10 @@ const SearchBar = () => {
       sortOrder = JSON.parse(sort).val
     }
     const filters = [title, tags, sortOrder]
-    if (!title && tags.length === 0) {
-      getAllGrants()
-        .then((res) => {
-          setResults(res.data)
-        })
-    } else {
-      getGrants({filters})
-        .then((res) => {
-          setResults(res.data)
-        })
-    }
+    getGrants({filters})
+      .then((res) => {
+        setResults(res.data)
+      })
   }
 
   const removeTag = (e) => {
@@ -84,7 +77,7 @@ const SearchBar = () => {
         </Animated>
         <div className={styles.filtersWrapper}>
           <Animated animationIn="bounceInUp" animationOut="fadeOut" isVisible={true}>
-            <select id='tagSelect' className={styles.tagSelect} value={selectedTags} onChange={update('selectedTags')} >
+            <select id='tagSelect' className={styles.tagSelect} onChange={update('selectedTags')} >
               <option value="">Select Tag</option>
               {
                 tags.map((tag) => {
@@ -98,8 +91,8 @@ const SearchBar = () => {
               <option value=''>Sort By</option>
               <option value='{"val": ["createdAt", -1]}'>Newest</option>
               <option value='{"val": ["createdAt", 1]}'>Oldest</option>
-              <option value='{"val": ["numAmount", 1]}'>Lowest Amount</option>
-              <option value='{"val": ["numAmount", -1]}'>Highest Amount</option>
+              <option value='{"val": ["maxAward", 1]}'>Lowest Amount</option>
+              <option value='{"val": ["maxAward", -1]}'>Highest Amount</option>
               <option value='{"val": ["deadline", 1]}'>Soonest Deadline</option> 
             </select>
           </Animated>

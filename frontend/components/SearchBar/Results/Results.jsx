@@ -4,7 +4,7 @@ import { Animated } from "react-animated-css";
 import { withRouter, Link } from "react-router-dom";
 
 const Result = ({ results, location }) => {
-
+  console.log(results)
   const [isVis, setIsVis] = useState(true)
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
@@ -41,7 +41,7 @@ const Result = ({ results, location }) => {
                 <li>
                   {
                     (loggedIn && location.pathname === '/admin/editgrant') ? (
-                      <Link to={`/admin/editgrant/${result._id}`}>Edit</Link>
+                      <Link className={styles.editButton} to={`/admin/editgrant/${result._id}`}>Edit</Link>
                     ) : null
                   }
                   <div className={styles.resultsDetailsLeft}>
@@ -50,11 +50,11 @@ const Result = ({ results, location }) => {
                     </h1>
                     <h5>
                       <span>Max Award</span> 
-                        {`${result.currencySymbol === '?' ? '' : result.currencySymbol}${result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward}`}
+                        {`${result.currency}${result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward}`}
                     </h5>
                     <h5>
                       <span>Payment Details</span> 
-                      {result.amount}
+                      {result.paymentDetails}
                     </h5>
                     <h5>
                       <span>Deadline</span> 
@@ -66,8 +66,8 @@ const Result = ({ results, location }) => {
                     </h5>
                     <h5>
                       <span>Link</span> 
-                      <a href={result.links} target='_blank'>
-                        {` ${result.links}`}
+                      <a href={result.link} target='_blank'>
+                        {` ${result.link}`}
                       </a>
                     </h5>
                   </div>

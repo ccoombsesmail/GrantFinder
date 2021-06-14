@@ -19,11 +19,11 @@ const GrantSchema = new Schema({
     type: String,
     required: false
   },
-  links: {
+  link: {
     type: String,
     required: false
   },
-  amount: {
+  paymentDetails: {
     type: String,
     required: false
   },
@@ -31,7 +31,7 @@ const GrantSchema = new Schema({
     type: Number,
     required: false
   },
-  currencySymbol: {
+  currency: {
     type: String,
     required: false
   },

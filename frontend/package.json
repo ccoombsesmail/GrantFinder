@@ -4,9 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/eslint-parser": "^7.14.5",
     "@babel/preset-env": "^7.12.11",
-    "@babel/preset-react": "^7.12.10",
-    "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.1",
     "@testing-library/user-event": "^12.2.0",
     "@types/jest": "^26.0.16",
@@ -16,8 +15,10 @@
     "@types/react-router": "^5.1.8",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.0.1",
+    "eslint": "^7.28.0",
     "file-loader": "^6.2.0",
     "file-saver": "^2.0.5",
+    "identity-obj-proxy": "^3.0.0",
     "react": "^17.0.1",
     "react-animated-css": "^1.2.1",
     "react-dom": "^17.0.1",
@@ -33,7 +34,8 @@
   },
   "scripts": {
     "webpack": "webpack --mode development --watch",
-    "webpack-prod": "webpack --mode production"
+    "webpack-prod": "webpack --mode production",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +57,19 @@
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.6"
+    "@babel/preset-react": "^7.12.10",
+    "@testing-library/jest-dom": "^5.11.8",
+    "@types/react-router-dom": "^5.1.6",
+    "babel-jest": "^26.6.3",
+    "jest": "^26.6.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   }
 }

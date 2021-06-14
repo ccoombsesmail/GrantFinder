@@ -10,8 +10,6 @@ import ExportGrantData from './components/ExportGrantData/ExportGrantData'
 import ImportGrantData from './components/ImportGrantData/ImportGrantData'
 import DeleteTags from './components/DeleteTags/DeleteTags'
 
-const UserContext = React.createContext('user');
-
 function App() {
   const [showModal, toggleModal] = useState([false, null])
   const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)

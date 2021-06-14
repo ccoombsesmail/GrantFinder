@@ -4,21 +4,20 @@ const moment = require('moment')
 
 const numPat = /\d+/g;
 const currencies = ["Lek", "؋", "$", "ƒ", "₼", "p.",
-  "BZ$", "$", "$b", "KM", "лв", "R$", "$", "៛", "$", "$", "$", "¥",
-  "$", "₡", "kn", "₱", "Kč", "RD$", "$", "kr", "€", "£", "$", "₾",
-  "¢", "£", "$", "Ft", "kr", "₹", "Rp", "﷼",
-  "£", "₪", "J$", "¥", "£", "лв", "₩", "₩", "лв", "₭", "Ls",
-  "Lt", "ден", "RM", "₨", "₮", "MT", "$", "₨", "ƒ", "$", "C$",
-  "₦", "kr", "﷼", "₨", "B/.", "Gs", "₱", "zł", "﷼", "lei", "₽", "£", "﷼", "Дин.", "₨", "$",
-  "₨", "kr", "CHF", "£", "NT$", "฿", "TT$", "₺", "$", "₴", "£",
+  "BZ$", "$b", "KM", "лв", "R$", "៛", "¥",
+  "₡", "kn", "₱", "Kč", "RD$", "kr", "€", "£", "₾",
+  "¢",  "Ft", "kr", "₹", "Rp", "﷼",, "₪", "J$", "¥", "лв", "₩", "₩", "лв", "₭", "Ls",
+  "Lt", "ден", "RM", "₨", "₮", "MT", "₨", "ƒ", "C$",
+  "₦", "kr", "﷼", "₨", "B/.", "Gs", "₱", "zł", "﷼", "lei", "₽", "﷼", "Дин.", "₨",
+  "₨", "kr", "CHF", "NT$", "฿", "TT$", "₺", "₴",
   "$U", "лв", "Bs", "₫", "﷼", "Z$"]
 
 const textToJsonHelper = (data) => {
   const json = []
   const grantNames = data[0].split('\r\n')
   const description = data[1].split('\r\n')
-  const links = data[2].split('\r\n')
-  const amount = data[3].split('\r\n')
+  const link = data[2].split('\r\n')
+  const paymentDetails = data[3].split('\r\n')
   const deadline = data[4].split('\r\n')
   const disbursement = data[5].split('\r\n')
   const location = data[6].split('\r\n')
@@ -27,11 +26,11 @@ const textToJsonHelper = (data) => {
 
   for (let i = 0; i < grantNames.length; i++) {
     let tags = formatTags(project[i])
-    const currencySymbol = getSymbol(amount[i])
+    const currency = getSymbol(paymentDetails[i])
     let maxAward = 0
     let deadlineDate = moment('01/01/2050', "MM-DD-YYYY").format()
-    if (amount[i]) {
-      maxAward = getNumericalAmount(amount[i])
+    if (paymentDetails[i]) {
+      maxAward = getNumericalAmount(paymentDetails[i])
     }
     if (deadline[i] && hasNumber(deadline[i]) && deadline[i] !== '\n' && deadline[i] !== ' ') {
       date = moment(deadline[i], "MM-DD-YYYY");
@@ -40,10 +39,10 @@ const textToJsonHelper = (data) => {
     const entry = {
       title: grantNames[i],
       description: description[i],
-      links: links[i],
-      amount: amount[i],
+      link: link[i],
+      paymentDetails: paymentDetails[i],
       maxAward,
-      currencySymbol,
+      currency,
       deadline: deadlineDate,
       disbursement: disbursement[i],
       status: '',
@@ -84,7 +83,7 @@ const getSymbol = (amountDetails) => {
       return curr
     }
   }
-  return '?'
+  return ''
 }
 
 const getNumericalAmount = (amount) => {
@@ -105,7 +104,8 @@ function hasNumber(myString) {
 module.exports = {
   textToJsonHelper,
   formatTags,
-  getNumericalAmount
+  getNumericalAmount,
+  getSymbol,
 };
 
 

@@ -1,11 +1,11 @@
 const express = require("express")
 const router = express.Router()
 const Grant = require('../../models/Grant');
-const Tag = require('../../models/Tag');
 const passport = require('passport');
 require('../../config/passport')(passport)
 const mongoose = require('mongoose')
 mongoose.set('useFindAndModify', false);
+const moment = require('moment')
 
 const fetch = require("node-fetch");
 const textToJson = require('../../txtToJson')
@@ -37,7 +37,6 @@ router.get('/seed', (req, res) => {
       }
     })
   })
-
 })
 
 router.post('/upload', (req, res) => {
@@ -100,7 +99,6 @@ router.post('/admin/grants', passport.authenticate('jwt', { session: false }), (
   const { grant } = req.body
   delete grant.username
   grant.tags = textToJson.formatTags(grant.tags)
-  grant.numAmount = textToJson.getNumericalAmount(grant.amount)
   let grantModel = new Grant(grant)
   grantModel.save()
   res.json(grant)
@@ -116,7 +114,7 @@ router.post('/admin/grants/edit', passport.authenticate('jwt', { session: false 
   delete grant.username
   delete grant.newTags
   grant.tags = textToJson.formatTags(grant.tags)
-  grant.numAmount = textToJson.getNumericalAmount(grant.amount)
+  grant.deadline = moment(grant.deadline, "YYYY-MM-DD").format()
   Grant.updateOne({ _id: mongoose.Types.ObjectId(id) }, { ...grant }).then((err, grnt) => {
     res.send({success: true})
   }).catch(err => console.log(err))

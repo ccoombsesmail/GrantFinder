@@ -122,7 +122,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var UserContext = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createContext('user');
 
 function App() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([false, null]),
@@ -385,8 +384,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SearchBar/SearchBar.module.css */ "./components/SearchBar/SearchBar.module.css");
 /* harmony import */ var _util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/grants_api_util */ "./util/grants_api_util.js");
 /* harmony import */ var _SearchBar_TagItem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../SearchBar/TagItem */ "./components/SearchBar/TagItem.jsx");
-/* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../util/tags_api_util */ "./util/tags_api_util.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _hooks_useGetGrantEffect_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./hooks/useGetGrantEffect.js */ "./components/GrantForm/hooks/useGetGrantEffect.js");
+/* harmony import */ var _utils_getCurrencyOptions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/getCurrencyOptions */ "./components/GrantForm/utils/getCurrencyOptions.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -415,194 +421,68 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var GrantForm = function GrantForm(_ref) {
-  var location = _ref.location,
-      match = _ref.match;
+  var _grantData$deadline;
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var match = _ref.match;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState2 = _slicedToArray(_useState, 2),
-      id = _useState2[0],
-      setId = _useState2[1];
+      tags = _useState2[0],
+      setTags = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      title = _useState4[0],
-      setTitle = _useState4[1];
+      tagOptions = _useState4[0],
+      setTagOptions = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
-      amount = _useState6[0],
-      setAmount = _useState6[1];
+      addTag = _useState6[0],
+      setAddTag = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      link = _useState8[0],
-      setLink = _useState8[1];
+      newTags = _useState8[0],
+      setNewTags = _useState8[1];
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
       _useState10 = _slicedToArray(_useState9, 2),
-      deadline = _useState10[0],
-      setDeadline = _useState10[1];
+      grantData = _useState10[0],
+      setGrantData = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState12 = _slicedToArray(_useState11, 2),
-      disbursement = _useState12[0],
-      setDisbursement = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState14 = _slicedToArray(_useState13, 2),
-      status = _useState14[0],
-      setStatus = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState16 = _slicedToArray(_useState15, 2),
-      locationelig = _useState16[0],
-      setLocationElig = _useState16[1];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState18 = _slicedToArray(_useState17, 2),
-      applicantelig = _useState18[0],
-      setApplicantelig = _useState18[1];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState20 = _slicedToArray(_useState19, 2),
-      description = _useState20[0],
-      setDescription = _useState20[1];
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState22 = _slicedToArray(_useState21, 2),
-      tags = _useState22[0],
-      setTags = _useState22[1];
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState24 = _slicedToArray(_useState23, 2),
-      tagOptions = _useState24[0],
-      setTagOptions = _useState24[1];
-
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
-      _useState26 = _slicedToArray(_useState25, 2),
-      addTag = _useState26[0],
-      setAddTag = _useState26[1];
-
-  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState28 = _slicedToArray(_useState27, 2),
-      newTags = _useState28[0],
-      setNewTags = _useState28[1];
-
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_5__.getTags)().then(function (allTags) {
-      setTagOptions(Object.values(allTags.data));
-
-      if (match.params.grantId) {
-        (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.getGrant)(match.params.grantId).then(function (res) {
-          var tagOptionNode = document.getElementById('tagSelect');
-          var grant = res.data[0];
-          var tagsArray = grant.tags.filter(function (tag) {
-            return tag !== null;
-          }).map(function (tag) {
-            console.log(tag);
-            var idx = tagOptionNode.querySelectorAll("[data-tag='".concat(tag.tag, "']"))[0].dataset.id;
-            document.getElementById('tagSelect').options[idx].disabled = true;
-            return [tag.tag, Number(idx)];
-          });
-          setTitle(grant.title);
-          setAmount(grant.amount);
-          setLink(grant.links);
-          setDeadline(grant.deadline);
-          setDisbursement(grant.disbursement);
-          setStatus(grant.status);
-          setLocationElig(grant.location_elig);
-          setApplicantelig(grant.applicant_elig);
-          setDescription(grant.description);
-          setTags(tagsArray);
-          setId(grant._id);
-        });
-      }
-    });
-  }, []);
+  (0,_hooks_useGetGrantEffect_js__WEBPACK_IMPORTED_MODULE_5__.default)(setGrantData, setTags, setTagOptions, match.params.grantId);
+  var currencyOptions = (0,_utils_getCurrencyOptions__WEBPACK_IMPORTED_MODULE_6__.default)();
 
   var update = function update(type) {
-    switch (type) {
-      case 'title':
-        return function (e) {
-          setTitle(e.currentTarget.value);
-        };
-
-      case 'amount':
-        return function (e) {
-          setAmount(e.currentTarget.value);
-        };
-
-      case 'link':
-        return function (e) {
-          setLink(e.currentTarget.value);
-        };
-
-      case 'deadline':
-        return function (e) {
-          setDeadline(e.currentTarget.value);
-        };
-
-      case 'disbursement':
-        return function (e) {
-          setDisbursement(e.currentTarget.value);
-        };
-
-      case 'status':
-        return function (e) {
-          setStatus(e.currentTarget.value);
-        };
-
-      case 'locationelig':
-        return function (e) {
-          setLocationElig(e.currentTarget.value);
-        };
-
-      case 'applicantelig':
-        return function (e) {
-          setApplicantelig(e.currentTarget.value);
-        };
-
-      case 'tags':
-        return function (e) {
-          setTags([[e.currentTarget.value, e.currentTarget.selectedIndex]].concat(_toConsumableArray(tags)));
-          e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true;
-        };
-
-      case 'description':
-        return function (e) {
-          setDescription(e.currentTarget.value);
-        };
-
-      case 'addTag':
-        return function (e) {
-          setAddTag(e.currentTarget.value);
-        };
-
-      default:
-        break;
+    if (type === 'tags') {
+      return function (e) {
+        setTags([[e.currentTarget.value, e.currentTarget.selectedIndex]].concat(_toConsumableArray(tags)));
+        e.currentTarget.options[e.currentTarget.selectedIndex].disabled = true;
+      };
+    } else if (type === 'addTag') {
+      return function (e) {
+        setAddTag(e.currentTarget.value);
+      };
+    } else {
+      return function (e) {
+        setGrantData(_objectSpread(_objectSpread({}, grantData), {}, _defineProperty({}, type, e.currentTarget.value)));
+      };
     }
   };
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    var grant = {
-      title: title,
-      tags: tags.map(function (tag) {
-        return tag[0];
-      }),
-      amount: amount,
-      link: link,
-      deadline: deadline,
-      disbursement: disbursement,
-      status: status,
-      location_elig: locationelig,
-      applicant_elig: applicantelig,
-      description: description,
-      username: JSON.parse(localStorage.getItem('currentUser')).user.username,
-      newTags: newTags
-    };
-    match.params.grantId ? (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.editGrant)(grant, id).then(function () {
+
+    var grant = _objectSpread({}, grantData);
+
+    grant.tags = tags.map(function (tag) {
+      return tag[0];
+    });
+    grant.username = JSON.parse(localStorage.getItem('currentUser')).user.username;
+    grant.newTags = newTags;
+    match.params.grantId ? (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.editGrant)(grant, grantData._id).then(function () {
       return window.location.reload();
     }) : (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_3__.createGrant)(grant).then(function (res) {
       return console.log(res);
@@ -638,13 +518,14 @@ var GrantForm = function GrantForm(_ref) {
     onSubmit: function onSubmit(e) {
       return handleSubmit(e);
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Enter New Grant"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, match.params.grantId ? 'Edit Grant' : 'Enter New Grant'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    required: true,
     maxLength: 100,
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: title,
+    value: grantData.title,
     onChange: update('title'),
     autoComplete: "off"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -652,61 +533,83 @@ var GrantForm = function GrantForm(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Link"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: link,
+    value: grantData.link,
     onChange: update('link')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Payment Details"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: amount,
-    onChange: update('amount')
+    value: grantData.paymentDetails,
+    onChange: update('paymentDetails')
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.awardWrapper
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Max Award"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
+    type: "number",
+    value: grantData.maxAward,
+    onChange: update('maxAward')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+    className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Currency"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    required: true,
+    value: grantData.currency,
+    className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagSelect,
+    onChange: update('currency')
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+    value: ""
+  }, "Select Currency"), currencyOptions.map(function (currency, idx) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      key: "currency".concat(idx),
+      value: currency
+    }, currency);
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Deadline"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
-    type: "text",
-    value: deadline,
+    type: "date",
+    value: (_grantData$deadline = grantData.deadline) === null || _grantData$deadline === void 0 ? void 0 : _grantData$deadline.split('T')[0],
     onChange: update('deadline')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Disbursement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: disbursement,
+    value: grantData.disbursement,
     onChange: update('disbursement')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: status,
+    value: grantData.status,
     onChange: update('status')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Location Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: locationelig,
-    onChange: update('locationelig')
+    value: grantData.location_elig,
+    onChange: update('location_elig')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Applicant Eligibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: applicantelig,
-    onChange: update('applicantelig')
+    value: grantData.applicant_elig,
+    onChange: update('applicant_elig')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formLabel
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Description"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
     className: _GrantForm_module_css__WEBPACK_IMPORTED_MODULE_1__.default.formInput,
     type: "text",
-    value: description,
+    value: grantData.description,
     onChange: update('description')
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
     id: "tagSelect",
     className: _SearchBar_SearchBar_module_css__WEBPACK_IMPORTED_MODULE_2__.default.tagSelect,
-    value: tags,
     onChange: update('tags')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: ""
@@ -724,7 +627,7 @@ var GrantForm = function GrantForm(_ref) {
       removeTag: removeTag,
       optionIdx: tag[1],
       index: idx,
-      key: "".concat(tag[0]).concat(idx),
+      key: "tag[0].tag".concat(idx),
       tag: tag[0]
     });
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -755,7 +658,72 @@ var removeNewTag = function removeNewTag(tag, newTags) {
   return newTagsToAdd;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(GrantForm));
+/* harmony default export */ __webpack_exports__["default"] = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.withRouter)(GrantForm));
+
+/***/ }),
+
+/***/ "./components/GrantForm/hooks/useGetGrantEffect.js":
+/*!*********************************************************!*\
+  !*** ./components/GrantForm/hooks/useGetGrantEffect.js ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _util_grants_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../util/grants_api_util */ "./util/grants_api_util.js");
+/* harmony import */ var _util_tags_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../util/tags_api_util */ "./util/tags_api_util.js");
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (function (setGrantData, setTags, setTagOptions, grantId) {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    (0,_util_tags_api_util__WEBPACK_IMPORTED_MODULE_2__.getTags)().then(function (allTags) {
+      setTagOptions(Object.values(allTags.data));
+
+      if (grantId) {
+        (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_1__.getGrant)(grantId).then(function (res) {
+          var tagOptionNode = document.getElementById('tagSelect');
+          var grant = res.data[0];
+          var tagsArray = grant.tags.filter(Boolean).map(function (tag) {
+            var idx = tagOptionNode.querySelectorAll("[data-tag='".concat(tag.tag, "']"))[0].dataset.id;
+            document.getElementById('tagSelect').options[idx].disabled = true;
+            return [tag.tag, Number(idx)];
+          });
+          setTags(tagsArray);
+          setGrantData({
+            title: grant.title,
+            paymentDetails: grant.paymentDetails,
+            currency: grant.currency,
+            maxAward: grant.maxAward,
+            link: grant.link,
+            deadline: grant.deadline,
+            disbursement: grant.disbursement,
+            status: grant.status,
+            location_elig: grant.location_elig,
+            applicant_elig: grant.applicant_elig,
+            description: grant.description,
+            _id: grant._id
+          });
+        });
+      }
+    });
+  }, []);
+});
+
+/***/ }),
+
+/***/ "./components/GrantForm/utils/getCurrencyOptions.js":
+/*!**********************************************************!*\
+  !*** ./components/GrantForm/utils/getCurrencyOptions.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  return ["$", "€", "£", "¥", "₡"];
+});
 
 /***/ }),
 
@@ -1057,6 +1025,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Result = function Result(_ref) {
   var results = _ref.results,
       location = _ref.location;
+  console.log(results);
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1096,13 +1065,14 @@ var Result = function Result(_ref) {
       isVisible: isVis,
       animationInDelay: 200 * Math.sqrt(idx)
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, loggedIn && location.pathname === '/admin/editgrant' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.editButton,
       to: "/admin/editgrant/".concat(result._id)
     }, "Edit") : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsLeft
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Max Award"), "".concat(result.currencySymbol === '?' ? '' : result.currencySymbol).concat(result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Payment Details"), result.amount), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Deadline"), deadline), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Tags"), tags.join(", ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Link"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-      href: result.links,
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "".concat(result.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Max Award"), "".concat(result.currency).concat(result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Payment Details"), result.paymentDetails), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Deadline"), deadline), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Tags"), tags.join(", ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Link"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+      href: result.link,
       target: "_blank"
-    }, " ".concat(result.links)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, " ".concat(result.link)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: _Results_module_css__WEBPACK_IMPORTED_MODULE_1__.default.resultsDetailsRight
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "Summary:"), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), result.description))));
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1230,18 +1200,11 @@ var SearchBar = function SearchBar() {
     }
 
     var filters = [title, tags, sortOrder];
-
-    if (!title && tags.length === 0) {
-      (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getAllGrants)().then(function (res) {
-        setResults(res.data);
-      });
-    } else {
-      (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getGrants)({
-        filters: filters
-      }).then(function (res) {
-        setResults(res.data);
-      });
-    }
+    (0,_util_grants_api_util__WEBPACK_IMPORTED_MODULE_4__.getGrants)({
+      filters: filters
+    }).then(function (res) {
+      setResults(res.data);
+    });
   };
 
   var removeTag = function removeTag(e) {
@@ -1279,7 +1242,6 @@ var SearchBar = function SearchBar() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
     id: "tagSelect",
     className: _SearchBar_module_css__WEBPACK_IMPORTED_MODULE_3__.default.tagSelect,
-    value: selectedTags,
     onChange: update('selectedTags')
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: ""
@@ -1304,9 +1266,9 @@ var SearchBar = function SearchBar() {
   }, "Newest"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "{\"val\": [\"createdAt\", 1]}"
   }, "Oldest"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "{\"val\": [\"numAmount\", 1]}"
+    value: "{\"val\": [\"maxAward\", 1]}"
   }, "Lowest Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-    value: "{\"val\": [\"numAmount\", -1]}"
+    value: "{\"val\": [\"maxAward\", -1]}"
   }, "Highest Amount"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
     value: "{\"val\": [\"deadline\", 1]}"
   }, "Soonest Deadline")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -3296,12 +3258,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._2mCNVUFTt-0_fKJ0_vKYqz {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n._3JY87cBHvV3yaz-vy47XPD {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > h1 {\n  margin-top: 50px;\n}\n\n\n._3JY87cBHvV3yaz-vy47XPD > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  margin-bottom: 30px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:focus {\n  outline: none;\n  border: none;\n} \n\n._317ZTfEE3CgrPn3KmFukRZ > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > input:focus {\n  border: 2px solid #3389C5;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > textarea {\n  width: 100%;\n  min-height: 10vh;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}", "",{"version":3,"sources":["webpack://./components/GrantForm/GrantForm.module.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;EACtB,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,oBAAoB;AACtB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,+BAA+B;EAC/B,kBAAkB;EAClB,sBAAsB;EACtB,YAAY;;AAEd;;AAEA;EACE,gBAAgB;AAClB;;;AAGA;EACE,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,wDAAwD,EAAE,qEAAqE;EAC/H,YAAY;EACZ,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,mBAAmB;EACnB,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,eAAe;EACf,mBAAmB;;AAErB;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;AACpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;AACd;;AAEA;EACE,WAAW;EACX,gBAAgB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;AACpC","sourcesContent":[".grantFormWrapper {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n.form {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n.form > h1 {\n  margin-top: 50px;\n}\n\n\n.form > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  margin-bottom: 30px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n.form > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n.form > button:focus {\n  outline: none;\n  border: none;\n} \n\n.formLabel > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n.formLabel > input:focus {\n  border: 2px solid #3389C5;\n}\n\n.formLabel {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}\n\n.formLabel > textarea {\n  width: 100%;\n  min-height: 10vh;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._2mCNVUFTt-0_fKJ0_vKYqz {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n._3JY87cBHvV3yaz-vy47XPD {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > h1 {\n  margin-top: 50px;\n}\n\n\n._3JY87cBHvV3yaz-vy47XPD > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  margin-bottom: 30px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n._3JY87cBHvV3yaz-vy47XPD > button:focus {\n  outline: none;\n  border: none;\n} \n\n._317ZTfEE3CgrPn3KmFukRZ > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > input:focus {\n  border: 2px solid #3389C5;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}\n\n._317ZTfEE3CgrPn3KmFukRZ > textarea {\n  width: 100%;\n  min-height: 10vh;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n._36FkM6EUehu09kNiKlpkfn {\n  display: flex;\n  width: 80%;\n}\n\n._36FkM6EUehu09kNiKlpkfn > label:nth-child(2) {\n  margin-left: 2vw;\n}", "",{"version":3,"sources":["webpack://./components/GrantForm/GrantForm.module.css"],"names":[],"mappings":"AAAA;EACE,iBAAiB;EACjB,uBAAuB;EACvB,kBAAkB;EAClB,WAAW;EACX,aAAa;EACb,sBAAsB;EACtB,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,oBAAoB;AACtB;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;EACnB,+BAA+B;EAC/B,kBAAkB;EAClB,sBAAsB;EACtB,YAAY;;AAEd;;AAEA;EACE,gBAAgB;AAClB;;;AAGA;EACE,mBAAmB,GAAG,8BAA8B;EACpD,+DAA+D,GAAG,+BAA+B;EACjG,wDAAwD,EAAE,qEAAqE;EAC/H,YAAY;EACZ,kBAAkB;EAClB,YAAY;EACZ,eAAe;EACf,mBAAmB;EACnB,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,eAAe;EACf,mBAAmB;;AAErB;;AAEA;EACE,WAAW;EACX,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,WAAW;EACX,YAAY;EACZ,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;AACpC;;AAEA;EACE,yBAAyB;AAC3B;;AAEA;EACE,UAAU;EACV,mBAAmB;EACnB,kBAAkB;EAClB,YAAY;AACd;;AAEA;EACE,WAAW;EACX,gBAAgB;EAChB,mBAAmB;EACnB,iBAAiB;EACjB,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,kCAAkC;AACpC;;AAEA;EACE,aAAa;EACb,UAAU;AACZ;;AAEA;EACE,gBAAgB;AAClB","sourcesContent":[".grantFormWrapper {\n  margin-top: 200px;\n  border: 1px solid black;\n  border-radius: 5px;\n  width: 90vw;\n  display: flex;\n  flex-direction: column;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  margin-bottom: 500px;\n}\n\n.form {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  background-color: rgb(34,34,34);\n  border-radius: 7px;\n  background-color:white;\n  color: black;\n\n}\n\n.form > h1 {\n  margin-top: 50px;\n}\n\n\n.form > button {\n  background: #2c3e50;  /* fallback for old browsers */\n  background: -webkit-linear-gradient(to right, #3498db, #175ca7);  /* Chrome 10-25, Safari 5.1-6 */\n  background: linear-gradient(to right, #3498db,  #175ca7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  border: none;\n  border-radius: 7px;\n  padding: 7px;\n  margin-top: 7px;\n  margin-bottom: 30px;\n  width: 30%;\n  font-weight: bolder;\n  font-size: 17px;\n  cursor: pointer;\n  transition: all .6s;\n\n}\n\n.form > button:hover {\n  opacity: .7;\n  color: black;\n}\n\n.form > button:focus {\n  outline: none;\n  border: none;\n} \n\n.formLabel > input {\n  width: 100%;\n  height: 35px;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n.formLabel > input:focus {\n  border: 2px solid #3389C5;\n}\n\n.formLabel {\n  width: 80%;\n  border-radius: 10px;\n  margin-bottom: 5px;\n  color: black;\n}\n\n.formLabel > textarea {\n  width: 100%;\n  min-height: 10vh;\n  border-radius: 10px;\n  padding-left: 5px;\n  border: none;\n  outline: none;\n  box-sizing: border-box;\n  background-color: rgb(232,240,254);\n}\n\n.awardWrapper {\n  display: flex;\n  width: 80%;\n}\n\n.awardWrapper > label:nth-child(2) {\n  margin-left: 2vw;\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"grantFormWrapper": "_2mCNVUFTt-0_fKJ0_vKYqz",
 	"form": "_3JY87cBHvV3yaz-vy47XPD",
-	"formLabel": "_317ZTfEE3CgrPn3KmFukRZ"
+	"formLabel": "_317ZTfEE3CgrPn3KmFukRZ",
+	"awardWrapper": "_36FkM6EUehu09kNiKlpkfn"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -3409,13 +3372,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 85vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: white;\n  padding: .8vw;\n  cursor: text\n\n  \n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  background-color: #EFEFEF;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  font-size: .9vw;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d span {\n  background-color: rgb(207,184,124);\n  color: black;\n  /* border-right: 8px solid rgb(207,184,124); */\n  padding: 10px;\n  margin-right: 10px;\n  border-radius: 3px;\n}\n\n\n@media only screen and (max-width: 800px) {\n .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 1.2vw;\n  }\n}\n\n@media only screen and (max-width: 600px) {\n  ._1dvHL2TeuxYpw0kN4hgH1d {\n    width: 100%;\n  }\n  ._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n    flex-direction: column;\n  }\n  .muFjZhvUjP0VmOoRnKuJ6 {\n    width: 100%;\n    max-width: 100%;\n    border: none;\n\n  }\n  ._32ELTAAZBC4OnhcAh4G0F2 {\n    width: 100%;\n  }\n\n  .muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-top: 10px;\n  }\n\n\n  .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 1.7vw;\n  }\n\n}\n\n@media only screen and (max-width: 500px) {\n .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 2vw;\n  }\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,uBAAuB;EACvB,aAAa;EACb;;;AAGF;;;AAGA;EACE,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;;AAExB;;AAEA;EACE,iBAAiB;EACjB,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,kCAAkC;EAClC,YAAY;EACZ,8CAA8C;EAC9C,aAAa;EACb,kBAAkB;EAClB,kBAAkB;AACpB;;;AAGA;CACC;IACG,gBAAgB;IAChB,gBAAgB;EAClB;AACF;;AAEA;EACE;IACE,WAAW;EACb;EACA;IACE,sBAAsB;EACxB;EACA;IACE,WAAW;IACX,eAAe;IACf,YAAY;;EAEd;EACA;IACE,WAAW;EACb;;EAEA;EACA,gBAAgB;EAChB;;;EAGA;IACE,gBAAgB;IAChB,gBAAgB;EAClB;;AAEF;;AAEA;CACC;IACG,gBAAgB;IAChB,cAAc;EAChB;AACF","sourcesContent":[".resultsWrapper {\n  width: 85vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: white;\n  padding: .8vw;\n  cursor: text\n\n  \n}\n\n\n.resultsWrapper > ul li:hover {\n  background-color: #EFEFEF;\n}\n\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  font-size: .9vw;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}\n\n.resultsWrapper span {\n  background-color: rgb(207,184,124);\n  color: black;\n  /* border-right: 8px solid rgb(207,184,124); */\n  padding: 10px;\n  margin-right: 10px;\n  border-radius: 3px;\n}\n\n\n@media only screen and (max-width: 800px) {\n .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 1.2vw;\n  }\n}\n\n@media only screen and (max-width: 600px) {\n  .resultsWrapper {\n    width: 100%;\n  }\n  .resultsWrapper > ul li {\n    flex-direction: column;\n  }\n  .resultsDetailsLeft {\n    width: 100%;\n    max-width: 100%;\n    border: none;\n\n  }\n  .resultsDetailsRight {\n    width: 100%;\n  }\n\n  .resultsDetailsLeft > h1 {\n  margin-top: 10px;\n  }\n\n\n  .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 1.7vw;\n  }\n\n}\n\n@media only screen and (max-width: 500px) {\n .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 2vw;\n  }\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._1dvHL2TeuxYpw0kN4hgH1d {\n  width: 85vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul:last-child {\n  padding-bottom: 100px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n._1dvHL2TeuxYpw0kN4hgH1d > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul:first-child {\n  padding-top: 40px;\n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul > div {\n  width: 95%;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: white;\n  padding: .8vw;\n  cursor: text\n\n  \n}\n\n\n._1dvHL2TeuxYpw0kN4hgH1d > ul li:hover {\n  background-color: #EFEFEF;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-left: 10px;\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n\n}\n\n.muFjZhvUjP0VmOoRnKuJ6 > h5 {\n  margin-left: 10px;\n  font-size: .9vw;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n}\n\n\n._32ELTAAZBC4OnhcAh4G0F2 > p {\n  margin: 10px;\n}\n\n._1u8nLgRzpFWo4UL9CSriwX {\n  height: 300px;\n  width: 100vw;\n}\n\n._1dvHL2TeuxYpw0kN4hgH1d span {\n  background-color: rgb(207,184,124);\n  color: black;\n  /* border-right: 8px solid rgb(207,184,124); */\n  padding: 10px;\n  margin-right: 10px;\n  border-radius: 3px;\n}\n\n.D7vKwFw46jCR_b9gPROD0 {\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 10px;\n  border-radius: 3px;\n}\n\n\n@media only screen and (max-width: 800px) {\n .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 1.2vw;\n  }\n}\n\n@media only screen and (max-width: 600px) {\n  ._1dvHL2TeuxYpw0kN4hgH1d {\n    width: 100%;\n  }\n  ._1dvHL2TeuxYpw0kN4hgH1d > ul li {\n    flex-direction: column;\n  }\n  .muFjZhvUjP0VmOoRnKuJ6 {\n    width: 100%;\n    max-width: 100%;\n    border: none;\n\n  }\n  ._32ELTAAZBC4OnhcAh4G0F2 {\n    width: 100%;\n  }\n\n  .muFjZhvUjP0VmOoRnKuJ6 > h1 {\n  margin-top: 10px;\n  }\n\n\n  .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 1.7vw;\n  }\n\n}\n\n@media only screen and (max-width: 500px) {\n .muFjZhvUjP0VmOoRnKuJ6 > h5 {\n    margin-top: 10px;\n    font-size: 2vw;\n  }\n}", "",{"version":3,"sources":["webpack://./components/SearchBar/Results/Results.module.css"],"names":[],"mappings":"AAAA;EACE,WAAW;EACX,sDAAsD;EACtD,mDAAmD;EACnD,8CAA8C;EAC9C,aAAa;EACb,uBAAuB;EACvB,sBAAsB;EACtB,kBAAkB;EAClB,aAAa;EACb,uBAAuB;EACvB,gBAAgB;EAChB,oBAAoB;;;AAGtB;;AAEA;EACE,aAAa;EACb,sBAAsB;EACtB,WAAW;EACX,mBAAmB;EACnB,kBAAkB;EAClB,kDAAkD;;AAEpD;AACA;EACE,qBAAqB;AACvB;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,8BAA8B;AAChC;AACA;EACE,iCAAiC;EACjC,kBAAkB;EAClB,oCAAoC;AACtC;;AAEA;EACE,iBAAiB;AACnB;;;AAGA;EACE,UAAU;AACZ;;AAEA;EACE,gBAAgB;EAChB,WAAW;EACX,qCAAqC;EACrC,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,gBAAgB;EAChB,kBAAkB;EAClB,aAAa;EACb,mBAAmB;EACnB,uBAAuB;EACvB,sBAAsB;EACtB,uBAAuB;EACvB,aAAa;EACb;;;AAGF;;;AAGA;EACE,yBAAyB;AAC3B;;;AAGA;EACE,aAAa;EACb,sBAAsB;EACtB,UAAU;EACV,cAAc;EACd,cAAc;EACd,6BAA6B;AAC/B;;;AAGA;EACE,iBAAiB;AACnB;;AAEA;EACE,iBAAiB;EACjB,sBAAsB;;AAExB;;AAEA;EACE,iBAAiB;EACjB,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;;;AAGA;EACE,YAAY;AACd;;AAEA;EACE,aAAa;EACb,YAAY;AACd;;AAEA;EACE,kCAAkC;EAClC,YAAY;EACZ,8CAA8C;EAC9C,aAAa;EACb,kBAAkB;EAClB,kBAAkB;AACpB;;AAEA;EACE,kCAAkC;EAClC,YAAY;EACZ,aAAa;EACb,kBAAkB;AACpB;;;AAGA;CACC;IACG,gBAAgB;IAChB,gBAAgB;EAClB;AACF;;AAEA;EACE;IACE,WAAW;EACb;EACA;IACE,sBAAsB;EACxB;EACA;IACE,WAAW;IACX,eAAe;IACf,YAAY;;EAEd;EACA;IACE,WAAW;EACb;;EAEA;EACA,gBAAgB;EAChB;;;EAGA;IACE,gBAAgB;IAChB,gBAAgB;EAClB;;AAEF;;AAEA;CACC;IACG,gBAAgB;IAChB,cAAc;EAChB;AACF","sourcesContent":[".resultsWrapper {\n  width: 85vw;\n  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);\n  z-index: 9999;\n  border: 2px solid black;\n  box-sizing: border-box;\n  border-radius: 5px;\n  display: flex;\n  justify-content: center;\n  margin-top: 50px;\n  margin-bottom: 300px;\n\n\n}\n\n.resultsWrapper > ul {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  align-items: center;\n  overflow-y: hidden;\n  scrollbar-color: var(--thumbBG) var(--scrollbarBG);\n\n}\n.resultsWrapper > ul:last-child {\n  padding-bottom: 100px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar {\n  width: 15px;\n}\n\n.resultsWrapper > ul::-webkit-scrollbar-track {\n  background: var(--scrollbarBG);\n}\n.resultsWrapper > ul::-webkit-scrollbar-thumb {\n  background-color: var(--thumbBG) ;\n  border-radius: 6px;\n  border: 3px solid var(--scrollbarBG);\n}\n\n.resultsWrapper > ul:first-child {\n  padding-top: 40px;\n}\n\n\n.resultsWrapper > ul > div {\n  width: 95%;\n}\n\n.resultsWrapper > ul li {\n  list-style: none;\n  width: 100%;\n  /* background-color: rgb(34,34,34); */\n  color: black;\n  margin-bottom: 10px;\n  margin-top: 10px;\n  min-height: 23vh;\n  border-radius: 7px;\n  display: flex;\n  transition: all .5s;\n  border: 1px solid black;\n  box-sizing: border-box;\n  background-color: white;\n  padding: .8vw;\n  cursor: text\n\n  \n}\n\n\n.resultsWrapper > ul li:hover {\n  background-color: #EFEFEF;\n}\n\n\n.resultsDetailsLeft {\n  display: flex;\n  flex-direction: column;\n  width: 50%;\n  max-width: 50%;\n  min-width: 50%;\n  border-right: 1px solid black;\n}\n\n\n.resultsDetailsLeft > h1 {\n  margin-left: 10px;\n}\n\n.resultsDetailsLeft > h3 {\n  margin-left: 10px;\n  color: rgb(77, 77, 87);\n\n}\n\n.resultsDetailsLeft > h5 {\n  margin-left: 10px;\n  font-size: .9vw;\n  display: flex;\n  align-items: center;\n  margin-top: 10px;\n}\n\n\n.resultsDetailsRight > p {\n  margin: 10px;\n}\n\n.fillerDiv {\n  height: 300px;\n  width: 100vw;\n}\n\n.resultsWrapper span {\n  background-color: rgb(207,184,124);\n  color: black;\n  /* border-right: 8px solid rgb(207,184,124); */\n  padding: 10px;\n  margin-right: 10px;\n  border-radius: 3px;\n}\n\n.editButton {\n  background-color: rgb(207,184,124);\n  color: black;\n  padding: 10px;\n  border-radius: 3px;\n}\n\n\n@media only screen and (max-width: 800px) {\n .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 1.2vw;\n  }\n}\n\n@media only screen and (max-width: 600px) {\n  .resultsWrapper {\n    width: 100%;\n  }\n  .resultsWrapper > ul li {\n    flex-direction: column;\n  }\n  .resultsDetailsLeft {\n    width: 100%;\n    max-width: 100%;\n    border: none;\n\n  }\n  .resultsDetailsRight {\n    width: 100%;\n  }\n\n  .resultsDetailsLeft > h1 {\n  margin-top: 10px;\n  }\n\n\n  .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 1.7vw;\n  }\n\n}\n\n@media only screen and (max-width: 500px) {\n .resultsDetailsLeft > h5 {\n    margin-top: 10px;\n    font-size: 2vw;\n  }\n}"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"resultsWrapper": "_1dvHL2TeuxYpw0kN4hgH1d",
 	"resultsDetailsLeft": "muFjZhvUjP0VmOoRnKuJ6",
 	"resultsDetailsRight": "_32ELTAAZBC4OnhcAh4G0F2",
-	"fillerDiv": "_1u8nLgRzpFWo4UL9CSriwX"
+	"fillerDiv": "_1u8nLgRzpFWo4UL9CSriwX",
+	"editButton": "D7vKwFw46jCR_b9gPROD0"
 };
 /* harmony default export */ __webpack_exports__["default"] = (___CSS_LOADER_EXPORT___);
 
@@ -3439,7 +3403,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_cssWithMappingToString_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "._19jgdkhSv5rUYbgdGYXeMu {\n  height: 40vh;\n  width: 100vw;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n\n\n._11lkiV-WvzeUbdjebCIkdf {\n  margin-top: 200px;\n  height: 2.5vw;\n  width: 40vw;\n  padding-left: 10px;\n  border-radius: 5px;\n  font-size: 1em;\n\n}\n\n::placeholder {\n  color: grey;\n  font-size: 1em;\n}\n\n._3Ns6CBtEMV0iemNImqYqhJ {\n  display: flex;\n  width: 40vw;\n  margin-top: 10px;\n  box-sizing: border-box;\n}\n\n._2_nXWcHxfB9hKLKKX5DYwT {\n  width: 10vw;\n  font-size: .8em;\n  border-radius: 5px;\n  background-color: rgb(0,4,17);\n  color: white;\n  font-weight: 700;\n  margin-right: 10px;\n  padding: 6px;\n  \n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: .8vw;\n  width: 40vw;\n\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li {\n  list-style: none;\n  border-radius: 5px;\n  background-color: darkgrey;\n  margin: 10px 5px 0 0;\n  padding: 12px;\n  z-index: 9999;\n  position: relative;\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li > span {\n  position: absolute;\n  font-size: .6em;\n  top: 3px;\n  right: 3px;\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li > span:hover {\n  opacity: .6;\n  background-color: antiquewhite;\n  cursor: pointer;\n}\n\n._19jgdkhSv5rUYbgdGYXeMu button {\n  padding: 10px;\n  font-size: 1em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-left: .5em;\n  transition: all .6s;\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n}\n\n@media only screen and (max-width: 980px) {\n  ._2_nXWcHxfB9hKLKKX5DYwT {\n    width: 17vw;\n  }\n}\n\n\n@media only screen and (max-width: 780px) {\n  ._2_nXWcHxfB9hKLKKX5DYwT {\n    width: 30vw;\n  }\n\n  ._11lkiV-WvzeUbdjebCIkdf {\n    margin-top: 200px;\n    height: 4.5vw;\n    width: 70vw;\n    padding-left: .5em;\n    border-radius: 5px;\n  }\n  ._19jgdkhSv5rUYbgdGYXeMu button {\n    \n  }\n  \n}\n", "",{"version":3,"sources":["webpack://./components/SearchBar/SearchBar.module.css"],"names":[],"mappings":"AAAA;EACE,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;AACrB;;;;AAIA;EACE,iBAAiB;EACjB,aAAa;EACb,WAAW;EACX,kBAAkB;EAClB,kBAAkB;EAClB,cAAc;;AAEhB;;AAEA;EACE,WAAW;EACX,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,eAAe;EACf,kBAAkB;EAClB,6BAA6B;EAC7B,YAAY;EACZ,gBAAgB;EAChB,kBAAkB;EAClB,YAAY;;AAEd;;AAEA;EACE,aAAa;EACb,eAAe;EACf,gBAAgB;EAChB,WAAW;;AAEb;;AAEA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,0BAA0B;EAC1B,oBAAoB;EACpB,aAAa;EACb,aAAa;EACb,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,QAAQ;EACR,UAAU;AACZ;;AAEA;EACE,WAAW;EACX,8BAA8B;EAC9B,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,cAAc;EACd,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,mBAAmB;EACnB,kCAAkC;EAClC,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,WAAW;EACb;AACF;;;AAGA;EACE;IACE,WAAW;EACb;;EAEA;IACE,iBAAiB;IACjB,aAAa;IACb,WAAW;IACX,kBAAkB;IAClB,kBAAkB;EACpB;EACA;;EAEA;;AAEF","sourcesContent":[".searchBarWrapper {\n  height: 40vh;\n  width: 100vw;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n\n\n.searchBar {\n  margin-top: 200px;\n  height: 2.5vw;\n  width: 40vw;\n  padding-left: 10px;\n  border-radius: 5px;\n  font-size: 1em;\n\n}\n\n::placeholder {\n  color: grey;\n  font-size: 1em;\n}\n\n.filtersWrapper {\n  display: flex;\n  width: 40vw;\n  margin-top: 10px;\n  box-sizing: border-box;\n}\n\n.tagSelect {\n  width: 10vw;\n  font-size: .8em;\n  border-radius: 5px;\n  background-color: rgb(0,4,17);\n  color: white;\n  font-weight: 700;\n  margin-right: 10px;\n  padding: 6px;\n  \n}\n\n.selectedTagsWrap {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: .8vw;\n  width: 40vw;\n\n}\n\n.selectedTagsWrap > li {\n  list-style: none;\n  border-radius: 5px;\n  background-color: darkgrey;\n  margin: 10px 5px 0 0;\n  padding: 12px;\n  z-index: 9999;\n  position: relative;\n}\n\n.selectedTagsWrap > li > span {\n  position: absolute;\n  font-size: .6em;\n  top: 3px;\n  right: 3px;\n}\n\n.selectedTagsWrap > li > span:hover {\n  opacity: .6;\n  background-color: antiquewhite;\n  cursor: pointer;\n}\n\n.searchBarWrapper button {\n  padding: 10px;\n  font-size: 1em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-left: .5em;\n  transition: all .6s;\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n}\n\n@media only screen and (max-width: 980px) {\n  .tagSelect {\n    width: 17vw;\n  }\n}\n\n\n@media only screen and (max-width: 780px) {\n  .tagSelect {\n    width: 30vw;\n  }\n\n  .searchBar {\n    margin-top: 200px;\n    height: 4.5vw;\n    width: 70vw;\n    padding-left: .5em;\n    border-radius: 5px;\n  }\n  .searchBarWrapper button {\n    \n  }\n  \n}\n"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, "._19jgdkhSv5rUYbgdGYXeMu {\n  height: 40vh;\n  width: 100vw;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n\n\n._11lkiV-WvzeUbdjebCIkdf {\n  margin-top: 200px;\n  height: 2.5vw;\n  width: 40vw;\n  padding-left: 10px;\n  border-radius: 5px;\n  font-size: 1em;\n\n}\n\n::placeholder {\n  color: grey;\n  font-size: 1em;\n}\n\n._3Ns6CBtEMV0iemNImqYqhJ {\n  display: flex;\n  width: 40vw;\n  margin-top: 10px;\n  box-sizing: border-box;\n}\n\n._2_nXWcHxfB9hKLKKX5DYwT {\n  width: 10vw;\n  font-size: .8em;\n  border-radius: 5px;\n  background-color: rgb(0,4,17);\n  color: white;\n  font-weight: 700;\n  margin-right: 10px;\n  padding: 6px;\n  height: 2vw;\n  \n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: .8vw;\n  width: 40vw;\n\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li {\n  list-style: none;\n  border-radius: 5px;\n  background-color: darkgrey;\n  margin: 10px 5px 0 0;\n  padding: 12px;\n  z-index: 9999;\n  position: relative;\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li > span {\n  position: absolute;\n  font-size: .6em;\n  top: 3px;\n  right: 3px;\n}\n\n._2AMFkxNk_I37rmLn5vvlJ8 > li > span:hover {\n  opacity: .6;\n  background-color: antiquewhite;\n  cursor: pointer;\n}\n\n._19jgdkhSv5rUYbgdGYXeMu button {\n  padding: 10px;\n  font-size: 1em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-left: .5em;\n  transition: all .6s;\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n}\n\n@media only screen and (max-width: 980px) {\n  ._2_nXWcHxfB9hKLKKX5DYwT {\n    width: 17vw;\n  }\n}\n\n\n@media only screen and (max-width: 780px) {\n  ._2_nXWcHxfB9hKLKKX5DYwT {\n    width: 30vw;\n  }\n\n  ._11lkiV-WvzeUbdjebCIkdf {\n    margin-top: 200px;\n    height: 4.5vw;\n    width: 70vw;\n    padding-left: .5em;\n    border-radius: 5px;\n  }\n  ._19jgdkhSv5rUYbgdGYXeMu button {\n    \n  }\n  \n}\n", "",{"version":3,"sources":["webpack://./components/SearchBar/SearchBar.module.css"],"names":[],"mappings":"AAAA;EACE,YAAY;EACZ,YAAY;EACZ,aAAa;EACb,sBAAsB;EACtB,mBAAmB;AACrB;;;;AAIA;EACE,iBAAiB;EACjB,aAAa;EACb,WAAW;EACX,kBAAkB;EAClB,kBAAkB;EAClB,cAAc;;AAEhB;;AAEA;EACE,WAAW;EACX,cAAc;AAChB;;AAEA;EACE,aAAa;EACb,WAAW;EACX,gBAAgB;EAChB,sBAAsB;AACxB;;AAEA;EACE,WAAW;EACX,eAAe;EACf,kBAAkB;EAClB,6BAA6B;EAC7B,YAAY;EACZ,gBAAgB;EAChB,kBAAkB;EAClB,YAAY;EACZ,WAAW;;AAEb;;AAEA;EACE,aAAa;EACb,eAAe;EACf,gBAAgB;EAChB,WAAW;;AAEb;;AAEA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,0BAA0B;EAC1B,oBAAoB;EACpB,aAAa;EACb,aAAa;EACb,kBAAkB;AACpB;;AAEA;EACE,kBAAkB;EAClB,eAAe;EACf,QAAQ;EACR,UAAU;AACZ;;AAEA;EACE,WAAW;EACX,8BAA8B;EAC9B,eAAe;AACjB;;AAEA;EACE,aAAa;EACb,cAAc;EACd,gBAAgB;EAChB,YAAY;EACZ,aAAa;EACb,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,mBAAmB;EACnB,kCAAkC;EAClC,YAAY;EACZ,eAAe;AACjB;;AAEA;EACE;IACE,WAAW;EACb;AACF;;;AAGA;EACE;IACE,WAAW;EACb;;EAEA;IACE,iBAAiB;IACjB,aAAa;IACb,WAAW;IACX,kBAAkB;IAClB,kBAAkB;EACpB;EACA;;EAEA;;AAEF","sourcesContent":[".searchBarWrapper {\n  height: 40vh;\n  width: 100vw;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n\n\n.searchBar {\n  margin-top: 200px;\n  height: 2.5vw;\n  width: 40vw;\n  padding-left: 10px;\n  border-radius: 5px;\n  font-size: 1em;\n\n}\n\n::placeholder {\n  color: grey;\n  font-size: 1em;\n}\n\n.filtersWrapper {\n  display: flex;\n  width: 40vw;\n  margin-top: 10px;\n  box-sizing: border-box;\n}\n\n.tagSelect {\n  width: 10vw;\n  font-size: .8em;\n  border-radius: 5px;\n  background-color: rgb(0,4,17);\n  color: white;\n  font-weight: 700;\n  margin-right: 10px;\n  padding: 6px;\n  height: 2vw;\n  \n}\n\n.selectedTagsWrap {\n  display: flex;\n  flex-wrap: wrap;\n  margin-top: .8vw;\n  width: 40vw;\n\n}\n\n.selectedTagsWrap > li {\n  list-style: none;\n  border-radius: 5px;\n  background-color: darkgrey;\n  margin: 10px 5px 0 0;\n  padding: 12px;\n  z-index: 9999;\n  position: relative;\n}\n\n.selectedTagsWrap > li > span {\n  position: absolute;\n  font-size: .6em;\n  top: 3px;\n  right: 3px;\n}\n\n.selectedTagsWrap > li > span:hover {\n  opacity: .6;\n  background-color: antiquewhite;\n  cursor: pointer;\n}\n\n.searchBarWrapper button {\n  padding: 10px;\n  font-size: 1em;\n  font-weight: 900;\n  color: white;\n  outline: none;\n  border: none;\n  border-radius: 5px;\n  margin-left: .5em;\n  transition: all .6s;\n  background-color: rgb(207,184,124);\n  color: black;\n  cursor: pointer;\n}\n\n@media only screen and (max-width: 980px) {\n  .tagSelect {\n    width: 17vw;\n  }\n}\n\n\n@media only screen and (max-width: 780px) {\n  .tagSelect {\n    width: 30vw;\n  }\n\n  .searchBar {\n    margin-top: 200px;\n    height: 4.5vw;\n    width: 70vw;\n    padding-left: .5em;\n    border-radius: 5px;\n  }\n  .searchBarWrapper button {\n    \n  }\n  \n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"searchBarWrapper": "_19jgdkhSv5rUYbgdGYXeMu",
