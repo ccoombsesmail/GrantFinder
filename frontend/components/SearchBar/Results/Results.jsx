@@ -68,7 +68,7 @@ const Result = ({ results, loading }) => {
                     <h5>
                       <span>Link</span> 
                       <a href={result.link} target='_blank'>
-                        {` ${result.link}`}
+                        {` ${result.link ? result.link : ''}`}
                       </a>
                     </h5>
                   </div>
