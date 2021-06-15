@@ -101,6 +101,7 @@
 @media only screen and (max-width: 980px) {
   .tagSelect {
     width: 17vw;
+    height: 4vw;
   }
 }
 
@@ -108,6 +109,7 @@
 @media only screen and (max-width: 780px) {
   .tagSelect {
     width: 30vw;
+    height: 6vw;
   }
 
   .searchBar {
@@ -119,6 +121,19 @@
   }
   .searchBarWrapper button {
     
+  }
+  
+}
+
+
+@media only screen and (max-width: 500px) {
+  .tagSelect {
+    width: 30vw;
+    height: 8vw;
+  }
+    .searchBar {
+    height: 6.5vw;
+  
   }
   
 }
