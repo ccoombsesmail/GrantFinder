@@ -7,6 +7,5 @@ export const getTags = () => {
 }
 
 export const deleteTag = (tagId) => {
-  console.log(tagId)
   return axios.delete('/api/tags', { data: {tagId} })
 }

@@ -1,6 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Grant = require('../../models/Grant');
+const Grant = require('../../models/Grant')
 const passport = require('passport');
 require('../../config/passport')(passport)
 const mongoose = require('mongoose')

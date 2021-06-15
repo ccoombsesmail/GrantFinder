@@ -37,7 +37,6 @@ const GrantSchema = new Schema({
   },
   deadline: {
     type: Date,
-    default: Date.now(),
     required: false
   },
   disbursement: {

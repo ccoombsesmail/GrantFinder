@@ -13,6 +13,7 @@ const ExportGrantData = () => {
       const formatedGrants = res.data.map((grant) => {
         const newGrant = {...grant}
         delete newGrant.__v
+        newGrant.deadline = newGrant.deadline.split('T')[0]
         newGrant.tags = newGrant.tags.map((tag) => {
           if (tag) { 
             return tag.tag 
@@ -36,7 +37,7 @@ const ExportGrantData = () => {
   }
 
   return (
-    <button className={styles.button} onClick={(e) => exportToCSV(grantData, 'data')}>
+    <button className={styles.button} onClick={(e) => exportToCSV(grantData, 'grant_data')}>
       Export Grant Data
     </button>
   )

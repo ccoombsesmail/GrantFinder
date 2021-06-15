@@ -26,55 +26,55 @@ const Result = ({ results, loading }) => {
         ) : (
           <ul>
           {
-            results.map((result, idx) => {
-              let tags = result.tags.map((tag) => {
+            results.map(({tags, deadline, title, _id, paymentDetails, maxAward, currency, description, link }, idx) => {
+              let formattedTags = tags.map((tag) => {
                 if (tag) {
                   return tag.tag
                 }
               })
-              const date = new Date(result.deadline)
-              let deadline = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
-              if (date.getFullYear() === 2050) {
-                deadline = 'No Deadline Specified'
-              }
+              const date = new Date(deadline)
+              const formattedDeadline = deadline ? (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() : "No Deadline Specified"
+              
               return (
-              <Animated key={result._id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*Math.sqrt(idx)}>
+              <Animated key={_id} animationIn="fadeInUp" animationOut="fadeOut" isVisible={isVis} animationInDelay={200*Math.sqrt(idx)}>
                 <li>
                   {
                     (loggedIn && location.pathname === '/admin/editgrant') ? (
-                      <Link className={styles.editButton} to={`/admin/editgrant/${result._id}`}>Edit</Link>
+                      <Link className={styles.editButton} to={`/admin/editgrant/${_id}`}>Edit</Link>
                     ) : null
                   }
                   <div className={styles.resultsDetailsLeft}>
                     <h1>
-                      {`${result.title}`}  
+                      {`${
+                        title}`}  
                     </h1>
                     <h5>
                       <span>Max Award</span> 
-                        {`${result.currency ? result.currency : 'N/A'}${result.maxAward === 0 || result.maxAward === undefined  ? '' : Number(result.maxAward)?.toLocaleString('en')}`}
+                        {`${currency ? currency : 'N/A'}${maxAward === 0 ||  maxAward === undefined  ? '' : Number(maxAward)?.toLocaleString('en')}`}
                     </h5>
                     <h5>
                       <span>Payment Details</span> 
-                      {result.paymentDetails ? result.paymentDetails : 'N/A' }
+                      {
+                      paymentDetails ? paymentDetails : 'N/A' }
                     </h5>
                     <h5>
                       <span>Deadline</span> 
-                      {deadline}
+                      {formattedDeadline}
                     </h5>
                     <h5>
                       <span>Tags</span> 
-                      {tags.join(", ")}
+                      {formattedTags.join(", ")}
                     </h5>
                     <h5>
                       <span>Link</span> 
-                      <a href={result.link} target='_blank'>
-                        {` ${result.link ? result.link : ''}`}
+                      <a href={link} target='_blank'>
+                        {`${link ? link : ''}`}
                       </a>
                     </h5>
                   </div>
                   <div className={styles.resultsDetailsRight}>
                   <p>
-                    <b>Summary:</b> <br></br>{result.description}
+                    <b>Summary:</b> <br></br>{description}
                   </p>
                   </div>
                 </li>

@@ -48,7 +48,6 @@ const GrantForm = ({ match }) => {
     grant.tags = tags.map((tag) => tag[0])
     grant.username = JSON.parse(localStorage.getItem('currentUser')).user.username
     grant.newTags = newTags
-  
     match.params.grantId ? 
       editGrant(grant, grantData._id).then(() => setTimeout(setLoading, 2000, false)) : 
       createGrant(grant).then(() => setTimeout(setLoading, 2000, false))
@@ -102,6 +101,7 @@ const GrantForm = ({ match }) => {
         <label className={styles.formLabel}>
           <h4>Payment Details</h4>
           <input
+            required
             className={styles.formInput}
             type="text"
             value={grantData.paymentDetails || ''}
@@ -116,7 +116,6 @@ const GrantForm = ({ match }) => {
               type="number"
               value={grantData.maxAward || ''}
               onChange={update('maxAward')} />
-              
           </label>
           <label className={styles.formLabel}>
             <h4>Currency</h4>
@@ -129,7 +128,6 @@ const GrantForm = ({ match }) => {
               }
             </select>
           </label>
-
         </div>
         <label className={styles.formLabel}>
           <h4>Deadline</h4>
@@ -174,6 +172,7 @@ const GrantForm = ({ match }) => {
         <label className={styles.formLabel}>
           <h4>Description</h4>
           <textarea
+            required
             className={styles.formInput}
             type="text"
             value={grantData.description || ''}
