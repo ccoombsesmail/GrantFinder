@@ -15,6 +15,7 @@ const SearchBar = () => {
   const [results, setResults] = useState(null)
   const [sort, setSort] = useState('')
   const [tags, setTags] = useState([])
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getTags().then((tags) => {
@@ -50,6 +51,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e?.preventDefault()
+    setLoading(true)
     const tags = selectedTags.map((tag) => tag[0])
     let sortOrder = ["createdAt", -1]
     if (sort) {
@@ -58,6 +60,7 @@ const SearchBar = () => {
     const filters = [title, tags, sortOrder]
     getGrants({filters})
       .then((res) => {
+        setTimeout(setLoading, 750, false)
         setResults(res.data)
       })
   }
@@ -111,7 +114,7 @@ const SearchBar = () => {
         </ul>
       </form>
       {
-       results !== null ? <Results results={results} /> : null
+       results !== null ? <Results loading={loading} results={results} /> : null
       }
     </section>
   )

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react'
 import styles from './Results.module.css'
 import { Animated } from "react-animated-css";
 import { withRouter, Link } from "react-router-dom";
+import Loading from '../../Loading/Index';
 
-const Result = ({ results, location }) => {
+const Result = ({ results, loading }) => {
   const [isVis, setIsVis] = useState(true)
   const loggedIn = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
@@ -12,6 +13,7 @@ const Result = ({ results, location }) => {
     setTimeout(() => setIsVis(true), 100)
   }, [results])
 
+  if (loading) return <Loading loading={loading}/>
 
   return (
     <>

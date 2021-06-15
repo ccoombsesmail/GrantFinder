@@ -18,7 +18,7 @@ const GrantForm = ({ match }) => {
   const [addTag, setAddTag] = useState('')
   const [newTags, setNewTags] = useState([])
   const [grantData, setGrantData] = useState({})
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useGetGrantEffect(setGrantData, setTags, setTagOptions, match.params.grantId, tagOptions)
 
