@@ -1,23 +1,26 @@
-import React, { useState } from 'react'
-import styles from './GrantForm.module.css'
-import tagInputStyles from '../SearchBar/SearchBar.module.css'
-import { createGrant, editGrant } from '../../util/grants_api_util'
-import TagItem from '../SearchBar/TagItem'
-
-import useGetGrantEffect from './hooks/useGetGrantEffect.js'
-import getCurrencyOptions from './utils/getCurrencyOptions'
-
+import React, { useState, useRef } from 'react'
 import { withRouter } from "react-router-dom";
 
-const GrantForm = ({ match }) => {
+import useGetGrantEffect from './hooks/useGetGrantEffect.js'
 
+import TagItem from '../SearchBar/TagItem'
+import Loading from '../Loading/Index'
+
+import { createGrant, editGrant } from '../../util/grants_api_util'
+import getCurrencyOptions from './utils/getCurrencyOptions'
+
+import styles from './GrantForm.module.css'
+import tagInputStyles from '../SearchBar/SearchBar.module.css'
+const GrantForm = ({ match }) => {
+  const maxAwardInput = useRef(null);
   const [tags, setTags] = useState([])
   const [tagOptions, setTagOptions] = useState([])
   const [addTag, setAddTag] = useState('')
   const [newTags, setNewTags] = useState([])
   const [grantData, setGrantData] = useState({})
+  let [loading, setLoading] = useState(false);
 
-  useGetGrantEffect(setGrantData, setTags, setTagOptions, match.params.grantId)
+  useGetGrantEffect(setGrantData, setTags, setTagOptions, match.params.grantId, tagOptions)
 
   const currencyOptions = getCurrencyOptions()
 
@@ -40,14 +43,15 @@ const GrantForm = ({ match }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
     const grant = {...grantData}
     grant.tags = tags.map((tag) => tag[0])
     grant.username = JSON.parse(localStorage.getItem('currentUser')).user.username
     grant.newTags = newTags
- 
+  
     match.params.grantId ? 
-      editGrant(grant, grantData._id).then(() => window.location.reload()) : 
-      createGrant(grant).then((res) => console.log(res))
+      editGrant(grant, grantData._id).then(() => setTimeout(setLoading, 2000, false)) : 
+      createGrant(grant).then(() => setTimeout(setLoading, 2000, false))
   }
 
   const removeTag = (e) => {
@@ -68,6 +72,7 @@ const GrantForm = ({ match }) => {
     setNewTags([addTag, ...newTags])
     setAddTag('')
   }
+  if (loading) return <Loading loading={loading}/>
   return (
     
     <div className={styles.grantFormWrapper}>
@@ -81,7 +86,8 @@ const GrantForm = ({ match }) => {
             required 
             maxLength={100}
             className={styles.formInput}
-            type="text" value={grantData.title}
+            type="text" 
+            value={grantData.title || ''}
             onChange={update('title')}
             autoComplete="off" />
         </label>
@@ -90,7 +96,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.link}
+            value={grantData.link || ''}
             onChange={update('link')} />
         </label>
         <label className={styles.formLabel}>
@@ -98,21 +104,23 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.paymentDetails}
+            value={grantData.paymentDetails || ''}
             onChange={update('paymentDetails')} />
         </label>
         <div className={styles.awardWrapper}>
           <label className={styles.formLabel}>
             <h4>Max Award</h4>
             <input
+              ref={maxAwardInput}
               className={styles.formInput}
               type="number"
-              value={grantData.maxAward}
+              value={grantData.maxAward || ''}
               onChange={update('maxAward')} />
+              
           </label>
           <label className={styles.formLabel}>
             <h4>Currency</h4>
-            <select required value={grantData.currency} className={tagInputStyles.tagSelect} onChange={update('currency')} >
+            <select required={maxAwardInput?.current?.value} value={grantData.currency || ''} className={tagInputStyles.tagSelect} onChange={update('currency')} >
               <option value="">Select Currency</option>
               {
                 currencyOptions.map((currency, idx) => {
@@ -128,7 +136,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="date"
-            value={grantData.deadline?.split('T')[0]}
+            value={grantData.deadline?.split('T')[0] || ''}
             onChange={update('deadline')} />
         </label>
         <label className={styles.formLabel}>
@@ -136,7 +144,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.disbursement}
+            value={grantData.disbursement || ''}
             onChange={update('disbursement')} />
         </label>
         <label className={styles.formLabel}>
@@ -144,7 +152,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.status}
+            value={grantData.status || ''}
             onChange={update('status')} />
         </label>
         <label className={styles.formLabel}>
@@ -152,7 +160,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.location_elig}
+            value={grantData.location_elig || ''}
             onChange={update('location_elig')} />
         </label>
         <label className={styles.formLabel}>
@@ -160,7 +168,7 @@ const GrantForm = ({ match }) => {
           <input
             className={styles.formInput}
             type="text"
-            value={grantData.applicant_elig}
+            value={grantData.applicant_elig || ''}
             onChange={update('applicant_elig')} />
         </label>
         <label className={styles.formLabel}>
@@ -168,7 +176,7 @@ const GrantForm = ({ match }) => {
           <textarea
             className={styles.formInput}
             type="text"
-            value={grantData.description}
+            value={grantData.description || ''}
             onChange={update('description')} />
         </label>
         <select id='tagSelect' className={tagInputStyles.tagSelect} onChange={update('tags')} >

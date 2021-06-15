@@ -124,10 +124,24 @@
 }
 
 .editButton {
-  background-color: rgb(207,184,124);
-  color: black;
-  padding: 10px;
+  background-color: black;
+  color: white;
+  padding: 1em;
   border-radius: 3px;
+  font-size: 1em;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: center;
+  height: 1.5em;
+}
+
+.editButton:hover {
+  opacity: .6;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+   box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+   transition: all 1s;
 }
 
 

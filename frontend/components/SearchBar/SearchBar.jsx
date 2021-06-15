@@ -21,6 +21,10 @@ const SearchBar = () => {
       setTags(Object.values(tags.data))
     })
   }, [])
+
+  useEffect(() => {
+    if (results) handleSubmit()
+  }, [sort])
   
 
   const update = (type) => {
@@ -45,7 +49,7 @@ const SearchBar = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e?.preventDefault()
     const tags = selectedTags.map((tag) => tag[0])
     let sortOrder = ["createdAt", -1]
     if (sort) {

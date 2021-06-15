@@ -89,6 +89,15 @@
   cursor: pointer;
 }
 
+  .searchBarWrapper button:hover { 
+    opacity: .7;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+   box-shadow: inset 0px 0px 5px #c1c1c1;
+   outline: none;
+   transition: all 1s;
+}
+
 @media only screen and (max-width: 980px) {
   .tagSelect {
     width: 17vw;

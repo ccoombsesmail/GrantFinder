@@ -21,7 +21,6 @@ const ExportGrantData = () => {
         return newGrant
       })
       setGrantData(formatedGrants)
-      console.log(formatedGrants)
     })
   }, [])
 

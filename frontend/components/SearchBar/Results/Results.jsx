@@ -4,9 +4,8 @@ import { Animated } from "react-animated-css";
 import { withRouter, Link } from "react-router-dom";
 
 const Result = ({ results, location }) => {
-  console.log(results)
   const [isVis, setIsVis] = useState(true)
-  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
+  const loggedIn = useState(JSON.parse(localStorage.getItem('currentUser') || '{}').isAuthenticated)
 
   useEffect(() => {
     setIsVis(false)
@@ -50,11 +49,11 @@ const Result = ({ results, location }) => {
                     </h1>
                     <h5>
                       <span>Max Award</span> 
-                        {`${result.currency}${result.maxAward === 0 || result.maxAward === null ? '' : result.maxAward}`}
+                        {`${result.currency ? result.currency : 'N/A'}${result.maxAward === 0 || result.maxAward === undefined  ? '' : Number(result.maxAward)?.toLocaleString('en')}`}
                     </h5>
                     <h5>
                       <span>Payment Details</span> 
-                      {result.paymentDetails}
+                      {result.paymentDetails ? result.paymentDetails : 'N/A' }
                     </h5>
                     <h5>
                       <span>Deadline</span> 
@@ -87,7 +86,6 @@ const Result = ({ results, location }) => {
     </div>
     <div className={styles.fillerDiv}>.</div>
     </>
-
   )
 }
 

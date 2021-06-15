@@ -4,11 +4,13 @@ import { getGrant } from '../../../util/grants_api_util'
 import { getTags } from '../../../util/tags_api_util'
 
 
-export default (setGrantData, setTags, setTagOptions, grantId) => {
+export default (setGrantData, setTags, setTagOptions, grantId, tagOptions) => {
 useEffect(() => {
-    getTags().then((allTags) => {
-      setTagOptions(Object.values(allTags.data))
-      if (grantId) {
+    if (!tagOptions.length) {
+      getTags().then((allTags) => {
+        setTagOptions(Object.values(allTags.data))
+      })
+    } else if (grantId) {
         getGrant(grantId).then((res) => {
           const tagOptionNode = document.getElementById('tagSelect')
           const grant = res.data[0]
@@ -35,7 +37,5 @@ useEffect(() => {
           })
         })
       }
-    })
-    
-  }, [])
+  }, [tagOptions])
 }
